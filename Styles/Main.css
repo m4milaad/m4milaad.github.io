@@ -14,7 +14,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-        height: 100vh;
+    height: 100vh;
     overflow: hidden;
     font-family: Arial, sans-serif;
     background-color: rgb(26, 26, 26);
@@ -188,6 +188,10 @@ m {
     color: rgb(200, 200, 200);
 }
 
+.link {
+    color: inherit;
+}
+
 /* ======== Navigation (Scrollspy) ======== */
 .NavContainer {
     position: absolute;
@@ -301,9 +305,10 @@ m {
     align-self: center;
     height: 1px;
 }
+
 .Experience {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 /* ======== Responsive Adjustments START ======== */
@@ -405,8 +410,8 @@ m {
     }
 
     .NavContainer {
-    display: none;
-}
+        display: none;
+    }
 
     #SocialsContainer {
         position: static;
@@ -440,6 +445,7 @@ m {
     }
 
     @media (hover: hover) and (pointer: fine) {
+
         #MouseGlow,
         #MouseGlowBlur {
             display: block;
@@ -447,6 +453,7 @@ m {
     }
 
     @media (hover: none) and (pointer: coarse) {
+
         #MouseGlow,
         #MouseGlowBlur {
             display: none;
