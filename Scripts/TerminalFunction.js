@@ -147,20 +147,43 @@ const FileSystem = {
         type: "directory", contents: {
             "projects": {
                 type: "directory", contents: {
-                    "projects.txt": { type: "file", content: "This section contains links to various projects I \nhave worked on.Use 'start <project_name.lnk>' to \nopen a project link in your browser. Details about \neach project are implicitly available by \nvisiting the links." },
-                    "online_resume.lnk": { type: "link", content: "#", description: "Developed a responsive personal online resume website using HTML, Tailwind CSS, and JavaScript." },
-                    "yge_website.lnk": { type: "link", content: "https://yge.ct.ws/", description: "Deployed a responsive website for Yuva Global Enterprises using HTML, CSS, JavaScript, and managed DNS." },
-                    "banking_system.lnk": { type: "link", content: "https://github.com/m4milaad/Banking-System-", description: "Developed an object-oriented banking system application using Java." },
-                    "peek_hour_game.lnk": { type: "link", content: "https://github.com/m4milaad/Pyhton-Projects/tree/main/Peek%20Hour", description: "An interactive game built with Python." },
-                    "states_game.lnk": { type: "link", content: "https://github.com/m4milaad/Pyhton-Projects/tree/main/States%20Guessing%20Game", description: "Created an interactive U.S. states guessing game with Python." },
-                    "coffee_machine.lnk": { type: "link", content: "https://github.com/m4milaad/Pyhton-Projects/tree/main/Coffee%20Machine", description: "Simulated coffee machine operations using an object-oriented approach in Python." },
-                    "more_projects.txt": { type: "file", content: "Developed a diverse portfolio of 17+ additional \nprojects, primarily in Python, including games, \ndata tools, and simulations." }
+                    "projects.txt": { type: "file", content: "This section contains links to various projects I \nhave worked on.Use 'start <project_name.lnk>' to \nopen a project link in your browser." },
+                    "01_date_sheet_mgmt.lnk": { 
+                        type: "link", 
+                        content: "https://ds-cuk.vercel.app/", 
+                        description: "Web App: Date Sheet Management (TypeScript, React, TailwindCSS, PostgreSQL, Vercel)" 
+                    },
+                    "02_cancer_diagnosis.lnk": { 
+                        type: "link", 
+                        content: "https://github.com/m4milaad/Pyhton-Projects/tree/main/Coffee%20Machine", 
+                        description: "Cancer Diagnosis Model (Python, Scikit-learn, Pandas, NumPy) - Note: Link is to Coffee Machine repo as per index.html" 
+                    },
+                    "03_yge_website.lnk": { 
+                        type: "link", 
+                        content: "https://yge.ct.ws/", 
+                        description: "Website: Yuva Global Enterprises (HTML, CSS, JS, DNS)" 
+                    },
+                    "04_states_game.lnk": { 
+                        type: "link", 
+                        content: "https://github.com/m4milaad/Pyhton-Projects/tree/main/States%20Guessing%20Game", 
+                        description: "States Guessing Game (Python, Pandas, Turtle Game)" 
+                    },
+                    "05_banking_system.lnk": { 
+                        type: "link", 
+                        content: "https://github.com/m4milaad/Banking-System-", 
+                        description: "Banking System (Java, OOP, CLI Application)" 
+                    },
+                    "06_peek_hour.lnk": { 
+                        type: "link", 
+                        content: "https://github.com/m4milaad/Pyhton-Projects/tree/main/Peek%20Hour", 
+                        description: "Peek Hour Game (Python, Turtle Game)" 
+                    }
                 }
             },
-            "about.txt": { type: "file", content: "Skilled in programming and building both software\nand hardware projects, including web dashboards and\nIoT systems. Experienced with Python, C, Java, and \nmodern tools to deliver reliable, working solutions." },
-            "experience.txt": { type: "file", content: "Experience | 2023 - Present\n\n- Yuva Global Enterprises | Dec 2024 - Present\n  - Built and managed a website using HTML, CSS,\n    and JavaScript.\n  - Helped with other digital tasks in the office.\n\n- ByteNovators | Feb 2024 - Dec 2024\n  - Tested software for bugs and usability.\n  - Managed Facebook ads and lead data for clients.\n\n- Personal Projects | 2023 - Present\n  - Made an online resume site.\n  - Built apps and games in Python.\n  - Created a Java banking system using OOP." },
-            "education.txt": { type: "file", content: "Central University of Kashmir, Ganderbal\nB.Tech in Computer Science | Expected July 2027\nCourses: C, Java\nActivities: Coding contests, Event management\n\nSri Pratap Higher Secondary School, Srinagar\nHigh School | Graduated 2022\nCourses: Non-Medical\nActivities: Badminton, Football, Table Tennis" },
-            "awards.txt": { type: "file", content: "Demonstrated strong coding and problem-solving \nabilities by achieving third place in Central \nUniversity of Kashmir's competitive Cyber Concave \n2025 coding competition." },
+            "about.txt": { type: "file", content: "Technologist skilled in Python (Django, Flask, \nPandas, NumPy, Matplotlib, Scikit-learn), C, \nJava (Collections Framework), HTML, CSS, \nJavaScript (React, Vue.js, TypeScript, Bootstrap, \nTailwind CSS, Express.js, Node.js), and C++. \nExperienced with MongoDB, MySQL, PostgreSQL, \nAWS, Heroku, Netlify, Vercel, and Git. \nProficient with CLion, IntelliJ, Pycharm, and \nArduino integration." },
+            "experience.txt": { type: "file", content: "Skillified Mentor | June 2025\n- Built a machine learning model for cancer \n  diagnosis and analyzed the Framingham dataset.\n- (Certificate: ./Images/certificate.pdf)\n\nYuva Global Enterprises | Dec 2024 - Present\n- Led the development and maintenance of the \n  Yuva Global Enterprises website (HTML, CSS, JS).\n- Managed key digital operations.\n\nByteNovators | Feb 2024 - Dec 2024\n- Validated software quality and user experience \n  through comprehensive testing methodologies.\n- Managed Facebook leads and ads for clients.\n\nCurrent Projects | 2023 - Present\n- Engineered an interactive online resume website.\n- Key Python projects: Peek Hour, States Guessing Game.\n- Developed a Java-based banking system (OOP)." },
+            "education.txt": { type: "file", content: "Central University of Kashmir, Gaderbal\n- Bachelor of Technology (B.Tech), CSE\n- Expected Graduation: July 2027\n- Relevant Coursework: C, Java.\n- Activities: Coding Competition, Event Management.\n\nSri Pratap Higher Secondary School, Srinagar\n- 10+2 | Graduated: 2022\n- Relevant Coursework: Non-Medical.\n- Activities: Badminton, Football, Table Tennis." },
+            "awards.txt": { type: "file", content: "1st Position, Open Build Challenge | NIT Srinagar | 2025\n- Organised by FOSS NIT Srinagar in collabration with \n  FOSS United (https://fossunited.org/).\n\n3rd Position in Coding Competition | CUK | 2025\n- Hosted by Code Squad during their Cyber Concave\n  2025 event." },
             "plasma.exe": { type: "executable", content: "plasma" },
         }
     },
@@ -345,3 +368,4 @@ function GetIntensityPlasma(Row, Col) {
 
     return 17 * (0.5 + 0.499 * Math.sin(Intensity)) * (0.7 + Math.sin(Time) * 0.3);
 }
+
