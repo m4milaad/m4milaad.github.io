@@ -3,7 +3,7 @@
 
 Welcome to my [personal portfolio website](https://m4milaad.github.io/Resume)! This project showcases my work as an aspiring software developer and features a unique blend of modern web design and retro-inspired 3D graphics. Below, you'll find details about the development process, key features, and how to explore the site.
 
-![alt text](https://github.com/m4milaad/Resume/blob/main/Images/banner.png)
+<img width="1366" height="615" alt="image" src="https://github.com/user-attachments/assets/cfec15a7-c0a1-4bcd-a05d-a6dc43661342" />
 
 ## 🔥 Features
 - **Dual Interface Design**:
