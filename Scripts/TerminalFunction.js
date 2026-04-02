@@ -1858,22 +1858,25 @@ function MazeRender() {
 let InTypeTestGame = false;
 let TypeTestGame = {};
 
-const TYPETEST_PHRASES = [
-  "the quick brown fox jumps over the lazy dog",
-  "programming is the art of telling a computer what to do",
-  "practice makes perfect when it comes to typing fast",
-  "a journey of a thousand miles begins with a single step",
-  "to be or not to be that is the question",
-  "code is read more often than it is written",
-  "simplicity is the soul of efficiency",
-  "every expert was once a beginner",
+const TYPETEST_WORDS = [
+  "the", "be", "to", "of", "and", "a", "in", "that", "have", "i",
+  "it", "for", "not", "on", "with", "he", "as", "you", "do", "at",
+  "this", "but", "his", "by", "from", "they", "we", "say", "her", "she",
+  "or", "an", "will", "my", "one", "all", "would", "there", "their", "what",
+  "so", "up", "out", "if", "about", "who", "get", "which", "go", "me",
+  "when", "make", "can", "like", "time", "no", "just", "him", "know", "take",
+  "people", "into", "year", "your", "good", "some", "could", "them", "see", "other",
+  "than", "then", "now", "look", "only", "come", "its", "over", "think", "also",
+  "back", "after", "use", "two", "how", "our", "work", "first", "well", "way"
 ];
 
 function TypeTestInit() {
-  const phrase =
-    TYPETEST_PHRASES[Math.floor(Math.random() * TYPETEST_PHRASES.length)];
+  let words = [];
+  for (let i = 0; i < 15; i++) {
+    words.push(TYPETEST_WORDS[Math.floor(Math.random() * TYPETEST_WORDS.length)]);
+  }
   TypeTestGame = {
-    Phrase: phrase,
+    Phrase: words.join(" "),
     Typed: "",
     Start: null,
     Done: false,
@@ -1898,7 +1901,7 @@ function TypeTestKeyPress(key) {
 
   if (G.Typed.length >= G.Phrase.length) {
     const elapsed = (Date.now() - G.Start) / 1000 / 60;
-    G.WPM = Math.round(G.Phrase.split(" ").length / elapsed);
+    G.WPM = Math.round((G.Typed.length / 5) / elapsed);
     G.Done = true;
   }
 }
@@ -1937,14 +1940,10 @@ function TypeTestRender() {
       globalIdx++;
     }
     // pad
-    const raw =
-      l.length +
-      (globalIdx >= G.Typed.length && globalIdx - l.length <= G.Typed.length
-        ? 1
-        : 0);
-    while (rendered.replace(/\u2502/g, "").replace(/ /g, "").length < W)
-      rendered += " ";
-    text += rendered.slice(0, W + 3) + " \u2502\n";
+    const hasBracket = rendered.includes("[");
+    const spacesNeeded = W - l.length - (hasBracket ? 1 : 0);
+    rendered += " ".repeat(Math.max(0, spacesNeeded));
+    text += rendered + " \u2502\n";
   }
 
   text += " \u2514" + "\u2500".repeat(W) + "\u2518\n";
@@ -1955,7 +1954,9 @@ function TypeTestRender() {
   } else if (!G.Start) {
     text += "\n  Start typing to begin the timer!\n";
   } else {
-    text += `\n  ${G.Typed.length}/${G.Phrase.length} chars  Errors: ${G.Errors}\n`;
+    const elapsed = (Date.now() - G.Start) / 1000 / 60;
+    const liveWpm = elapsed > 0 ? Math.round((G.Typed.length / 5) / elapsed) : 0;
+    text += `\n  Live WPM: ${liveWpm}  |  ${G.Typed.length}/${G.Phrase.length} chars  |  Errors: ${G.Errors}\n`;
   }
   return text;
 }
