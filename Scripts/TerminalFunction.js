@@ -8,6 +8,10 @@ let InputText = "";
 // Dictionary to store info about the text blinker
 let Blinker = { Index: 0, Time: Date.now() * 0.001 };
 
+// Command history for arrow key navigation
+let CommandHistory = [];
+let HistoryIndex = -1; // -1 means we're at the live input
+
 // Current directory
 let Directory = "C:/Users/guest";
 
@@ -288,12 +292,29 @@ function KeyPressed(key) {
         Index: Math.min(InputText.length, Blinker.Index + 1),
         Time: Date.now() * 0.001,
       };
-    } else if (key === "ArrowUp") // Scroll text upwards
+    } else if (key === "ArrowUp") // Navigate to previous command in history
     {
-      ScrollOffset = Math.max(0, ScrollOffset - 1);
-    } else if (key === "ArrowDown") // Scroll text downwards
+      if (CommandHistory.length > 0) {
+        HistoryIndex = Math.min(HistoryIndex + 1, CommandHistory.length - 1);
+        InputText = CommandHistory[CommandHistory.length - 1 - HistoryIndex];
+        Blinker = { Index: InputText.length, Time: Date.now() * 0.001 };
+        if (ScrollOffset < LinesCount - 30) {
+          ScrollOffset = Math.max(0, LinesCount - 30);
+        }
+      }
+    } else if (key === "ArrowDown") // Navigate to next command in history
     {
-      ScrollOffset = Math.min(LinesCount - 1, ScrollOffset + 1);
+      if (HistoryIndex > 0) {
+        HistoryIndex -= 1;
+        InputText = CommandHistory[CommandHistory.length - 1 - HistoryIndex];
+      } else {
+        HistoryIndex = -1;
+        InputText = "";
+      }
+      Blinker = { Index: InputText.length, Time: Date.now() * 0.001 };
+      if (ScrollOffset < LinesCount - 30) {
+        ScrollOffset = Math.max(0, LinesCount - 30);
+      }
     } else if (key === "Tab") // Auto complete
     {
       AutoComplete(); // Complete input text
@@ -304,6 +325,13 @@ function KeyPressed(key) {
     } else if (key === "Enter") // Submit text
     {
       OutputsText += `${Directory}> ${InputText}\n`;
+
+      // Save non-empty commands to history (avoid duplicates at top)
+      if (InputText.trim() && (CommandHistory.length === 0 || CommandHistory[CommandHistory.length - 1] !== InputText)) {
+        CommandHistory.push(InputText);
+      }
+      HistoryIndex = -1; // Reset history navigation
+
       ExecuteCommand();
 
       InputText = "";
