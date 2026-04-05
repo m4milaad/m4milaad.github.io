@@ -317,9 +317,9 @@ html.embed-site-light #MainDiv::before {
     border-radius: 50%;
     background: radial-gradient(
         circle closest-side,
-        rgba(255, 167, 25, 0.26) 0%,
-        rgba(255, 167, 25, 0.1) 42%,
-        rgba(255, 167, 25, 0.03) 62%,
+        rgba(255, 167, 25, 0.31) 0%,
+        rgba(255, 167, 25, 0.125) 50%,
+        rgba(255, 167, 25, 0.04) 62%,
         transparent 72%
     );
     filter: blur(18px);
@@ -338,7 +338,7 @@ html.embed-site-light #MainDiv::before {
 
 /* Retro terminal pumps warm scene colors; soften UI overlays in modern so nothing reads as “seepage” */
 html[data-terminal-mode="modern"] #MouseGlow {
-    opacity: 0.2;
+    opacity: 0.29;
     filter: blur(22px);
 }
 
