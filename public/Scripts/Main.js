@@ -703,7 +703,7 @@ const rightPanelForScrollListener = document.getElementById('RightPanel'); // Th
 
 if (leftPanelForScrollListener && rightPanelForScrollListener) {
     window.addEventListener('wheel', function(event) {
-        const isDesktopView = window.innerWidth > 992;
+        const isDesktopView = window.innerWidth > 1024;
 
         // Only apply custom scroll logic if in "Modern" state.
         if (typeof State === 'undefined' || State !== "Modern") {

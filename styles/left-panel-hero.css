@@ -552,7 +552,231 @@ html.embed-site-light #LeftPanel .NavItem.Active .NavItemText {
   color: #09090b;
 }
 
-@media (max-width: 992px) {
+/*
+ * Narrow left column on laptops (e.g. 13" Mac): #LeftPanel is calc(50vw - 20vh).
+ * Scale padding/type/avatar so the glass card fits without clipping or overflow.
+ */
+@media (max-width: 1536px) and (min-width: 1025px) {
+  #LeftPanel .lp-hero {
+    max-width: min(30rem, 100%);
+  }
+
+  #LeftPanel .lp-card {
+    padding: 1.35rem 1.2rem;
+    border-radius: 1.65rem;
+  }
+
+  #LeftPanel .lp-card-top {
+    margin-bottom: 1.1rem;
+    gap: 0.5rem;
+  }
+
+  #LeftPanel .lp-card-id-row {
+    gap: 0.65rem;
+  }
+
+  #LeftPanel .lp-avatar-wrap {
+    width: 60px;
+    height: 60px;
+  }
+
+  #LeftPanel .lp-name {
+    font-size: 1.28rem;
+    line-height: 1.18;
+  }
+
+  #LeftPanel .lp-handle {
+    font-size: 0.8125rem;
+  }
+
+  #LeftPanel .lp-theme {
+    padding: 0.5rem;
+    border-radius: 0.85rem;
+  }
+
+  #LeftPanel .lp-tagline-block {
+    margin-bottom: 1.1rem;
+  }
+
+  #LeftPanel .lp-headline {
+    font-size: clamp(1.3rem, 2.4vw + 0.55rem, 2.1rem);
+    line-height: 1.12;
+  }
+
+  #LeftPanel .lp-bio {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: 0.55rem !important;
+  }
+
+  #LeftPanel .lp-social-row {
+    gap: 0.45rem;
+    margin-bottom: 1.25rem;
+  }
+
+  #LeftPanel .lp-social-btn {
+    width: 2.45rem;
+    height: 2.45rem;
+    border-radius: 0.72rem;
+  }
+
+  #LeftPanel .lp-social-svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  #LeftPanel .lp-bottom-row {
+    gap: 0.65rem;
+  }
+
+  #LeftPanel .lp-cv {
+    padding: 0.58rem 1.1rem;
+    font-size: 0.8125rem;
+    border-radius: 0.85rem;
+  }
+
+  #LeftPanel .lp-footer-meta {
+    gap: 0.15rem;
+  }
+
+  #LeftPanel .lp-time {
+    font-size: 0.65rem;
+  }
+
+  #LeftPanel .lp-available {
+    font-size: 0.8125rem;
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 1025px) {
+  #LeftPanel .lp-hero {
+    max-width: min(26rem, 100%);
+  }
+
+  #LeftPanel .lp-card {
+    padding: 1.2rem 1.05rem;
+    border-radius: 1.4rem;
+  }
+
+  #LeftPanel .lp-avatar-wrap {
+    width: 54px;
+    height: 54px;
+  }
+
+  #LeftPanel .lp-name {
+    font-size: 1.15rem;
+  }
+
+  #LeftPanel .lp-headline {
+    font-size: clamp(1.2rem, 2.2vw + 0.45rem, 1.85rem);
+  }
+
+  #LeftPanel .lp-bio {
+    font-size: 0.875rem;
+  }
+}
+
+/* ~1245×765 and similar: smaller card + lighter shadow so nothing bleeds onto #RightPanel */
+@media (max-width: 1280px) and (min-width: 1025px) {
+  #LeftPanel .lp-hero {
+    max-width: min(21.5rem, 100%);
+  }
+
+  #LeftPanel .lp-card {
+    padding: 1rem 0.9rem;
+    border-radius: 1.25rem;
+    box-shadow:
+      0 2px 14px rgba(0, 0, 0, 0.04),
+      0 14px 32px -12px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  #LeftPanel .lp-card.lp-card-dark {
+    box-shadow:
+      0 2px 16px rgba(0, 0, 0, 0.16),
+      0 16px 36px -14px rgba(0, 0, 0, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  #LeftPanel .lp-card-top {
+    margin-bottom: 0.85rem;
+  }
+
+  #LeftPanel .lp-avatar-wrap {
+    width: 48px;
+    height: 48px;
+  }
+
+  #LeftPanel .lp-name {
+    font-size: 1.05rem;
+  }
+
+  #LeftPanel .lp-headline {
+    font-size: clamp(1.1rem, 2vw + 0.4rem, 1.65rem);
+  }
+
+  #LeftPanel .lp-bio {
+    font-size: 0.8125rem;
+    line-height: 1.55;
+  }
+
+  #LeftPanel .lp-social-row {
+    margin-bottom: 1rem;
+  }
+
+  #LeftPanel .lp-cv {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Tightest desktop band just above mobile breakpoint */
+@media (max-width: 1060px) and (min-width: 1025px) {
+  #LeftPanel .lp-hero {
+    max-width: min(19rem, 100%);
+  }
+
+  #LeftPanel .lp-card {
+    padding: 0.85rem 0.75rem;
+    border-radius: 1.1rem;
+  }
+
+  #LeftPanel .lp-avatar-wrap {
+    width: 44px;
+    height: 44px;
+  }
+
+  #LeftPanel .lp-name {
+    font-size: 1rem;
+  }
+
+  #LeftPanel .lp-handle {
+    font-size: 0.75rem;
+  }
+
+  #LeftPanel .lp-headline {
+    font-size: clamp(1rem, 1.85vw + 0.35rem, 1.45rem);
+  }
+
+  #LeftPanel .lp-bio {
+    font-size: 0.75rem;
+    margin-top: 0.4rem !important;
+  }
+
+  #LeftPanel .lp-social-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  #LeftPanel .lp-theme {
+    padding: 0.4rem;
+  }
+}
+
+@media (max-width: 1024px) {
   #LeftPanel .lp-hero {
     max-width: 26rem;
     margin: 0 auto;

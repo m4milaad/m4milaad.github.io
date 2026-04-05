@@ -45,7 +45,7 @@ function scrollToSection(
   const target = document.getElementById(sectionId);
   if (!target) return;
   const offset = window.innerHeight * 0.1;
-  if (window.innerWidth > 992 && rightPanel) {
+  if (window.innerWidth > 1024 && rightPanel) {
     const top = topWithinScroller(rightPanel, target) - offset;
     rightPanel.scrollTo({
       top: Math.max(0, top),
@@ -62,7 +62,7 @@ function activeSectionId(
   rightPanel: HTMLDivElement | null,
 ): (typeof SECTION_IDS)[number] {
   const threshold = 150;
-  const desktop = window.innerWidth > 992 && rightPanel;
+  const desktop = window.innerWidth > 1024 && rightPanel;
 
   if (desktop) {
     const y = rightPanel!.scrollTop + threshold;

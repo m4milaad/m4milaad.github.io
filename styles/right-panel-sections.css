@@ -331,7 +331,7 @@ html.embed-site-light #RightPanel .rp-accolade-body .link {
 }
 
 /* —— Mobile: stack project row —— */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   #RightPanel .rp-project-row {
     flex-wrap: wrap;
     justify-content: center;
