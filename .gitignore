@@ -12,3 +12,14 @@ Thumbs.db
 *.cache
 *.swp
 *.swo
+
+# Dependencies & build
+node_modules/
+.next/
+out/
+dist/
+
+# Env
+.env
+.env.*
+.temp/

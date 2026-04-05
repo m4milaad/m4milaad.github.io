@@ -1,0 +1,175 @@
+/* Tech stack marquees — scoped under #RightPanel (aligns with right-panel-sections .rp-*). */
+#RightPanel .rp-tech-root {
+  --rp-tech-fg: #09090b;
+  --rp-tech-muted: #71717a;
+  --rp-tech-border: rgba(0, 0, 0, 0.12);
+  --rp-tech-pill-bg: transparent;
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--rp-tech-fg);
+  text-align: left;
+  margin: 0 0 6vh 0;
+  max-width: 52rem;
+}
+
+#RightPanel .rp-tech-root.is-dark {
+  --rp-tech-fg: #fafafa;
+  --rp-tech-muted: #a1a1aa;
+  --rp-tech-border: rgba(255, 255, 255, 0.12);
+  --rp-tech-pill-bg: transparent;
+}
+
+#RightPanel .rp-tech-root *,
+#RightPanel .rp-tech-root *::before,
+#RightPanel .rp-tech-root *::after {
+  box-sizing: border-box;
+}
+
+#RightPanel .rp-tech-root h1,
+#RightPanel .rp-tech-root h2,
+#RightPanel .rp-tech-root h3,
+#RightPanel .rp-tech-root p {
+  margin: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  pointer-events: auto;
+}
+
+#RightPanel .rp-tech-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.rp-tech-panel {
+  padding: 0 0 1rem;
+  background: transparent;
+  border-radius: 0;
+  margin-top: 0;
+}
+
+.rp-tech-panel.rp-tech-panel--inview .rp-tech-marquee-wrap {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rp-tech-marquee-wrap {
+  position: relative;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease 0.15s, transform 0.65s ease 0.15s;
+}
+
+.rp-tech-marquee-wrap + .rp-tech-marquee-wrap {
+  transition-delay: 0.22s, 0.22s;
+}
+
+.rp-tech-marquee-outer {
+  position: relative;
+  overflow: hidden;
+}
+
+.rp-tech-marquee-edge {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  width: clamp(3rem, 14vw, 6rem);
+}
+
+.rp-tech-marquee-edge--left {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--bg) 42%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+.rp-tech-marquee-edge--right {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    color-mix(in srgb, var(--bg) 42%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+.rp-tech-marquee-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.rp-tech-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  padding: 0.35rem 0;
+  animation: rpTechMarquee 32s linear infinite;
+}
+
+.rp-tech-marquee-track.rp-tech-marquee-track--rev {
+  animation-direction: reverse;
+  animation-duration: 38s;
+}
+
+@keyframes rpTechMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.rp-tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid var(--rp-tech-border);
+  background: var(--rp-tech-pill-bg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--rp-tech-fg);
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: none;
+}
+
+.rp-tech-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+}
+
+.rp-tech-icon path {
+  fill: currentColor;
+}
+
+.rp-tech-initials {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #RightPanel .rp-tech-root .rp-tech-marquee-track {
+    animation: none;
+  }
+
+  #RightPanel .rp-tech-root .rp-tech-marquee-wrap {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,586 @@
+/* Left-panel hero — DM Sans, scoped .lp-* (no Tailwind) */
+#LeftPanel .lp-hero {
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  max-width: 36rem;
+  pointer-events: auto;
+}
+
+@keyframes lp-card-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes lp-name-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lp-pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+/* Apple-style liquid glass: translucency + heavy blur + saturation + specular edge */
+#LeftPanel .lp-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 2.5rem;
+  padding: 2rem 2.25rem;
+  isolation: isolate;
+  color: #09090b;
+  opacity: 0;
+  transform: scale(0.95);
+  animation: lp-card-in 0.55s ease forwards;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, color 0.2s ease;
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: linear-gradient(
+    138deg,
+    rgba(255, 255, 255, 0.48) 0%,
+    rgba(255, 255, 255, 0.14) 38%,
+    rgba(255, 255, 255, 0.22) 62%,
+    rgba(255, 255, 255, 0.36) 100%
+  );
+  backdrop-filter: blur(48px) saturate(190%) brightness(1.04);
+  -webkit-backdrop-filter: blur(48px) saturate(190%) brightness(1.04);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.05),
+    0 28px 56px -16px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.12);
+}
+
+#LeftPanel .lp-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0) 38%,
+    rgba(255, 255, 255, 0) 62%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  opacity: 0.85;
+}
+
+#LeftPanel .lp-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+#LeftPanel .lp-card.lp-card-dark {
+  color: #fafafa;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(
+    142deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(32, 32, 40, 0.32) 35%,
+    rgba(14, 14, 20, 0.38) 65%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  backdrop-filter: blur(52px) saturate(165%) brightness(1.02);
+  -webkit-backdrop-filter: blur(52px) saturate(165%) brightness(1.02);
+  box-shadow:
+    0 4px 28px rgba(0, 0, 0, 0.22),
+    0 32px 64px -18px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+#LeftPanel .lp-card.lp-card-dark::before {
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 36%,
+    rgba(255, 255, 255, 0) 64%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  opacity: 0.75;
+}
+
+#LeftPanel .lp-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 0.75rem;
+}
+
+#LeftPanel .lp-card-id-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-width: 0;
+}
+
+#LeftPanel .lp-avatar-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 9999px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+#LeftPanel .lp-card-dark .lp-avatar-wrap {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+#LeftPanel .lp-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#LeftPanel .lp-id-block {
+  min-width: 0;
+}
+
+#LeftPanel .lp-name {
+  margin: 0 !important;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: inherit;
+}
+
+#LeftPanel .lp-name-inner {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: lp-name-in 0.5s ease 0.12s forwards;
+}
+
+#LeftPanel .lp-handle {
+  margin: 0.15rem 0 0 !important;
+  font-family: ui-monospace, "Cascadia Code", "Fira Code", Menlo, monospace;
+  font-size: 0.875rem;
+  color: #71717a;
+}
+
+#LeftPanel .lp-card-dark .lp-handle {
+  color: #a1a1aa;
+}
+
+#LeftPanel .lp-theme {
+  flex-shrink: 0;
+  padding: 0.625rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  transition: box-shadow 0.2s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+#LeftPanel .lp-card-dark .lp-theme {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+#LeftPanel .lp-theme:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transform: translateY(-1px);
+}
+
+#LeftPanel .lp-card-dark .lp-theme:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+#LeftPanel .lp-tagline-block {
+  margin-bottom: 1.5rem;
+}
+
+#LeftPanel .lp-headline {
+  margin: 0 !important;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: inherit;
+}
+
+#LeftPanel .lp-rotating-word {
+  font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  display: inline-block;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#LeftPanel .lp-rotating-word[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#LeftPanel .lp-rotating-word[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+#LeftPanel .lp-bio {
+  margin: 0.75rem 0 0 !important;
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 42rem;
+  color: #52525b;
+  font-weight: 400;
+}
+
+#LeftPanel .lp-card-dark .lp-bio {
+  color: #a1a1aa;
+}
+
+#LeftPanel .lp-social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-bottom: 2rem;
+}
+
+#LeftPanel .lp-social-svg {
+  width: 18px;
+  height: 18px;
+}
+
+#LeftPanel .lp-social-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+#LeftPanel .lp-social-neutral {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  color: #09090b;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+#LeftPanel .lp-card-dark .lp-social-neutral {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fafafa;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+#LeftPanel .lp-social-gmail {
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  color: #ea4335;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+#LeftPanel .lp-card-dark .lp-social-gmail {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#LeftPanel .lp-social-linkedin {
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  color: #0a66c2;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+#LeftPanel .lp-card-dark .lp-social-linkedin {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#LeftPanel .lp-social-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+#LeftPanel .lp-card-dark .lp-social-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+#LeftPanel .lp-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#LeftPanel .lp-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(9, 9, 11, 0.72);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  color: #fafafa;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: opacity 0.15s ease, transform 0.15s ease, background 0.2s ease;
+}
+
+#LeftPanel .lp-card-dark .lp-cv {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(250, 250, 250, 0.82);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  color: #09090b;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+#LeftPanel .lp-cv:hover {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+#LeftPanel .lp-footer-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+#LeftPanel .lp-time {
+  font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  color: #71717a;
+  font-variant-numeric: tabular-nums;
+}
+
+#LeftPanel .lp-card-dark .lp-time {
+  color: #a1a1aa;
+}
+
+#LeftPanel .lp-available {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: inherit;
+}
+
+#LeftPanel .lp-available-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.55);
+  flex-shrink: 0;
+  animation: lp-pulse-dot 2s ease-in-out infinite;
+}
+
+#LeftPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#LeftPanel .NavContainer {
+  position: relative;
+  z-index: 2;
+  top: auto;
+  transform: none;
+  margin-top: 2rem;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 16rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#LeftPanel .NavContainer::before {
+  content: "On this page";
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 250, 0.42);
+  margin-bottom: 0.85rem;
+}
+
+html.embed-site-light #LeftPanel .NavContainer::before {
+  color: rgba(9, 9, 11, 0.4);
+}
+
+#LeftPanel button.NavItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 0;
+  min-height: 2.75rem;
+  padding: 0.62rem 0.85rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#LeftPanel button.NavItem:active {
+  transform: scale(0.98);
+}
+
+#LeftPanel button.NavItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+#LeftPanel button.NavItem:focus {
+  outline: none;
+}
+
+#LeftPanel button.NavItem:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 2px;
+}
+
+html.embed-site-light #LeftPanel button.NavItem:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+html.embed-site-light #LeftPanel button.NavItem:focus-visible {
+  outline-color: rgba(9, 9, 11, 0.35);
+}
+
+#LeftPanel .NavItemDot {
+  width: 6px;
+  height: 6px;
+  margin-right: 0;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background-color: rgba(161, 161, 170, 0.65);
+  transform: none;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+#LeftPanel .NavItem.Active .NavItemDot {
+  width: 4px;
+  height: 1.35rem;
+  border-radius: 999px;
+  background-color: #fafafa;
+  transform: none;
+}
+
+#LeftPanel .NavItemText {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: rgba(250, 250, 250, 0.58);
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+#LeftPanel .NavItem.Active .NavItemText {
+  color: #fafafa;
+  font-weight: 600;
+}
+
+html.embed-site-light #LeftPanel .NavItemDot {
+  background-color: rgba(113, 113, 122, 0.55);
+}
+
+html.embed-site-light #LeftPanel .NavItem.Active .NavItemDot {
+  background-color: #09090b;
+}
+
+html.embed-site-light #LeftPanel .NavItemText {
+  color: #71717a;
+}
+
+html.embed-site-light #LeftPanel .NavItem.Active .NavItemText {
+  color: #09090b;
+}
+
+@media (max-width: 992px) {
+  #LeftPanel .lp-hero {
+    max-width: 26rem;
+    margin: 0 auto;
+  }
+
+  #LeftPanel .lp-card {
+    padding: 1.5rem 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #LeftPanel .lp-card {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  #LeftPanel .lp-name-inner {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  #LeftPanel .lp-rotating-word {
+    transition: none;
+  }
+
+  #LeftPanel .lp-available-dot {
+    animation: none;
+  }
+}

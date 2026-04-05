@@ -1,0 +1,355 @@
+/* Projects, Experience, Education, Accolades — scoped to #RightPanel (DM Sans via layout) */
+#RightPanel .rp-section {
+  max-width: 52rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#RightPanel .rp-section > h2 {
+  font-size: clamp(1.65rem, 2.4vh, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.4rem;
+  color: #fafafa;
+  line-height: 1.15;
+}
+
+#RightPanel .rp-section-intro {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(250, 250, 250, 0.62);
+  margin: 0 0 1.5rem;
+  max-width: 40rem;
+}
+
+/* —— Projects: .Project kept for Main.js; inner layout only —— */
+#RightPanel a.Project.rp-project {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.55rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.65rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+#RightPanel a.Project.rp-project:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+}
+
+#RightPanel .rp-project-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  min-width: 0;
+}
+
+#RightPanel .rp-project-row > .Separator {
+  flex: 1 1 auto;
+  margin: 0;
+  min-width: 0.75rem;
+  border-bottom-color: rgba(161, 161, 170, 0.45);
+}
+
+#RightPanel .rp-project-row > p:last-of-type {
+  flex-shrink: 0;
+  font-size: 0.8rem !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(250, 250, 250, 0.42) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+#RightPanel .rp-project-tech {
+  font-size: 0.8125rem !important;
+  line-height: 1.5;
+  color: rgba(250, 250, 250, 0.48) !important;
+  margin: 0 !important;
+}
+
+#RightPanel .rp-project-row > p[data-value*=" "][style*="color: white"] {
+  margin: 0 !important;
+  font-size: 0.95rem !important;
+}
+
+/* —— Experience timeline —— */
+#RightPanel .rp-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  margin: 0;
+  padding: 0 0 0 1rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+#RightPanel .rp-exp-block {
+  position: relative;
+  padding-bottom: 0.15rem;
+}
+
+#RightPanel .rp-exp-block::before {
+  content: "";
+  position: absolute;
+  left: calc(-1rem - 5px);
+  top: 0.35rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(250, 250, 250, 0.55);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.35);
+}
+
+#RightPanel .rp-exp-headline {
+  margin: 0 0 0.45rem !important;
+  font-size: 0.98rem !important;
+  line-height: 1.45;
+}
+
+#RightPanel .rp-exp-headline a.Experience {
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+#RightPanel .rp-exp-headline a.Experience:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.45);
+}
+
+#RightPanel .rp-accolade-title a.Experience {
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+
+#RightPanel .rp-accolade-title a.Experience:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.45);
+}
+
+#RightPanel .rp-exp-text {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.7 !important;
+  color: rgba(250, 250, 250, 0.58) !important;
+}
+
+/* —— Education cards —— */
+#RightPanel .rp-edu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+#RightPanel .rp-edu-card {
+  padding: 1.1rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+#RightPanel .rp-edu-school {
+  margin: 0 0 0.35rem !important;
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+}
+
+#RightPanel .rp-edu-degree {
+  margin: 0 0 0.65rem !important;
+  font-size: 0.88rem !important;
+  line-height: 1.45 !important;
+  color: rgba(250, 250, 250, 0.72) !important;
+}
+
+#RightPanel .rp-edu-detail {
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.65 !important;
+  color: rgba(250, 250, 250, 0.55) !important;
+}
+
+#RightPanel .rp-edu-detail + .rp-edu-detail {
+  margin-top: 0.35rem !important;
+}
+
+/* —— Accolades —— */
+#RightPanel .rp-accolade-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+#RightPanel .rp-accolade {
+  padding: 1rem 1.15rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+#RightPanel .rp-accolade-title {
+  margin: 0 0 0.5rem !important;
+  font-size: 0.95rem !important;
+  line-height: 1.45 !important;
+}
+
+#RightPanel .rp-accolade-body {
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.65 !important;
+  color: rgba(250, 250, 250, 0.55) !important;
+}
+
+#RightPanel .rp-accolade-body .link {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  transition: border-color 0.2s ease;
+}
+
+#RightPanel .rp-accolade-body .link:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+#RightPanel .rp-footer-credit {
+  margin-top: 2rem;
+}
+
+/* —— Light theme —— */
+html.embed-site-light #RightPanel .rp-section > h2 {
+  color: #09090b;
+}
+
+html.embed-site-light #RightPanel .rp-section-intro {
+  color: #52525b;
+}
+
+html.embed-site-light #RightPanel a.Project.rp-project {
+  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+}
+
+html.embed-site-light #RightPanel a.Project.rp-project:hover {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+}
+
+html.embed-site-light #RightPanel .rp-project-row > .Separator {
+  border-bottom-color: #d4d4d8;
+}
+
+html.embed-site-light #RightPanel .rp-project-row > p:last-of-type {
+  color: #71717a !important;
+}
+
+html.embed-site-light #RightPanel .rp-project-tech {
+  color: #71717a !important;
+}
+
+html.embed-site-light
+  #RightPanel
+  .rp-project-row
+  > p[data-value*=" "][style*="color: white"] {
+  color: #09090b !important;
+}
+
+html.embed-site-light #RightPanel .rp-timeline {
+  border-left-color: rgba(0, 0, 0, 0.1);
+}
+
+html.embed-site-light #RightPanel .rp-exp-block::before {
+  background: #09090b;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
+}
+
+html.embed-site-light #RightPanel .rp-exp-text {
+  color: #52525b !important;
+}
+
+html.embed-site-light #RightPanel .rp-exp-headline a.Experience {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+html.embed-site-light #RightPanel .rp-exp-headline a.Experience:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.28);
+}
+
+html.embed-site-light #RightPanel .rp-accolade-title a.Experience {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+html.embed-site-light #RightPanel .rp-accolade-title a.Experience:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.28);
+}
+
+html.embed-site-light #RightPanel .rp-edu-card {
+  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+html.embed-site-light #RightPanel .rp-edu-degree {
+  color: #3f3f46 !important;
+}
+
+html.embed-site-light #RightPanel .rp-edu-detail {
+  color: #52525b !important;
+}
+
+html.embed-site-light #RightPanel .rp-accolade {
+  border-color: rgba(0, 0, 0, 0.07);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(249, 250, 251, 0.9) 100%
+  );
+}
+
+html.embed-site-light #RightPanel .rp-accolade-body {
+  color: #52525b !important;
+}
+
+html.embed-site-light #RightPanel .rp-accolade-body .link {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+/* —— Mobile: stack project row —— */
+@media (max-width: 992px) {
+  #RightPanel .rp-project-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #RightPanel .rp-project-row > .Separator {
+    order: 3;
+    flex: 0 0 75%;
+    max-width: 14rem;
+    margin-top: 0.25rem;
+  }
+
+  #RightPanel .rp-timeline {
+    padding-left: 0.85rem;
+  }
+
+  #RightPanel .rp-exp-block::before {
+    left: calc(-0.85rem - 5px);
+  }
+}

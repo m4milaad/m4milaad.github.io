@@ -1,0 +1,754 @@
+/*
+ * Global portfolio layout: background tokens, #MainDiv / WebGL shell, section nav,
+ * legacy Main.js hooks. Light theme via html.embed-site-light (SiteThemeProvider).
+ */
+:root {
+    --bg: #000000;
+    /* Shiblee globals use 0.025; slightly stronger so grid reads on WebGL + vignette */
+    --grid-color: rgba(255, 255, 255, 0.065);
+    --site-base: var(--bg);
+}
+
+html.embed-site-light {
+    --bg: #ffffff;
+    --grid-color: rgba(0, 0, 0, 0.055);
+    --site-base: var(--bg);
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--bg);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg);
+    color: gray;
+    line-height: 1.6;
+}
+
+/* ======== Canvas Background ======== */
+canvas#Canvas3D {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* ======== Main Button (Terminal Toggle) ======== */
+#MainButton {
+    position: fixed;
+    left: 50%;
+    bottom: max(1.25rem, 2.5vh);
+    transform: translateX(-50%);
+    z-index: 1000;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 3rem;
+    padding: 0.55rem 1.15rem 0.55rem 0.85rem;
+
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-size: clamp(0.8rem, 1.85vh, 0.95rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #fafafa;
+    white-space: nowrap;
+
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 9999px;
+    background: rgba(14, 14, 18, 0.72);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(0, 0, 0, 0.2) inset,
+        0 1px 0 rgba(255, 255, 255, 0.08) inset;
+
+    transition:
+        transform 0.22s ease,
+        background 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+#MainButton:hover {
+    transform: translateX(-50%) translateY(-2px);
+    background: rgba(24, 24, 30, 0.88);
+    border-color: rgba(255, 167, 25, 0.42);
+    box-shadow:
+        0 10px 36px rgba(0, 0, 0, 0.5),
+        0 0 28px rgba(255, 167, 25, 0.12),
+        0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+#MainButton:active {
+    transform: translateX(-50%) translateY(0);
+}
+
+#MainButton .main-btn-terminal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 167, 25, 0.95);
+    flex-shrink: 0;
+}
+
+#MainButton .main-btn-terminal-icon svg {
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+#ButtonText {
+    margin: 0;
+    transition: font-size 0.15s ease;
+}
+
+#ButtonArrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(250, 250, 250, 0.75);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+#ButtonArrow svg {
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+#MainButton:hover #ButtonText {
+    font-size: clamp(0.85rem, 1.9vh, 1rem);
+}
+
+#MainButton:hover .main-btn-terminal-icon svg {
+    transform: scale(1.06);
+}
+
+#MainButton:hover #ButtonArrow svg {
+    transform: scale(1.08);
+}
+
+html.embed-site-light #MainButton {
+    color: #09090b;
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow:
+        0 4px 22px rgba(0, 0, 0, 0.08),
+        0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+html.embed-site-light #MainButton:hover {
+    background: #ffffff;
+    border-color: rgba(234, 88, 12, 0.45);
+    box-shadow:
+        0 10px 32px rgba(0, 0, 0, 0.1),
+        0 0 24px rgba(234, 88, 12, 0.08);
+}
+
+html.embed-site-light #MainButton .main-btn-terminal-icon {
+    color: #ea580c;
+}
+
+html.embed-site-light #MainButton #ButtonArrow {
+    color: #52525b;
+}
+
+/* ======== Main Content Area (Modern View) - Desktop ======== */
+#MainDiv {
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+
+    /* Transparent so WebGL canvas stays visible; grid + tint are ::before/::after */
+    background-color: transparent;
+    isolation: isolate;
+    transition: transform 0.5s ease-in-out;
+    transform: translateY(0%);
+}
+
+/*
+ * Vignette UNDER the grid — if the radial is on top it wipes out Shiblee’s 0.025 lines
+ * across most of the viewport; grid must paint above it to stay visible.
+ */
+#MainDiv::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.92) 30%,
+        var(--bg) 70%
+    );
+}
+
+html.embed-site-light #MainDiv::before {
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.88) 0%,
+        rgba(255, 255, 255, 0.92) 30%,
+        var(--bg) 70%
+    );
+}
+
+/*
+ * .grid-bg — globals.css (same gradients + 40px size); drawn above vignette (::before).
+ * Must sit ABOVE #MouseGlowBlur: full-viewport backdrop-filter blurs its backdrop; when the
+ * grid was z-1 under blur z-5, faint 1px lines were smeared away (worse once glow used filter).
+ */
+#MainDiv::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+#MainDiv.hidden {
+    transform: translateY(100%);
+}
+
+/* ======== Panels - Desktop Styles (Original Absolute Positioning) ======== */
+#LeftPanel {
+    width: calc(50vw - 20vh);
+    height: 100%;
+    left: 20vh;
+    position: absolute;
+    top: 0;
+    margin-top: 10vh;
+    pointer-events: auto;
+    box-sizing: border-box;
+    z-index: 102;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#RightPanel {
+    width: auto;
+    height: 100%;
+    position: absolute;
+    left: 50vw;
+    right: 0;
+    top: 0;
+    padding: 10vh 20vh 0 2vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    box-sizing: border-box;
+    z-index: 101;
+}
+
+#RightPanel::-webkit-scrollbar {
+    display: none;
+}
+
+/* ======== Mouse glow — under grid (grid z-10); under panels (101+) ======== */
+/* Radial falloff + light blur; grid is not behind backdrop-filter anymore */
+#MouseGlow {
+    width: 42vmax;
+    height: 42vmax;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    z-index: 2;
+    pointer-events: none;
+
+    border-radius: 50%;
+    background: radial-gradient(
+        circle closest-side,
+        rgba(255, 167, 25, 0.26) 0%,
+        rgba(255, 167, 25, 0.1) 42%,
+        rgba(255, 167, 25, 0.03) 62%,
+        transparent 72%
+    );
+    filter: blur(18px);
+}
+
+#MouseGlowBlur {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    z-index: 3;
+    backdrop-filter: blur(12vmax);
+    -webkit-backdrop-filter: blur(12vmax);
+    pointer-events: none;
+}
+
+/* Retro terminal pumps warm scene colors; soften UI overlays in modern so nothing reads as “seepage” */
+html[data-terminal-mode="modern"] #MouseGlow {
+    opacity: 0.2;
+    filter: blur(22px);
+}
+
+html[data-terminal-mode="modern"] #MouseGlowBlur {
+    backdrop-filter: blur(5vmax);
+    -webkit-backdrop-filter: blur(5vmax);
+}
+
+html[data-terminal-mode="retro"] #MouseGlow {
+    opacity: 1;
+}
+
+html[data-terminal-mode="retro"] #MouseGlowBlur {
+    backdrop-filter: blur(12vmax);
+    -webkit-backdrop-filter: blur(12vmax);
+}
+
+/* ======== Typography ======== */
+h1 {
+    font-size: 7.0vh;
+    margin: 0 0 1vh 0;
+    color: white;
+    font-weight: bold;
+    pointer-events: auto;
+}
+
+h2 {
+    font-size: 2.8vh;
+    margin: 0 0 1.5vh 0;
+    color: white;
+    font-weight: normal;
+    pointer-events: auto;
+}
+
+p {
+    font-size: 2.0vh;
+    margin: 0 0 1vh 0;
+    color: rgb(160, 160, 160);
+    line-height: 1.7;
+    pointer-events: auto;
+}
+
+.rp-inline-em {
+    font-weight: bold;
+    color: rgb(200, 200, 200);
+}
+
+.link {
+    color: inherit;
+}
+
+/* ======== Navigation (Scrollspy) ======== */
+.NavContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-65%);
+    pointer-events: auto;
+}
+
+.NavItem {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.NavItemDot {
+    width: 1.1vh;
+    height: 1.1vh;
+    border-radius: 50%;
+    background-color: gray;
+    transition: all 0.3s ease;
+    margin-right: 1.1vh;
+}
+
+.NavItemText {
+    font-size: 2.0vh;
+    color: gray;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.NavItem.Active .NavItemDot {
+    background-color: white;
+    transform: scale(1.5);
+}
+
+.NavItem.Active .NavItemText {
+    color: white;
+    font-weight: bold;
+}
+
+/* ======== Sections in Right Panel ======== */
+.Section {
+    margin-bottom: 10vh;
+}
+
+/* ======== Social Icons ======== */
+#SocialsContainer {
+    position: absolute;
+    top: 90vh;
+    transform: translateY(-170%);
+    display: flex;
+    justify-content: flex-start;
+    gap: 2.5vh;
+    pointer-events: auto;
+}
+
+#SocialsContainer a {
+    display: inline-block;
+    transform: scale(1);
+    filter: invert(100%) brightness(50%);
+    transition: all 0.1s ease;
+}
+
+#SocialsContainer a:hover {
+    transform: scale(1.1);
+    filter: invert(100%) brightness(100%);
+}
+
+#SocialsContainer img {
+    width: 3vh;
+    height: 3vh;
+    max-width: 30px;
+    max-height: 30px;
+}
+
+/* ======== Project list (layout + hover scramble in Main.js; card chrome in right-panel-sections.css) ======== */
+#RightPanel a.Project:not(.rp-project) {
+    margin-bottom: 0.5vh;
+    padding: 0.75vh;
+    border-radius: 0.75vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+#RightPanel a.Project:not(.rp-project):hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.Project p {
+    user-select: none;
+    font-size: 1.8vh;
+    color: gray;
+    margin-bottom: 0;
+}
+
+.Project p[data-value*=" "][style*="color: white"] {
+    color: white !important;
+    font-weight: bold;
+    white-space: pre;
+    margin-right: 1em;
+}
+
+.Separator {
+    flex-grow: 1;
+    border-bottom: 1px solid gray;
+    margin: 0 0.75vh;
+    align-self: center;
+    height: 1px;
+}
+
+.Experience {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ======== Responsive Adjustments START ======== */
+
+/* === Medium Screens (e.g., Smaller Desktops, Larger Tablets landscape ~1200px) === */
+@media (max-width: 1200px) {
+    #LeftPanel {
+        width: calc(50vw - 15vh);
+        left: 15vh;
+        padding-right: 3vw;
+    }
+
+    #RightPanel {
+        left: calc(35vw + 3vw);
+        width: calc(100vw - (35vw + 3vw) - 10vw);
+        padding: 10vh 10vw 0 3vw;
+    }
+
+    h1 {
+        font-size: 6.5vh;
+    }
+
+    h2 {
+        font-size: 2.6vh;
+    }
+
+    p {
+        font-size: 1.9vh;
+        line-height: 2.9vh;
+    }
+
+    .NavItemText {
+        font-size: 1.9vh;
+    }
+}
+
+
+/* ======== Tablet & Mobile Devices (Stacking layout, e.g., <= 992px) ======== */
+@media (max-width: 992px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+
+    #MainButton {
+        display: none;
+    }
+
+    #MainDiv {
+        position: relative;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        overflow-y: visible;
+    }
+
+    #LeftPanel,
+    #RightPanel {
+        position: static;
+        width: 100%;
+        height: auto;
+        left: auto;
+        right: auto;
+        top: auto;
+        margin-top: 0;
+        padding: 5vh 5vw;
+        overflow-y: visible;
+        pointer-events: auto;
+    }
+
+    #LeftPanel {
+        order: 1;
+        text-align: center;
+        padding-bottom: 3vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #RightPanel {
+        order: 2;
+        padding-top: 3vh;
+        padding-bottom: 5vh;
+    }
+
+    h1 {
+        font-size: clamp(4.5vh, 8vw, 6vh);
+        margin-bottom: 2vh;
+    }
+
+    h2 {
+        font-size: clamp(2.4vh, 5vw, 2.8vh);
+    }
+
+    p {
+        font-size: clamp(1.8vh, 3.5vw, 2vh);
+        line-height: 1.65;
+        margin-bottom: 1.5vh;
+    }
+
+    .NavContainer {
+        display: none;
+    }
+
+    #SocialsContainer {
+        position: static;
+        transform: none;
+        margin-top: 4vh;
+        padding-bottom: 3vh;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .Project {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5vh 1vh;
+    }
+
+    .Project .Separator {
+        width: 80%;
+        margin: 1vh auto;
+    }
+
+    .Project p {
+        width: 100%;
+        margin-bottom: 0.5vh;
+    }
+
+    #RightPanel>p[style*="padding-bottom: 95.0vh"] {
+        padding-bottom: 5vh !important;
+        font-size: 1.5vh !important;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+
+        #MouseGlow,
+        #MouseGlowBlur {
+            display: block;
+        }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+
+        #MouseGlow,
+        #MouseGlowBlur {
+            display: none;
+        }
+    }
+}
+
+/* ======== Mobile Devices (Screens <= 480px) ======== */
+@media (max-width: 480px) {
+
+    #LeftPanel,
+    #RightPanel {
+        padding: 4vh 4vw;
+    }
+
+    h1 {
+        font-size: clamp(4vh, 9vw, 5vh);
+    }
+
+    h2 {
+        font-size: clamp(2.2vh, 5.5vw, 2.4vh);
+    }
+
+    p {
+        font-size: clamp(1.7vh, 4vw, 1.9vh);
+        line-height: 1.6;
+    }
+
+    .NavItemText {
+        font-size: clamp(1.7vh, 3.5vw, 1.9vh);
+    }
+
+    .NavItemDot {
+        width: 0.9vh;
+        height: 0.9vh;
+    }
+
+
+    .Section {
+        margin-bottom: 5vh;
+    }
+
+    #SocialsContainer img {
+        width: 2vh;
+        height: 2vh;
+        max-width: 40px;
+        max-height: 40px;
+    }
+
+    #RightPanel>p[style*="padding-bottom: 95.0vh"] {
+        padding-bottom: 5vh !important;
+        font-size: 1.4vh !important;
+    }
+}
+
+/* ======== Light site theme (toggle in hero; syncs html.embed-site-light) ======== */
+html.embed-site-light body {
+    color: #52525b;
+}
+
+html.embed-site-light #LeftPanel h1,
+html.embed-site-light #LeftPanel h2 {
+    color: #09090b;
+}
+
+html.embed-site-light #LeftPanel p {
+    color: #52525b;
+}
+
+html.embed-site-light .NavItemText {
+    color: #71717a;
+}
+
+html.embed-site-light .NavItem.Active .NavItemText {
+    color: #09090b;
+}
+
+html.embed-site-light .NavItemDot {
+    background-color: #a1a1aa;
+}
+
+html.embed-site-light .NavItem.Active .NavItemDot {
+    background-color: #09090b;
+}
+
+html.embed-site-light #RightPanel .Section h2 {
+    color: #09090b;
+}
+
+html.embed-site-light #RightPanel .Section p,
+html.embed-site-light #RightPanel .Section .rp-inline-em {
+    color: #3f3f46;
+}
+
+html.embed-site-light #RightPanel .Section .rp-inline-em {
+    color: #27272a;
+}
+
+html.embed-site-light .Project:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+html.embed-site-light .Project p {
+    color: #71717a;
+}
+
+html.embed-site-light .Project p[data-value*=" "][style*="color: white"] {
+    color: #09090b !important;
+}
+
+html.embed-site-light .Separator {
+    border-bottom-color: #d4d4d8;
+}
+
+html.embed-site-light .Experience {
+    color: #27272a;
+}
+
+html.embed-site-light #RightPanel > p {
+    color: #71717a;
+}
+
+html.embed-site-light #RightPanel > p .rp-inline-em {
+    color: #27272a;
+}
