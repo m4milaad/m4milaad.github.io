@@ -191,7 +191,6 @@ export default function LeftPanelHero() {
             href="https://github.com/m4milaad"
             target="_blank"
             rel="noopener noreferrer"
-            title="GitHub"
             aria-label="GitHub"
           >
             <IconGithub />
@@ -201,7 +200,6 @@ export default function LeftPanelHero() {
             href="https://x.com/m4milaad"
             target="_blank"
             rel="noopener noreferrer"
-            title="Twitter / X"
             aria-label="X"
           >
             <IconX />
@@ -209,7 +207,6 @@ export default function LeftPanelHero() {
           <a
             className="lp-social-btn lp-social-gmail"
             href="mailto:mb4milad.bhattt@gmail.com"
-            title="Email"
             aria-label="Email"
           >
             <IconGmail />
@@ -219,7 +216,6 @@ export default function LeftPanelHero() {
             href="https://www.linkedin.com/in/m4milaad/"
             target="_blank"
             rel="noopener noreferrer"
-            title="LinkedIn"
             aria-label="LinkedIn"
           >
             <IconLinkedIn />
