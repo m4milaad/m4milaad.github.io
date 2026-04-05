@@ -265,207 +265,109 @@
 }
 
 #LeftPanel .lp-social-svg {
-  width: 18px;
-  height: 18px;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
+  pointer-events: none;
 }
 
 /*
- * Social chips — liquid glass (frosted capsule), no “hover pop”.
- * Press: slight inset scale; pointer hover: soft brightening only.
+ * Contact links — frosted glass (strong backdrop blur + milky tint). Not liquid glass:
+ * no specular gradients or inset shine on these controls.
  */
 #LeftPanel .lp-social-btn {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  width: 2.875rem;
-  height: 2.875rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.74);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
-  color: #0c0c0e;
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.18) 45%,
-    rgba(255, 255, 255, 0.28) 100%
-  );
-  backdrop-filter: blur(26px) saturate(200%) brightness(1.06);
-  -webkit-backdrop-filter: blur(26px) saturate(200%) brightness(1.06);
-  box-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.07),
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    inset 0 -0.5px 0 rgba(255, 255, 255, 0.2);
+  font-size: 0;
+  line-height: 0;
+  background: rgba(255, 255, 255, 0.68);
+  color: #52525b;
+  backdrop-filter: blur(42px) saturate(185%);
+  -webkit-backdrop-filter: blur(42px) saturate(185%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
   transition:
-    transform 0.2s cubic-bezier(0.25, 0.85, 0.35, 1),
-    box-shadow 0.22s ease,
-    border-color 0.22s ease,
-    background 0.22s ease,
-    color 0.2s ease;
-}
-
-#LeftPanel .lp-social-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.9;
-  background: linear-gradient(
-    118deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    transparent 38%,
-    transparent 62%,
-    rgba(255, 255, 255, 0.12) 100%
-  );
-}
-
-#LeftPanel .lp-social-btn .lp-social-svg {
-  position: relative;
-  z-index: 1;
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.12s ease;
 }
 
 #LeftPanel .lp-card-dark .lp-social-btn {
-  border-color: rgba(255, 255, 255, 0.16);
-  color: #f4f4f5;
-  background: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(255, 255, 255, 0.05) 48%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  box-shadow:
-    0 4px 18px rgba(0, 0, 0, 0.22),
-    0 1px 3px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
-}
-
-#LeftPanel .lp-card-dark .lp-social-btn::before {
-  background: linear-gradient(
-    118deg,
-    rgba(255, 255, 255, 0.22) 0%,
-    transparent 40%,
-    transparent 60%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  opacity: 0.75;
-}
-
-/* Icon tint only — glass stays consistent */
-#LeftPanel .lp-social-neutral {
-  color: #18181b;
-}
-
-#LeftPanel .lp-card-dark .lp-social-neutral {
-  color: #fafafa;
-}
-
-/* Gmail / LinkedIn: brand-true hues, tuned for frosted light vs dark card */
-#LeftPanel .lp-social-gmail {
-  color: #ea4335;
-}
-
-#LeftPanel .lp-card-dark .lp-social-gmail {
-  color: #c5221f;
-}
-
-#LeftPanel .lp-social-linkedin {
-  color: #0a66c2;
-}
-
-#LeftPanel .lp-card-dark .lp-social-linkedin {
-  color: #0a66c2;
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.22);
+  color: #a1a1aa;
+  backdrop-filter: blur(34px) saturate(168%);
+  -webkit-backdrop-filter: blur(34px) saturate(168%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
 }
 
 #LeftPanel .lp-social-btn:active {
-  transform: scale(0.94);
-  transition-duration: 0.1s;
+  transform: scale(0.97);
+  transition-duration: 0.08s;
 }
 
 @media (hover: hover) and (pointer: fine) {
   #LeftPanel .lp-social-btn:hover {
-    transform: scale(1.035);
-    border-color: rgba(255, 255, 255, 0.42);
-    box-shadow:
-      0 6px 20px rgba(0, 0, 0, 0.1),
-      0 2px 6px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.85),
-      inset 0 -0.5px 0 rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(255, 255, 255, 0.9);
+    color: #030213;
   }
 
   #LeftPanel .lp-card-dark .lp-social-btn:hover {
-    border-color: rgba(255, 255, 255, 0.26);
-    box-shadow:
-      0 10px 28px rgba(0, 0, 0, 0.38),
-      0 2px 8px rgba(0, 0, 0, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.32),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.32);
+    border-color: rgba(255, 255, 255, 0.48);
+    color: #f4f4f5;
   }
 
   #LeftPanel .lp-social-btn:active {
-    transform: scale(0.94);
+    transform: scale(0.97);
   }
 }
 
 #LeftPanel .lp-social-btn:focus-visible {
   outline: none;
-  box-shadow:
-    0 0 0 2px rgba(255, 167, 25, 0.55),
-    0 4px 16px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
 }
 
 #LeftPanel .lp-card-dark .lp-social-btn:focus-visible {
-  box-shadow:
-    0 0 0 2px rgba(255, 167, 25, 0.65),
-    0 8px 24px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.22);
 }
 
 html.embed-site-light #LeftPanel .lp-social-btn {
-  border-color: rgba(0, 0, 0, 0.08);
-  color: #18181b;
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.92) 0%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0.72) 100%
-  );
-  box-shadow:
-    0 2px 12px rgba(0, 0, 0, 0.06),
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 #ffffff,
-    inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.74);
+  border-color: rgba(255, 255, 255, 0.88);
+  color: #52525b;
+  backdrop-filter: blur(42px) saturate(185%);
+  -webkit-backdrop-filter: blur(42px) saturate(185%);
+}
+
+html.embed-site-light #LeftPanel .lp-social-btn:hover {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 255, 255, 0.96);
+  color: #030213;
 }
 
 html.embed-site-light #LeftPanel .lp-card-dark .lp-social-btn {
-  border-color: rgba(0, 0, 0, 0.1);
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.88) 0%,
-    rgba(248, 250, 252, 0.65) 100%
-  );
-  box-shadow:
-    0 3px 14px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 #ffffff;
+  background: rgba(255, 255, 255, 0.66);
+  border-color: rgba(255, 255, 255, 0.78);
+  color: #52525b;
+  backdrop-filter: blur(38px) saturate(175%);
+  -webkit-backdrop-filter: blur(38px) saturate(175%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
-html.embed-site-light #LeftPanel .lp-social-btn::before {
-  background: linear-gradient(
-    118deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    transparent 42%,
-    transparent 58%,
-    rgba(0, 0, 0, 0.03) 100%
-  );
-  opacity: 0.65;
+html.embed-site-light #LeftPanel .lp-card-dark .lp-social-btn:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.9);
+  color: #030213;
 }
 
 #LeftPanel .lp-bottom-row {
@@ -476,41 +378,109 @@ html.embed-site-light #LeftPanel .lp-social-btn::before {
   gap: 1rem;
 }
 
+/* View CV — frosted glass, same language as `.lp-social-btn` */
 #LeftPanel .lp-cv {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 1rem;
+  height: 2.25rem;
+  padding: 0 0.875rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.74);
+  background: rgba(255, 255, 255, 0.68);
+  color: #52525b;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
+  line-height: 1;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(9, 9, 11, 0.72);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  color: #fafafa;
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  transition: opacity 0.15s ease, transform 0.15s ease, background 0.2s ease;
+  backdrop-filter: blur(42px) saturate(185%);
+  -webkit-backdrop-filter: blur(42px) saturate(185%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.12s ease;
+}
+
+#LeftPanel .lp-cv svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
 }
 
 #LeftPanel .lp-card-dark .lp-cv {
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(250, 250, 250, 0.82);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  color: #09090b;
-  box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.22);
+  color: #a1a1aa;
+  backdrop-filter: blur(34px) saturate(168%);
+  -webkit-backdrop-filter: blur(34px) saturate(168%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
 }
 
-#LeftPanel .lp-cv:hover {
-  opacity: 0.9;
-  transform: scale(0.98);
+#LeftPanel .lp-cv:active {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
+}
+
+#LeftPanel .lp-cv:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+
+#LeftPanel .lp-card-dark .lp-cv:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.22);
+}
+
+html.embed-site-light #LeftPanel .lp-cv {
+  background: rgba(255, 255, 255, 0.74);
+  border-color: rgba(255, 255, 255, 0.88);
+  color: #52525b;
+  backdrop-filter: blur(42px) saturate(185%);
+  -webkit-backdrop-filter: blur(42px) saturate(185%);
+}
+
+html.embed-site-light #LeftPanel .lp-cv:hover {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 255, 255, 0.96);
+  color: #030213;
+}
+
+html.embed-site-light #LeftPanel .lp-card-dark .lp-cv {
+  background: rgba(255, 255, 255, 0.66);
+  border-color: rgba(255, 255, 255, 0.78);
+  color: #52525b;
+  backdrop-filter: blur(38px) saturate(175%);
+  -webkit-backdrop-filter: blur(38px) saturate(175%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+html.embed-site-light #LeftPanel .lp-card-dark .lp-cv:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.9);
+  color: #030213;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #LeftPanel .lp-cv:hover {
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(255, 255, 255, 0.9);
+    color: #030213;
+  }
+
+  #LeftPanel .lp-card-dark .lp-cv:hover {
+    background: rgba(255, 255, 255, 0.32);
+    border-color: rgba(255, 255, 255, 0.48);
+    color: #f4f4f5;
+  }
+
+  #LeftPanel .lp-cv:active {
+    transform: scale(0.97);
+  }
 }
 
 #LeftPanel .lp-footer-meta {
@@ -762,14 +732,14 @@ html.embed-site-light #LeftPanel .NavItem.Active .NavItemText {
   }
 
   #LeftPanel .lp-social-btn {
-    width: 2.45rem;
-    height: 2.45rem;
-    border-radius: 0.72rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
   }
 
   #LeftPanel .lp-social-svg {
-    width: 16px;
-    height: 16px;
+    width: 1rem;
+    height: 1rem;
   }
 
   #LeftPanel .lp-bottom-row {
@@ -777,9 +747,10 @@ html.embed-site-light #LeftPanel .NavItem.Active .NavItemText {
   }
 
   #LeftPanel .lp-cv {
-    padding: 0.58rem 1.1rem;
+    height: 2.25rem;
+    padding: 0 0.75rem;
     font-size: 0.8125rem;
-    border-radius: 0.85rem;
+    border-radius: 9999px;
   }
 
   #LeftPanel .lp-footer-meta {
@@ -875,8 +846,10 @@ html.embed-site-light #LeftPanel .NavItem.Active .NavItemText {
   }
 
   #LeftPanel .lp-cv {
-    padding: 0.5rem 0.85rem;
+    height: 2.25rem;
+    padding: 0 0.7rem;
     font-size: 0.75rem;
+    border-radius: 9999px;
   }
 }
 
@@ -914,8 +887,8 @@ html.embed-site-light #LeftPanel .NavItem.Active .NavItemText {
   }
 
   #LeftPanel .lp-social-btn {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2.25rem;
+    height: 2.25rem;
   }
 
   #LeftPanel .lp-theme {
@@ -942,7 +915,10 @@ html.embed-site-light #LeftPanel .NavItem.Active .NavItemText {
 @media (prefers-reduced-motion: reduce) {
   #LeftPanel .lp-social-btn,
   #LeftPanel .lp-social-btn:hover,
-  #LeftPanel .lp-social-btn:active {
+  #LeftPanel .lp-social-btn:active,
+  #LeftPanel .lp-cv,
+  #LeftPanel .lp-cv:hover,
+  #LeftPanel .lp-cv:active {
     transform: none;
   }
 

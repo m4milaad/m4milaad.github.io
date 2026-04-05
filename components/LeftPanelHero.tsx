@@ -187,7 +187,7 @@ export default function LeftPanelHero() {
 
         <div className="lp-social-row">
           <a
-            className="lp-social-btn lp-social-neutral"
+            className="lp-social-btn"
             href="https://github.com/m4milaad"
             target="_blank"
             rel="noopener noreferrer"
@@ -196,7 +196,7 @@ export default function LeftPanelHero() {
             <IconGithub />
           </a>
           <a
-            className="lp-social-btn lp-social-neutral"
+            className="lp-social-btn"
             href="https://x.com/m4milaad"
             target="_blank"
             rel="noopener noreferrer"
@@ -205,14 +205,14 @@ export default function LeftPanelHero() {
             <IconX />
           </a>
           <a
-            className="lp-social-btn lp-social-gmail"
+            className="lp-social-btn"
             href="mailto:mb4milad.bhattt@gmail.com"
             aria-label="Email"
           >
             <IconGmail />
           </a>
           <a
-            className="lp-social-btn lp-social-linkedin"
+            className="lp-social-btn"
             href="https://www.linkedin.com/in/m4milaad/"
             target="_blank"
             rel="noopener noreferrer"
