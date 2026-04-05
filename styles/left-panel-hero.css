@@ -798,6 +798,11 @@ html.embed-site-light #LeftPanel .NavItem.Active .NavItemText {
   #LeftPanel .lp-card {
     padding: 1.5rem 1.35rem;
   }
+
+  /* Beat base `#LeftPanel .NavContainer { display: flex }` — no scrollspy rail on mobile / ≤1024px */
+  #LeftPanel .NavContainer {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -163,6 +163,14 @@
   color: #fff;
 }
 
+@media (max-width: 1024px) {
+  #RightPanel .rp-tech-root {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: min(52rem, 100%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   #RightPanel .rp-tech-root .rp-tech-marquee-track {
     animation: none;
