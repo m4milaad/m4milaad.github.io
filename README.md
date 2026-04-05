@@ -1,50 +1,64 @@
-# Personal Website
-![alt text](https://img.shields.io/badge/Javascript_(ES6)-WebGL2-blue) ![alt text](https://img.shields.io/badge/HTML5-CSS3-green)
+# Personal portfolio
 
-Welcome to my [personal portfolio website](https://m4milaad.github.io/Resume)! This project showcases my work as an aspiring software developer and features a unique blend of modern web design and retro-inspired 3D graphics. Below, you'll find details about the development process, key features, and how to explore the site.
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![WebGL2](https://img.shields.io/badge/WebGL2-scene-orange)](https://www.khronos.org/webgl/)
 
-<img width="1366" height="615" alt="image" src="https://github.com/user-attachments/assets/cfec15a7-c0a1-4bcd-a05d-a6dc43661342" />
+Personal site blending a **React / Next.js** layout (left hero, scrollable right column, tech stack marquees) with a **legacy WebGL2 desk scene** and **retro terminal** driven by scripts in `public/Scripts/`.
 
-## 🔥 Features
-- **Dual Interface Design**:
-    - **Modern Interface**: A clean, user-friendly layout inspired by [Brittany Chiang's website](https://brittanychiang.com/). This section presents all the essential information in a straightforward, easily navigable format.
-    - **Retro 3D Interface**: An interactive retro-styled terminal interface inspired by [Ed Hinrichsen website](https://www.edwardh.io/). This section features a fully functional terminal on a 3D-rendered vintage computer screen.
+**Live site:** [m4milaad.github.io](https://m4milaad.github.io/)
 
-- **3D Rendering**:
-    - **WebGL2-Powered**: The retro side of the website uses WebGL2 for rendering, written entirely from scratch.
-    - **Custom Shaders**: Includes custom shader effects, shadow maps, and other advanced graphics techniques.
-    - **.OBJ and .MTL File Loader**: A custom loader for 3D models, allowing for dynamic content.
-    - **Handcrafted Models**: All 3D models used in the project were created by me.
+## Features
 
-- **Interactive Terminal**:
-    - Explore the retro interface by typing commands into the terminal. Navigate through files, discover information, and enjoy a nostalgic trip back to the early days of computing.
+- **Two-pane layout** — Fixed left panel (profile, theme toggle, links) and scrollable right panel (tech stack, projects, experience, education, accolades).
+- **3D + terminal** — WebGL2 rendering, custom shaders, and an interactive CLI loaded from legacy JavaScript (`Main.js`, `RenderingFunctions.js`, etc.).
+- **Static export** — `output: "export"` in Next.js; deployable to **GitHub Pages** with no server runtime.
+- **CI deploy** — Push to `main` runs `.github/workflows/deploy.yml`, builds with `npm ci` / `npm run build`, and publishes the `out/` directory.
 
-- **Fully Static and Front-End Only**:
-    - The site is a static front-end project, hosted on GitHub Pages. No back-end or server-side code is used.
+## Getting started
 
-## 🚀 Getting Started
-To explore the project locally or contribute:
+Requirements: **Node.js 20+** (matches the deploy workflow).
 
-1. **Clone the repository**:
 ```bash
-git clone https://github.com/m4milaad/Resume.git
+git clone https://github.com/m4milaad/m4milaad.github.io.git
+cd m4milaad.github.io
+npm ci
+npm run dev
 ```
-2. Navigate to the **project directory**:
-```bash
-cd Resume
-```
-3. **Open the index.html file** in your browser to explore the website locally.
 
-## 🛠️ Built With
-- **HTML5**: For the structure and content of the site.
-- **CSS3**: For the styling and layout.
-- **JavaScript (ES6)**: For interactivity, terminal functionality, and WebGL2 rendering.
-- **WebGL2**: Used to create the 3D rendering of the retro computer.
-- **GitHub Pages**: For hosting the live version of the site.
+Open [http://localhost:3000](http://localhost:3000).
 
-## 🎨 Inspirations
-- Modern Interface: Inspired by the clean design and structure of [Brittany Chiang's portfolio](https://brittanychiang.com/).
-- Retro Interface: The retro terminal experience was inspired by [Edward Hwang's portfolio](https://www.edwardh.io/).
+| Script    | Description                          |
+| --------- | ------------------------------------ |
+| `npm run dev`   | Next.js dev server                   |
+| `npm run build` | Production build → `out/` (static)   |
+| `npm run start` | Serve production build (after build) |
+| `npm run lint`  | ESLint (`eslint-config-next`)        |
 
-## 📬 Contact
-If you have any questions, feel free to reach out via [Email](mailto:mb4milad.bhattt@gmail.com).
+## Project layout
+
+| Path | Role |
+| ---- | ---- |
+| `app/` | App Router: `layout.tsx`, `page.tsx` |
+| `components/PortfolioShell.tsx` | Page shell: `#MainDiv`, `#RightPanel`, script loader, section nav |
+| `components/LeftPanelHero.tsx` | Left column hero |
+| `components/tech-stack/` | Tech stack marquees and icon data |
+| `components/site-theme/` | Light/dark context (`SiteThemeProvider`) |
+| `public/Scripts/` | WebGL / terminal / model logic consumed by the shell |
+| `public/Images/`, `public/Sounds/` | Static assets |
+| `styles/` | `portfolio-layout.css`, `right-panel-*.css`, `left-panel-hero.css` |
+
+## Built with
+
+- [Next.js](https://nextjs.org/) 14 (App Router), [React](https://react.dev/) 18, [TypeScript](https://www.typescriptlang.org/)
+- WebGL2, HTML, CSS, and vanilla JS for the 3D scene and terminal (see `public/Scripts/`)
+- [GitHub Pages](https://pages.github.com/) for hosting
+
+## Inspirations
+
+- Modern layout influenced by [Brittany Chiang’s portfolio](https://brittanychiang.com/).
+- Retro terminal / desk vibe influenced by [Edward Hwang’s site](https://www.edwardh.io/).
+
+## Contact
+
+Questions: [mb4milad.bhattt@gmail.com](mailto:mb4milad.bhattt@gmail.com).
