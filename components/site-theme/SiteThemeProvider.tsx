@@ -2,9 +2,10 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -15,22 +16,60 @@ const ThemeContext = createContext<Ctx>({
   toggleTheme: () => {},
 });
 
+const listeners = new Set<() => void>();
+
+function emitThemeChange() {
+  listeners.forEach((l) => l());
+}
+
+function subscribe(onChange: () => void) {
+  listeners.add(onChange);
+  if (typeof window !== "undefined") {
+    window.addEventListener("storage", onChange);
+  }
+  return () => {
+    listeners.delete(onChange);
+    if (typeof window !== "undefined") {
+      window.removeEventListener("storage", onChange);
+    }
+  };
+}
+
+function getServerSnapshot() {
+  return true;
+}
+
+function getClientSnapshot() {
+  if (typeof window === "undefined") return true;
+  try {
+    const saved = localStorage.getItem("milad-embed-theme");
+    return saved !== "light";
+  } catch {
+    return true;
+  }
+}
+
 /** Site-wide theme (html class + context). Renders children only — no wrapper div. */
 export function SiteThemeProvider({ children }: { children: ReactNode }) {
-  const [dark, setDark] = useState(true);
+  const dark = useSyncExternalStore(
+    subscribe,
+    getClientSnapshot,
+    getServerSnapshot,
+  );
 
-  useEffect(() => {
-    const saved = localStorage.getItem("milad-embed-theme");
-    if (saved === "dark" || saved === "light") {
-      setDark(saved === "dark");
+  const toggleTheme = useCallback(() => {
+    try {
+      const saved = localStorage.getItem("milad-embed-theme");
+      const currentlyDark = saved !== "light";
+      localStorage.setItem(
+        "milad-embed-theme",
+        currentlyDark ? "light" : "dark",
+      );
+      emitThemeChange();
+    } catch {
+      /* ignore */
     }
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("milad-embed-theme", dark ? "dark" : "light");
-  }, [dark]);
-
-  const toggleTheme = () => setDark((d) => !d);
 
   useEffect(() => {
     document.documentElement.classList.toggle("embed-site-light", !dark);

@@ -52,13 +52,14 @@ export default function RootLayout({
   return (
     <html lang="en" data-terminal-mode="modern">
       <head>
-        {/* eslint-disable-next-line @next/next/no-page-custom-font -- matches legacy index.html */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        {/* App Router: link tag fonts are fine for a single layout (legacy parity with index.html) */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=VT323&display=swap"
           rel="stylesheet"

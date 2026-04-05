@@ -241,13 +241,17 @@ html.embed-site-light #MainDiv::before {
 }
 
 /* ======== Panels - Desktop Styles (Original Absolute Positioning) ======== */
+/*
+ * Top inset via `top` + shortened height — not `margin-top` + `height: 100%`, which made the
+ * panel extend past the viewport and clipped the scrollspy (e.g. short 600px-tall windows).
+ */
 #LeftPanel {
     width: calc(50vw - 20vh);
-    height: 100%;
     left: 20vh;
     position: absolute;
-    top: 0;
-    margin-top: 10vh;
+    top: 10vh;
+    height: calc(100% - 10vh);
+    margin-top: 0;
     pointer-events: auto;
     box-sizing: border-box;
     z-index: 102;
@@ -286,7 +290,8 @@ html.embed-site-light #MainDiv::before {
         left: 12vh;
         width: calc(50vw - 12vh - 32px);
         padding-right: 6px;
-        margin-top: 6vh;
+        top: 6vh;
+        height: calc(100% - 6vh);
     }
 
     /* Less top/right inset than base 10vh / 20vh — avoids huge empty bands on short viewports */
@@ -424,6 +429,42 @@ p {
 .NavItem.Active .NavItemText {
     color: white;
     font-weight: bold;
+}
+
+/*
+ * Very short desktop height (~607px, e.g. 1351×607): #LeftPanel inset + compact scrollspy.
+ * Rule block lives AFTER base .NavItem so margins apply (otherwise `margin: 20px 0` wins).
+ */
+@media (max-height: 680px) and (min-width: 1025px) {
+    #LeftPanel {
+        top: max(0.35rem, 2.5vh);
+        height: calc(100% - max(0.35rem, 2.5vh));
+    }
+
+    #LeftPanel .NavContainer {
+        top: 50%;
+        transform: translateY(-52%);
+    }
+
+    #LeftPanel .NavItem {
+        margin: 2px 0;
+        min-height: 0;
+    }
+
+    #LeftPanel .NavItemText {
+        font-size: clamp(0.65rem, 1.45vh, 0.8rem);
+        line-height: 1.2;
+    }
+
+    #LeftPanel .NavItemDot {
+        width: 0.55rem;
+        height: 0.55rem;
+        margin-right: 0.45rem;
+    }
+
+    #LeftPanel .NavItem.Active .NavItemDot {
+        transform: scale(1.25);
+    }
 }
 
 /* ======== Sections in Right Panel ======== */

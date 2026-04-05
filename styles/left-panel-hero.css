@@ -454,6 +454,19 @@ html.embed-site-light #LeftPanel .NavContainer::before {
   color: rgba(9, 9, 11, 0.4);
 }
 
+/*
+ * ~1351×607 and similar: hide section label, tuck nav under hero (general layout unchanged).
+ */
+@media (min-width: 1025px) and (max-height: 680px) {
+  #LeftPanel .NavContainer::before {
+    display: none;
+  }
+
+  #LeftPanel .NavContainer {
+    margin-top: 0.85rem;
+  }
+}
+
 #LeftPanel button.NavItem {
   display: flex;
   align-items: center;
