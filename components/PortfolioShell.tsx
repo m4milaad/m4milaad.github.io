@@ -132,9 +132,9 @@ function ProjectCard({
     >
       <div className="rp-project-row">
         <p
+          className="rp-project-title"
           data-value={titleDataValue}
           style={{
-            color: "white",
             fontWeight: "bold",
             whiteSpace: "pre",
           }}

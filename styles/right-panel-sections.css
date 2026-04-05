@@ -64,6 +64,14 @@
   border-bottom-color: rgba(161, 161, 170, 0.45);
 }
 
+#RightPanel .rp-project-title {
+  margin: 0 !important;
+  font-size: 0.95rem !important;
+  font-weight: 700;
+  white-space: pre;
+  color: #fafafa !important;
+}
+
 #RightPanel .rp-project-row > p:last-of-type {
   flex-shrink: 0;
   font-size: 0.8rem !important;
@@ -78,11 +86,6 @@
   line-height: 1.5;
   color: rgba(250, 250, 250, 0.48) !important;
   margin: 0 !important;
-}
-
-#RightPanel .rp-project-row > p[data-value*=" "][style*="color: white"] {
-  margin: 0 !important;
-  font-size: 0.95rem !important;
 }
 
 /* —— Experience timeline —— */
@@ -264,10 +267,7 @@ html.embed-site-light #RightPanel .rp-project-tech {
   color: #71717a !important;
 }
 
-html.embed-site-light
-  #RightPanel
-  .rp-project-row
-  > p[data-value*=" "][style*="color: white"] {
+html.embed-site-light #RightPanel .rp-project-title {
   color: #09090b !important;
 }
 

@@ -464,12 +464,7 @@ p {
     margin-bottom: 0;
 }
 
-.Project p[data-value*=" "][style*="color: white"] {
-    color: white !important;
-    font-weight: bold;
-    white-space: pre;
-    margin-right: 1em;
-}
+/* Project title color lives in right-panel-sections.css (.rp-project-title) */
 
 .Separator {
     flex-grow: 1;
@@ -731,10 +726,6 @@ html.embed-site-light .Project:hover {
 
 html.embed-site-light .Project p {
     color: #71717a;
-}
-
-html.embed-site-light .Project p[data-value*=" "][style*="color: white"] {
-    color: #09090b !important;
 }
 
 html.embed-site-light .Separator {
