@@ -185,8 +185,8 @@ html.embed-site-light #MainButton #ButtonArrow {
     overflow: hidden;
     z-index: 1;
 
-    /* Transparent so WebGL canvas stays visible; grid + tint are ::before/::after */
-    background-color: transparent;
+    /* Solid background to block WebGL canvas when visible */
+    background-color: var(--bg);
     isolation: isolate;
     transition: transform 0.5s ease-in-out;
     transform: translateY(0%);
