@@ -91,7 +91,7 @@ function IconCv() {
   );
 }
 
-const ROTATING_WORDS = ["Products", "Interfaces", "Experiences"] as const;
+const ROTATING_WORDS = ["Full Stack Apps", "Frontend UI", "Backend Systems"] as const;
 
 export default function LeftPanelHero() {
   const { dark, toggleTheme } = useSiteTheme();
