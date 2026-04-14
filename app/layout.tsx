@@ -27,8 +27,17 @@ export const metadata: Metadata = {
     images: ["https://m4milaad.github.io/Images/logo.png"],
   },
   icons: {
-    icon: "/Images/logo.png",
-    apple: "/Images/logo.png",
+    icon: [
+      {
+        url: "/Images/logo-light.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/Images/logo-dark.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+    apple: "/Images/logo-light.png",
   },
 };
 
