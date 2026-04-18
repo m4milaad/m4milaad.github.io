@@ -127,6 +127,8 @@ export default function HandParticleLayer() {
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    const isLightTheme = () =>
+      document.documentElement.classList.contains("embed-site-light");
 
     let W = 0;
     let H = 0;
@@ -202,13 +204,22 @@ export default function HandParticleLayer() {
         let r: number;
         let g: number;
         let b: number;
-        /* Warm orange palette (original gesture demo) */
-        if (this.hue === 0) {
-          r = 148; g = 163; b = 184;
-        } else if (this.hue === 1) {
-          r = 100; g = 116; b = 139;
+        if (isLightTheme()) {
+          if (this.hue === 0) {
+            r = 30; g = 41; b = 59;
+          } else if (this.hue === 1) {
+            r = 15; g = 23; b = 42;
+          } else {
+            r = 51; g = 65; b = 85;
+          }
         } else {
-          r = 203; g = 213; b = 225;
+          if (this.hue === 0) {
+            r = 148; g = 163; b = 184;
+          } else if (this.hue === 1) {
+            r = 100; g = 116; b = 139;
+          } else {
+            r = 203; g = 213; b = 225;
+          }
         }
         if (fast) {
           c2d.beginPath();

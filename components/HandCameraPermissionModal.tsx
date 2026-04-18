@@ -47,24 +47,43 @@ export default function HandCameraPermissionModal({
         aria-describedby={descId}
       >
         <div className="hp-cam-perm-accent" aria-hidden />
+
         <div className="hp-cam-perm-header">
           <div className="hp-cam-perm-icon" aria-hidden>
             <svg
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="1.5"
+              strokeWidth="1.7"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h3l2.5 3h5L21 15V9l-6.5-5Z" />
-              <circle cx="12" cy="12" r="3" />
+              <rect x="3" y="6.5" width="14" height="11" rx="3.2" />
+              <path d="M17 10l4-2.3v8.6L17 14z" />
+              <circle cx="10" cy="12" r="3" />
+              <circle cx="10" cy="12" r="1.25" />
+              <path d="M7.1 6.5l1.2-2h3.4l1.2 2" />
             </svg>
           </div>
           <h2 id={titleId} className="hp-cam-perm-title">
             Use camera for hand tracking?
           </h2>
         </div>
+
+        {/* demo video preview */}
+        <div className="hp-cam-perm-video-wrap" aria-hidden>
+          <video
+            className="hp-cam-perm-video"
+            src="/demo.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            disablePictureInPicture
+          />
+          <div className="hp-cam-perm-video-vignette" />
+        </div>
+
         <p id={descId} className="hp-cam-perm-body">
           Use <strong>local camera-only processing</strong> to move particles with
           your hands.
@@ -72,6 +91,7 @@ export default function HandCameraPermissionModal({
             Not recorded. Not uploaded. Nothing shown on screen.
           </span>
         </p>
+
         <div className="hp-cam-perm-actions">
           <button
             type="button"

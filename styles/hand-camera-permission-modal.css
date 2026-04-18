@@ -5,6 +5,35 @@
   z-index: 1100;
   pointer-events: none;
   animation: hp-cam-perm-in 0.24s ease both;
+  --hp-card-bg: rgba(245, 247, 250, 0.9);
+  --hp-card-border: rgba(15, 23, 42, 0.12);
+  --hp-grid-line: rgba(15, 23, 42, 0.06);
+  --hp-card-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.48) inset,
+    0 1px 0 rgba(255, 255, 255, 0.65) inset;
+  --hp-accent: rgba(71, 85, 105, 0.42);
+  --hp-vignette-mid: rgba(245, 247, 250, 0.7);
+  --hp-vignette-end: rgba(245, 247, 250, 0.96);
+  --hp-icon-fg: rgba(51, 65, 85, 0.85);
+  --hp-icon-bg: rgba(148, 163, 184, 0.14);
+  --hp-icon-border: rgba(100, 116, 139, 0.22);
+  --hp-title: rgba(15, 23, 42, 0.94);
+  --hp-body: rgba(51, 65, 85, 0.78);
+  --hp-strong: rgba(15, 23, 42, 0.9);
+  --hp-note-bg: rgba(148, 163, 184, 0.1);
+  --hp-note-border: rgba(100, 116, 139, 0.18);
+  --hp-note-fg: rgba(71, 85, 105, 0.78);
+  --hp-btn-primary-fg: rgba(248, 250, 252, 0.98);
+  --hp-btn-primary-bg: rgba(15, 23, 42, 0.9);
+  --hp-btn-primary-hover: rgba(2, 6, 23, 0.96);
+  --hp-btn-primary-shadow: 0 4px 18px rgba(15, 23, 42, 0.32);
+  --hp-btn-secondary-fg: rgba(51, 65, 85, 0.82);
+  --hp-btn-secondary-bg: transparent;
+  --hp-btn-secondary-border: rgba(100, 116, 139, 0.28);
+  --hp-btn-secondary-hover-bg: rgba(100, 116, 139, 0.1);
+  --hp-btn-secondary-hover-border: rgba(71, 85, 105, 0.38);
+  --hp-btn-secondary-hover-fg: rgba(15, 23, 42, 0.92);
 }
 
 @keyframes hp-cam-perm-in {
@@ -26,19 +55,16 @@
   pointer-events: auto;
 
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: rgba(17, 17, 17, 0.90);
+  border: 1px solid var(--hp-card-border);
+  background-color: var(--hp-card-bg);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
-  box-shadow:
-    0 10px 32px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(0, 0, 0, 0.25) inset,
-    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  box-shadow: var(--hp-card-shadow);
 
   /* same grid texture as the site */
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(var(--hp-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hp-grid-line) 1px, transparent 1px);
   background-size: 32px 32px;
 
   font-family: "DM Sans", system-ui, sans-serif;
@@ -46,23 +72,45 @@
   overflow: hidden;
 }
 
-/* top accent line — slate glow instead of orange */
+/* top accent line */
 .hp-cam-perm-accent {
   height: 1px;
   width: 100%;
   background: linear-gradient(
     90deg,
     rgba(148, 163, 184, 0) 0%,
-    rgba(148, 163, 184, 0.35) 48%,
+    var(--hp-accent) 48%,
     rgba(148, 163, 184, 0) 100%
   );
 }
 
+/* ── demo video ──────────────────────────────────────────── */
+.hp-cam-perm-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+}
+
+.hp-cam-perm-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.7) brightness(0.85);
+}
+
+/* fade the bottom edge into the card */
+.hp-cam-perm-video-vignette {
+  display: none;
+}
+
+/* ── header ──────────────────────────────────────────────── */
 .hp-cam-perm-header {
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.75rem 0.8rem 0.25rem;
+  padding: 0.65rem 0.8rem 0.25rem;
 }
 
 .hp-cam-perm-icon {
@@ -71,9 +119,9 @@
   border-radius: 0.55rem;
   display: grid;
   place-items: center;
-  color: rgba(148, 163, 184, 0.80);
-  background: rgba(148, 163, 184, 0.07);
-  border: 1px solid rgba(148, 163, 184, 0.13);
+  color: var(--hp-icon-fg);
+  background: var(--hp-icon-bg);
+  border: 1px solid var(--hp-icon-border);
   flex-shrink: 0;
 }
 
@@ -87,21 +135,22 @@
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: rgba(226, 232, 240, 0.92);
+  color: var(--hp-title);
   line-height: 1.25;
 }
 
+/* ── body ────────────────────────────────────────────────── */
 .hp-cam-perm-body {
   margin: 0;
   padding: 0.2rem 0.8rem 0.65rem;
   font-size: 0.78rem;
   line-height: 1.45;
-  color: rgba(148, 163, 184, 0.62);
+  color: var(--hp-body);
 }
 
 .hp-cam-perm-body strong {
   font-weight: 600;
-  color: rgba(203, 213, 225, 0.85);
+  color: var(--hp-strong);
 }
 
 .hp-cam-perm-note {
@@ -109,13 +158,14 @@
   margin-top: 0.35rem;
   padding: 0.35rem 0.5rem;
   border-radius: 0.4rem;
-  background: rgba(148, 163, 184, 0.05);
-  border: 1px solid rgba(148, 163, 184, 0.10);
-  color: rgba(148, 163, 184, 0.48);
+  background: var(--hp-note-bg);
+  border: 1px solid var(--hp-note-border);
+  color: var(--hp-note-fg);
   font-size: 0.72rem;
   line-height: 1.4;
 }
 
+/* ── actions ─────────────────────────────────────────────── */
 .hp-cam-perm-actions {
   display: flex;
   gap: 0.45rem;
@@ -142,23 +192,23 @@
 .hp-cam-perm-btn:active {
   transform: scale(0.985);
 }
+
 .hp-cam-perm-btn-primary {
-  color: #0a0a0a;
-  background: rgba(226, 232, 240, 0.90);
+  color: var(--hp-btn-primary-fg);
+  background: var(--hp-btn-primary-bg);
   border-color: transparent;
 }
 
-/* secondary — ghost outline */
 .hp-cam-perm-btn-secondary {
-  color: rgba(148, 163, 184, 0.62);
-  background: transparent;
-  border-color: rgba(148, 163, 184, 0.16);
+  color: var(--hp-btn-secondary-fg);
+  background: var(--hp-btn-secondary-bg);
+  border-color: var(--hp-btn-secondary-border);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .hp-cam-perm-btn-primary:hover {
-    background: #ffffff;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+    background: var(--hp-btn-primary-hover);
+    box-shadow: var(--hp-btn-primary-shadow);
     transform: translateY(-1px);
   }
 
@@ -168,9 +218,9 @@
   }
 
   .hp-cam-perm-btn-secondary:hover {
-    background: rgba(148, 163, 184, 0.06);
-    border-color: rgba(148, 163, 184, 0.30);
-    color: rgba(148, 163, 184, 0.88);
+    background: var(--hp-btn-secondary-hover-bg);
+    border-color: var(--hp-btn-secondary-hover-border);
+    color: var(--hp-btn-secondary-hover-fg);
   }
 }
 

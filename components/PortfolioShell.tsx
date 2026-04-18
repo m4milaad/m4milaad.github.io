@@ -3,6 +3,7 @@
 /** Full-page shell: #MainDiv, #RightPanel (sections + legacy Main.js hooks), #LeftPanel, script loader. */
 import "../styles/right-panel-sections.css";
 import {
+  type ReactNode,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -96,6 +97,180 @@ const LEGACY_SCRIPTS = [
 let legacyScriptsLoading: Promise<void> | null = null;
 
 const CACHE_BUST = `?v=${Date.now()}`;
+
+type ProjectItem = {
+  href: string;
+  title: string;
+  tech: string;
+};
+
+type ExperienceItem = {
+  headline: string;
+  text: string;
+  href?: string;
+};
+
+type EducationItem = {
+  school: string;
+  degree: string;
+  details: string[];
+};
+
+type AccoladeItem = {
+  id: string;
+  title: ReactNode;
+  body: ReactNode;
+};
+
+const PROJECT_ITEMS: ProjectItem[] = [
+  {
+    href: "https://ds-cuk.vercel.app/",
+    title: "Web App: Date Sheet Management ",
+    tech: "TS React Tailwind Postgres Vercel",
+  },
+  {
+    href: "https://github.com/m4milaad/Pyhton-Projects/tree/main/Coffee%20Machine",
+    title: "Cancer Diagnosis Model ",
+    tech: "Python Scikit-learn Pandas NumPy",
+  },
+  {
+    href: "https://yge.ct.ws/",
+    title: "Website: Yuva Global Enterprises ",
+    tech: "HTML CSS JS DNS",
+  },
+  {
+    href: "https://github.com/m4milaad/Pyhton-Projects/tree/main/States%20Guessing%20Game",
+    title: "States Guessing Game ",
+    tech: "Python Pandas Turtle Game",
+  },
+  {
+    href: "https://github.com/m4milaad/Banking-System-",
+    title: "Banking System ",
+    tech: "Java OOP CLI Application",
+  },
+  {
+    href: "https://github.com/m4milaad/Pyhton-Projects/tree/main/Peek%20Hour",
+    title: "Peek Hour Game ",
+    tech: "Python Turtle Game",
+  },
+] as const;
+
+const EXPERIENCE_ITEMS: ExperienceItem[] = [
+  {
+    headline: "Skillified Mentor | June 2025",
+    href: "/Images/certificate.pdf",
+    text: "Built a machine learning model for cancer diagnosis and analyzed the Framingham dataset to study glucose levels and heart disease risk.",
+  },
+  {
+    headline: "Yuva Global Enterprises | Dec 2024 - Present",
+    text: "Led the development and maintenance of the Yuva Global Enterprises website (HTML, CSS, JavaScript). Additionally, managed key digital operations.",
+  },
+  {
+    headline: "ByteNovators | Feb 2024 - Dec 2024",
+    text: "Validated software quality and user experience through comprehensive testing methodologies. Concurrently, managed Facebook leads and ads for clients.",
+  },
+  {
+    headline: "Current Projects | 2023 - Present",
+    text: "Engineered an interactive online resume website (HTML, CSS, JS). Key Python projects include development of Peek Hour and States Guessing Game. Developed a Java-based banking system with object-oriented principles.",
+  },
+] as const;
+
+const EDUCATION_ITEMS: EducationItem[] = [
+  {
+    school: "Central University of Kashmir, Gaderbal",
+    degree:
+      "Bachelor of Technology (B.Tech), CSE | Expected Graduation: July 2027",
+    details: [
+      "Relevant Coursework: C, Java.",
+      "Activities: Coding Competition, Event Management.",
+    ],
+  },
+  {
+    school: "Sri Pratap Higher Secondary School, Srinagar",
+    degree: "10+2 | Graduated: 2022",
+    details: [
+      "Relevant Coursework: Non-Medical.",
+      "Activities: Badminton, Football, Table Tennis.",
+    ],
+  },
+] as const;
+
+const ACCOLADE_ITEMS: AccoladeItem[] = [
+  {
+    id: "open-build-challenge-2025",
+    title: (
+      <>
+        1<sup>st</sup> Position in Open Build Challenge | NIT Srinagar | 2025
+      </>
+    ),
+    body: (
+      <>
+        Organised by FOSS NIT Srinagar in collabration with{" "}
+        <a
+          href="https://fossunited.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link"
+        >
+          FOSS United
+        </a>
+        .
+      </>
+    ),
+  },
+  {
+    id: "coding-competition-cuk-2025",
+    title: (
+      <>
+        3<sup>rd</sup> Position in Coding Competition | Central University of
+        Kashmir | 2025
+      </>
+    ),
+    body: (
+      <>
+        Hosted by{" "}
+        <a
+          href="https://codesquad-one.vercel.app/"
+          className="link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Code Squad
+        </a>{" "}
+        during their Cyber Concave 2025 event.
+      </>
+    ),
+  },
+  {
+    id: "iust-tech-summit-2025",
+    title: "Coding Challenge (Participation) | Tech Summit IUST | 2025",
+    body: "Participated in the Coding Challenge during Tech Summit 2025, held as part of Foundation Week.",
+  },
+  {
+    id: "oci-foundations-2025",
+    title: (
+      <a
+        href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=20239024792714BF5CAC484CB35B78330060C9DC6F08F530A0FEE782FDECE86E"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="Experience"
+      >
+        OCI 2025 Certified AI Foundations Associate | Oracle | 2025
+      </a>
+    ),
+    body: "Successfully passed the OCI AI Foundations Associate (1Z0 1122 25) certification with 95 percent.",
+  },
+  {
+    id: "aiml-workshop-nit-2025",
+    title: "5-Day AI/ML Workshop | NIT Srinagar | 2025",
+    body: "Hands on training in machine learning concepts and practical implementation.",
+  },
+  {
+    id: "gaming-coordinator-cuk-2025",
+    title: "Coordinator of Gaming Competition | Central University of Kashmir | 2025",
+    body: "Recognized for leadership and coordination during Cyber Concave 2025, including the BGMI event.",
+  },
+] as const;
 
 function loadScript(src: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -207,222 +382,76 @@ export default function PortfolioShell() {
               projects in the future, improving their code with my current level of
               expertise.
             </p>
-            <ProjectCard
-              href="https://ds-cuk.vercel.app/"
-              title="Web App: Date Sheet Management "
-              titleDataValue="Web App: Date Sheet Management "
-              tech="TS React Tailwind Postgres Vercel"
-              techDataValue="TS React Tailwind Postgres Vercel"
-            />
-            <ProjectCard
-              href="https://github.com/m4milaad/Pyhton-Projects/tree/main/Coffee%20Machine"
-              title="Cancer Diagnosis Model "
-              titleDataValue="Cancer Diagnosis Model "
-              tech="Python Scikit-learn Pandas NumPy"
-              techDataValue="Python Scikit-learn Pandas NumPy"
-            />
-            <ProjectCard
-              href="https://yge.ct.ws/"
-              title="Website: Yuva Global Enterprises "
-              titleDataValue="Website: Yuva Global Enterprises "
-              tech="HTML CSS JS DNS"
-              techDataValue="HTML CSS JS DNS"
-            />
-            <ProjectCard
-              href="https://github.com/m4milaad/Pyhton-Projects/tree/main/States%20Guessing%20Game"
-              title="States Guessing Game "
-              titleDataValue="States Guessing Game "
-              tech="Python Pandas Turtle Game"
-              techDataValue="Python Pandas Turtle Game"
-            />
-            <ProjectCard
-              href="https://github.com/m4milaad/Banking-System-"
-              title="Banking System "
-              titleDataValue="Banking System "
-              tech="Java OOP CLI Application"
-              techDataValue="Java OOP CLI Application"
-            />
-            <ProjectCard
-              href="https://github.com/m4milaad/Pyhton-Projects/tree/main/Peek%20Hour"
-              title="Peek Hour Game "
-              titleDataValue="Peek Hour Game "
-              tech="Python Turtle Game"
-              techDataValue="Python Turtle Game"
-            />
+            {PROJECT_ITEMS.map((project) => (
+              <ProjectCard
+                key={project.href}
+                href={project.href}
+                title={project.title}
+                titleDataValue={project.title}
+                tech={project.tech}
+                techDataValue={project.tech}
+              />
+            ))}
           </div>
           <div id="Section3" className="Section rp-section">
             <h2>Experience</h2>
             <div className="rp-timeline">
-              <div className="rp-exp-block">
-                <p className="rp-exp-headline">
-                  <a
-                    href="/Images/certificate.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="Experience"
-                  >
-                    <span className="rp-inline-em">Skillified Mentor | June 2025</span>
-                  </a>
-                </p>
-                <p className="rp-exp-text">
-                  Built a machine learning model for cancer diagnosis and analyzed the
-                  Framingham dataset to study glucose levels and heart disease risk.
-                </p>
-              </div>
-              <div className="rp-exp-block">
-                <p className="rp-exp-headline">
-                  <span className="rp-inline-em">Yuva Global Enterprises | Dec 2024 - Present</span>
-                </p>
-                <p className="rp-exp-text">
-                  Led the development and maintenance of the Yuva Global Enterprises
-                  website (HTML, CSS, JavaScript). Additionally, managed key digital
-                  operations.
-                </p>
-              </div>
-              <div className="rp-exp-block">
-                <p className="rp-exp-headline">
-                  <span className="rp-inline-em">ByteNovators | Feb 2024 - Dec 2024</span>
-                </p>
-                <p className="rp-exp-text">
-                  Validated software quality and user experience through comprehensive
-                  testing methodologies. Concurrently, managed Facebook leads and ads
-                  for clients.
-                </p>
-              </div>
-              <div className="rp-exp-block">
-                <p className="rp-exp-headline">
-                  <span className="rp-inline-em">Current Projects | 2023 - Present</span>
-                </p>
-                <p className="rp-exp-text">
-                  Engineered an interactive online resume website (HTML, CSS, JS). Key
-                  Python projects include development of Peek Hour and States
-                  Guessing Game. Developed a Java-based banking system with
-                  object-oriented principles.
-                </p>
-              </div>
+              {EXPERIENCE_ITEMS.map((item) => (
+                <div key={item.headline} className="rp-exp-block">
+                  <p className="rp-exp-headline">
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="Experience"
+                      >
+                        <span className="rp-inline-em">{item.headline}</span>
+                      </a>
+                    ) : (
+                      <span className="rp-inline-em">{item.headline}</span>
+                    )}
+                  </p>
+                  <p className="rp-exp-text">{item.text}</p>
+                </div>
+              ))}
             </div>
           </div>
           <div id="Section4" className="Section rp-section">
             <h2>Education</h2>
             <div className="rp-edu-grid">
-              <div className="rp-edu-card">
-                <p className="rp-edu-school">
-                  <span className="rp-inline-em">Central University of Kashmir, Gaderbal</span>
-                </p>
-                <p className="rp-edu-degree">
-                  <span className="rp-inline-em">
-                    Bachelor of Technology (B.Tech), CSE | Expected Graduation: July
-                    2027
-                  </span>
-                </p>
-                <p className="rp-edu-detail">Relevant Coursework: C, Java.</p>
-                <p className="rp-edu-detail">
-                  Activities: Coding Competition, Event Management.
-                </p>
-              </div>
-              <div className="rp-edu-card">
-                <p className="rp-edu-school">
-                  <span className="rp-inline-em">Sri Pratap Higher Secondary School, Srinagar</span>
-                </p>
-                <p className="rp-edu-degree">
-                  <span className="rp-inline-em"> 10+2 | Graduated: 2022</span>
-                </p>
-                <p className="rp-edu-detail">Relevant Coursework: Non-Medical.</p>
-                <p className="rp-edu-detail">
-                  Activities: Badminton, Football, Table Tennis.
-                </p>
-              </div>
+              {EDUCATION_ITEMS.map((item) => (
+                <div key={item.school} className="rp-edu-card">
+                  <p className="rp-edu-school">
+                    <span className="rp-inline-em">{item.school}</span>
+                  </p>
+                  <p className="rp-edu-degree">
+                    <span className="rp-inline-em">{item.degree}</span>
+                  </p>
+                  {item.details.map((detail) => (
+                    <p key={detail} className="rp-edu-detail">
+                      {detail}
+                    </p>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
           <div id="Section5" className="Section rp-section">
             <h2>Accolades</h2>
             <div className="rp-accolade-list">
-              <article className="rp-accolade">
-                <p className="rp-accolade-title">
-                  <span className="rp-inline-em">
-                    1<sup>st</sup> Position in Open Build Challenge | NIT Srinagar |
-                    2025
-                  </span>
-                </p>
-                <p className="rp-accolade-body">
-                  Organised by FOSS NIT Srinagar in collabration with{" "}
-                  <a
-                    href="https://fossunited.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link"
-                  >
-                    FOSS United
-                  </a>
-                  .
-                </p>
-              </article>
-              <article className="rp-accolade">
-                <p className="rp-accolade-title">
-                  <span className="rp-inline-em">
-                    3<sup>rd</sup> Position in Coding Competition | Central University
-                    of Kashmir | 2025
-                  </span>
-                </p>
-                <p className="rp-accolade-body">
-                  Hosted by{" "}
-                  <a
-                    href="https://codesquad-one.vercel.app/"
-                    className="link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Code Squad
-                  </a>{" "}
-                  during their Cyber Concave 2025 event.
-                </p>
-              </article>
-              <article className="rp-accolade">
-                <p className="rp-accolade-title">
-                  <span className="rp-inline-em">Coding Challenge (Participation) | Tech Summit IUST | 2025</span>
-                </p>
-                <p className="rp-accolade-body">
-                  Participated in the Coding Challenge during Tech Summit 2025, held as
-                  part of Foundation Week.
-                </p>
-              </article>
-              <article className="rp-accolade">
-                <p className="rp-accolade-title">
-                  <a
-                    href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=20239024792714BF5CAC484CB35B78330060C9DC6F08F530A0FEE782FDECE86E"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="Experience"
-                  >
-                    <span className="rp-inline-em">OCI 2025 Certified AI Foundations Associate | Oracle | 2025</span>
-                  </a>
-                </p>
-                <p className="rp-accolade-body">
-                  Successfully passed the OCI AI Foundations Associate (1Z0 1122 25)
-                  certification with 95 percent.
-                </p>
-              </article>
-              <article className="rp-accolade">
-                <p className="rp-accolade-title">
-                  <span className="rp-inline-em">5-Day AI/ML Workshop | NIT Srinagar | 2025</span>
-                </p>
-                <p className="rp-accolade-body">
-                  Hands on training in machine learning concepts and practical
-                  implementation.
-                </p>
-              </article>
-              <article className="rp-accolade">
-                <p className="rp-accolade-title">
-                  <span className="rp-inline-em">
-                    Coordinator of Gaming Competition | Central University of Kashmir |
-                    2025
-                  </span>
-                </p>
-                <p className="rp-accolade-body">
-                  Recognized for leadership and coordination during Cyber Concave 2025,
-                  including the BGMI event.
-                </p>
-              </article>
+              {ACCOLADE_ITEMS.map((item) => (
+                <article key={item.id} className="rp-accolade">
+                  <p className="rp-accolade-title">
+                    {typeof item.title === "string" ? (
+                      <span className="rp-inline-em">{item.title}</span>
+                    ) : (
+                      item.title
+                    )}
+                  </p>
+                  <p className="rp-accolade-body">{item.body}</p>
+                </article>
+              ))}
             </div>
           </div>
           <p className="rp-footer-credit">
