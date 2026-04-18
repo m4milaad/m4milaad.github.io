@@ -1,0 +1,184 @@
+/* Compact camera-consent card: cookie-banner style */
+.hp-cam-perm-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  pointer-events: none;
+  animation: hp-cam-perm-in 0.24s ease both;
+}
+
+@keyframes hp-cam-perm-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hp-cam-perm-dialog {
+  position: fixed;
+  right: clamp(0.75rem, 2vw, 1.1rem);
+  bottom: max(1rem, 2.2vh);
+  width: min(21.5rem, calc(100vw - 1.5rem));
+  pointer-events: auto;
+
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(17, 17, 17, 0.90);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.25) inset,
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+
+  /* same grid texture as the site */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* top accent line — slate glow instead of orange */
+.hp-cam-perm-accent {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0) 0%,
+    rgba(148, 163, 184, 0.35) 48%,
+    rgba(148, 163, 184, 0) 100%
+  );
+}
+
+.hp-cam-perm-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 0.8rem 0.25rem;
+}
+
+.hp-cam-perm-icon {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 0.55rem;
+  display: grid;
+  place-items: center;
+  color: rgba(148, 163, 184, 0.80);
+  background: rgba(148, 163, 184, 0.07);
+  border: 1px solid rgba(148, 163, 184, 0.13);
+  flex-shrink: 0;
+}
+
+.hp-cam-perm-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.hp-cam-perm-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: rgba(226, 232, 240, 0.92);
+  line-height: 1.25;
+}
+
+.hp-cam-perm-body {
+  margin: 0;
+  padding: 0.2rem 0.8rem 0.65rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(148, 163, 184, 0.62);
+}
+
+.hp-cam-perm-body strong {
+  font-weight: 600;
+  color: rgba(203, 213, 225, 0.85);
+}
+
+.hp-cam-perm-note {
+  display: block;
+  margin-top: 0.35rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.4rem;
+  background: rgba(148, 163, 184, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  color: rgba(148, 163, 184, 0.48);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.hp-cam-perm-actions {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0 0.8rem 0.8rem;
+}
+
+.hp-cam-perm-btn {
+  flex: 1;
+  min-height: 2.05rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
+}
+
+.hp-cam-perm-btn:active {
+  transform: scale(0.985);
+}
+.hp-cam-perm-btn-primary {
+  color: #0a0a0a;
+  background: rgba(226, 232, 240, 0.90);
+  border-color: transparent;
+}
+
+/* secondary — ghost outline */
+.hp-cam-perm-btn-secondary {
+  color: rgba(148, 163, 184, 0.62);
+  background: transparent;
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hp-cam-perm-btn-primary:hover {
+    background: #ffffff;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .hp-cam-perm-btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .hp-cam-perm-btn-secondary:hover {
+    background: rgba(148, 163, 184, 0.06);
+    border-color: rgba(148, 163, 184, 0.30);
+    color: rgba(148, 163, 184, 0.88);
+  }
+}
+
+@media (max-width: 640px) {
+  .hp-cam-perm-dialog {
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    bottom: 0.75rem;
+  }
+}

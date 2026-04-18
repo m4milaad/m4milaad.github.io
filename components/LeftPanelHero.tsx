@@ -4,6 +4,7 @@
 
 import { useEffect, useState } from "react";
 import "../styles/left-panel-hero.css";
+import { HERO_HEADLINE_ROTATION } from "@/constants/hero-words";
 import { useSiteTheme } from "./site-theme/SiteThemeProvider";
 
 const SunIcon = () => (
@@ -91,8 +92,6 @@ function IconCv() {
   );
 }
 
-const ROTATING_WORDS = ["Full Stack Apps", "Frontend UI", "Backend Systems"] as const;
-
 export default function LeftPanelHero() {
   const { dark, toggleTheme } = useSiteTheme();
   const [clock, setClock] = useState("");
@@ -121,7 +120,7 @@ export default function LeftPanelHero() {
     const interval = window.setInterval(() => {
       setWordVisible(false);
       window.setTimeout(() => {
-        setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
+        setWordIndex((prev) => (prev + 1) % HERO_HEADLINE_ROTATION.length);
         setWordVisible(true);
       }, 400);
     }, 2500);
@@ -175,7 +174,7 @@ export default function LeftPanelHero() {
               className="lp-rotating-word"
               data-visible={wordVisible ? "true" : "false"}
             >
-              {ROTATING_WORDS[wordIndex]}
+              {HERO_HEADLINE_ROTATION[wordIndex]}
             </em>
             .
           </h2>

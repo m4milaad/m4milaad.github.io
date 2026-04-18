@@ -1,0 +1,27 @@
+#HandParticleLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#HandParticleLayer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  background: transparent;
+}
+
+#HandParticleLayer .hp-webcam {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Camera permission UI lives in HandCameraPermissionModal (portaled to body). */

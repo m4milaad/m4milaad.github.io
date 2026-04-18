@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/portfolio-layout.css";
+import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 
 export const metadata: Metadata = {
   title: "Milad Ajaz Bhat | Portfolio",
@@ -70,7 +71,7 @@ export default function RootLayout({
         {/* App Router: link tag fonts are fine for a single layout (legacy parity with index.html) */}
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=VT323&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=Orbitron:wght@700;900&family=VT323&display=swap"
           rel="stylesheet"
         />
         <script
@@ -83,7 +84,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ServiceWorkerRegistrar />
+        {children}
+      </body>
     </html>
   );
 }

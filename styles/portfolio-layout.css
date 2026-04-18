@@ -688,11 +688,6 @@ p {
         margin-bottom: 0.5vh;
     }
 
-    #RightPanel>p[style*="padding-bottom: 95.0vh"] {
-        padding-bottom: 5vh !important;
-        font-size: 1.5vh !important;
-    }
-
     @media (hover: hover) and (pointer: fine) {
 
         #MouseGlow,
@@ -752,10 +747,6 @@ p {
         max-height: 40px;
     }
 
-    #RightPanel>p[style*="padding-bottom: 95.0vh"] {
-        padding-bottom: 5vh !important;
-        font-size: 1.4vh !important;
-    }
 }
 
 /* ======== Light site theme (toggle in hero; syncs html.embed-site-light) ======== */

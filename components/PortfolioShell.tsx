@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import HandParticleLayer from "./HandParticleLayer";
 import LeftPanelHero from "./LeftPanelHero";
 import TechStackSection from "./tech-stack/TechStackSection";
 import { SiteThemeProvider } from "./site-theme/SiteThemeProvider";
@@ -193,6 +194,7 @@ export default function PortfolioShell() {
       <div id="MainDiv">
         <div id="MouseGlow" />
         <div id="MouseGlowBlur" />
+        <HandParticleLayer />
         <div id="RightPanel" ref={rightPanelRef}>
           <div id="Section1" className="Section">
             <TechStackSection />
@@ -423,10 +425,7 @@ export default function PortfolioShell() {
               </article>
             </div>
           </div>
-          <p
-            className="rp-footer-credit"
-            style={{ paddingBottom: "95vh", fontSize: "1.25vh" }}
-          >
+          <p className="rp-footer-credit">
             Built by <span className="rp-inline-em">Milad Ajaz Bhat</span> with <span className="rp-inline-em">Next.js</span>, <span className="rp-inline-em">React</span>, and{" "}
             <span className="rp-inline-em">TypeScript</span>. The 3D desk and retro CLI run on raw <span className="rp-inline-em">WebGL2</span> with{" "}
             <span className="rp-inline-em">HTML</span>, <span className="rp-inline-em">CSS</span>, and <span className="rp-inline-em">JavaScript</span> — no game engine or UI
