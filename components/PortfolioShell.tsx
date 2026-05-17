@@ -26,11 +26,11 @@ const SECTION_LABELS: Record<(typeof SECTION_IDS)[number], string> = {
   Section1: "Tech stack",
   Section2: "Projects",
   Section3: "Experience",
-  Section4: "Education",
-  Section5: "Accolades",
+  Section4: "Accolades",
+  Section5: "Education",
 };
 
-/** Top of `el` within `scroller`’s scroll coordinate system (offsetTop breaks when offsetParent ≠ scroller). */
+/** Top of `el` within `scroller`'s scroll coordinate system (offsetTop breaks when offsetParent ≠ scroller). */
 function topWithinScroller(scroller: HTMLElement, el: HTMLElement): number {
   const sr = scroller.getBoundingClientRect();
   const er = el.getBoundingClientRect();
@@ -168,6 +168,10 @@ const EXPERIENCE_ITEMS: ExperienceItem[] = [
     text: "Full-time hybrid internship at the Department of Training and Placement, NIT Srinagar. Gained hands-on experience in real-world software development and institutional systems.",
   },
   {
+    headline: "5-Day AI/ML Workshop | NIT Srinagar | 2025",
+    text: "Hands-on training in machine learning concepts and practical implementation at NIT Srinagar.",
+  },
+  {
     headline: "Campus Lead | Open Source Connect | Dec 2025 - Apr 2026",
     text: "Led open-source initiatives on campus as Campus Lead for Open Source Connect, organizing events and fostering a culture of open-source contribution.",
   },
@@ -212,92 +216,18 @@ const EDUCATION_ITEMS: EducationItem[] = [
 
 const ACCOLADE_ITEMS: AccoladeItem[] = [
   {
-    id: "synertech-2026-winner",
-    title: (
-      <>
-        1<sup>st</sup> Position in SynerTech 2026 Hackathon | KCET | 2026
-      </>
-    ),
-    body: "Won the hackathon at Kashmir College of Engineering and Technology. Developed a CRM-based Academic Management Portal with an AI-powered chatbot, integrated with a fully functional Android application.",
-  },
-  {
-    id: "open-build-challenge-2025",
-    title: (
-      <>
-        1<sup>st</sup> Position in Open Build Challenge | NIT Srinagar | 2025
-      </>
-    ),
-    body: (
-      <>
-        Organised by FOSS NIT Srinagar in collabration with{" "}
-        <a
-          href="https://fossunited.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link"
-        >
-          FOSS United
-        </a>
-        .
-      </>
-    ),
-  },
-  {
-    id: "coding-competition-cuk-2025",
-    title: (
-      <>
-        3<sup>rd</sup> Position in Coding Competition | Central University of
-        Kashmir | 2025
-      </>
-    ),
-    body: (
-      <>
-        Hosted by{" "}
-        <a
-          href="https://codesquad-one.vercel.app/"
-          className="link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Code Squad
-        </a>{" "}
-        during their Cyber Concave 2025 event.
-      </>
-    ),
-  },
-  {
-    id: "iust-tech-summit-2025",
-    title: "Coding Challenge (Participation) | Tech Summit IUST | 2025",
-    body: "Participated in the Coding Challenge during Tech Summit 2025, held as part of Foundation Week.",
-  },
-  {
-    id: "oci-foundations-2025",
-    title: (
-      <a
-        href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=20239024792714BF5CAC484CB35B78330060C9DC6F08F530A0FEE782FDECE86E"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="Experience"
-      >
-        OCI 2025 Certified AI Foundations Associate | Oracle | 2025
-      </a>
-    ),
-    body: "Successfully passed the OCI AI Foundations Associate (1Z0 1122 25) certification with 95 percent.",
-  },
-  {
-    id: "aiml-workshop-nit-2025",
-    title: "5-Day AI/ML Workshop | NIT Srinagar | 2025",
-    body: "Hands on training in machine learning concepts and practical implementation.",
-  },
-  {
-    id: "gaming-coordinator-cuk-2025",
-    title: "Coordinator of Gaming Competition | Central University of Kashmir | 2025",
-    body: "Recognized for leadership and coordination during Cyber Concave 2025, including the BGMI event.",
-  },
-  {
     id: "build-ai-agent-ibm",
     title: "Build an AI Agent | IBM | 2026",
     body: "Completed IBM's Build an AI Agent certification, gaining expertise in AI agent development and prompt engineering.",
+  },
+  {
+    id: "synertech-2026-winner",
+    title: (
+      <span className="rp-inline-em">
+        1<sup>st</sup> Position in SynerTech 2026 Hackathon | KCET | 2026
+      </span>
+    ),
+    body: "Won the hackathon at Kashmir College of Engineering and Technology. Developed a CRM-based Academic Management Portal with an AI-powered chatbot, integrated with a fully functional Android application.",
   },
   {
     id: "swoc-mentorship-cert",
@@ -357,14 +287,78 @@ const ACCOLADE_ITEMS: AccoladeItem[] = [
     body: "Completed IBM's AI Fundamentals certification covering AI applications, capabilities, and core concepts.",
   },
   {
+    id: "oci-foundations-2025",
+    title: (
+      <a
+        href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=20239024792714BF5CAC484CB35B78330060C9DC6F08F530A0FEE782FDECE86E"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="Experience"
+      >
+        OCI 2025 Certified AI Foundations Associate | Oracle | 2025
+      </a>
+    ),
+    body: "Successfully passed the OCI AI Foundations Associate (1Z0 1122 25) certification with 95 percent.",
+  },
+  {
+    id: "iust-tech-summit-2025",
+    title: "Coding Challenge (Participation) | Tech Summit IUST | 2025",
+    body: "Participated in the Coding Challenge during Tech Summit 2025, held as part of Foundation Week.",
+  },
+  {
+    id: "open-build-challenge-2025",
+    title: (
+      <span className="rp-inline-em">
+        1<sup>st</sup> Position in Open Build Challenge | NIT Srinagar | 2025
+      </span>
+    ),
+    body: (
+      <>
+        Organised by FOSS NIT Srinagar in collabration with{" "}
+        <a
+          href="https://fossunited.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link"
+        >
+          FOSS United
+        </a>
+        .
+      </>
+    ),
+  },
+  {
+    id: "coding-competition-cuk-2025",
+    title: (
+      <span className="rp-inline-em">
+        3<sup>rd</sup> Position in Coding Competition | Central University of
+        Kashmir | 2025
+      </span>
+    ),
+    body: (
+      <>
+        Hosted by{" "}
+        <a
+          href="https://codesquad-one.vercel.app/"
+          className="link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Code Squad
+        </a>{" "}
+        during their Cyber Concave 2025 event.
+      </>
+    ),
+  },
+  {
+    id: "gaming-coordinator-cuk-2025",
+    title: "Coordinator of Gaming Competition | Central University of Kashmir | 2025",
+    body: "Recognized for leadership and coordination during Cyber Concave 2025, including the BGMI event.",
+  },
+  {
     id: "cyber-concave-achievement-cert",
     title: "Certificate of Achievement — Cyber Concave 2025 | CUK | 2025",
     body: "Recognized for exemplary leadership and dedication as Coordinator of Cyber Concave 2025.",
-  },
-  {
-    id: "ml-internship-cert",
-    title: "Machine Learning Internship Certificate | Skillified Mentor | 2025",
-    body: "Completed a one-month Machine Learning internship, working on ML workflows, model development, and deployment-ready solutions.",
   },
 ] as const;
 
@@ -386,19 +380,24 @@ function ProjectCard({
   titleDataValue,
   tech,
   techDataValue,
+  className,
+  style,
 }: {
   href: string;
   title: string;
   titleDataValue: string;
   tech: string;
   techDataValue: string;
+  className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="Project rp-project"
+      className={`Project rp-project${className ? ` ${className}` : ""}`}
+      style={style}
     >
       <div className="rp-project-row">
         <p
@@ -459,6 +458,26 @@ export default function PortfolioShell() {
     };
   }, [updateActiveFromScroll]);
 
+  /* ── Scroll-reveal: IntersectionObserver adds .rp-visible ── */
+  useEffect(() => {
+    const panel = rightPanelRef.current;
+    if (!panel) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add("rp-visible");
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { root: panel, threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+    );
+    const targets = panel.querySelectorAll(".rp-animate, .rp-section > h2");
+    targets.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <SiteThemeProvider>
       <canvas id="Canvas3D" />
@@ -469,6 +488,8 @@ export default function PortfolioShell() {
           <div id="Section1" className="Section">
             <TechStackSection />
           </div>
+
+          {/* ── Projects ── */}
           <div id="Section2" className="Section rp-section">
             <h2>Projects</h2>
             <p className="rp-section-intro">
@@ -477,7 +498,7 @@ export default function PortfolioShell() {
               projects in the future, improving their code with my current level of
               expertise.
             </p>
-            {PROJECT_ITEMS.map((project) => (
+            {PROJECT_ITEMS.map((project, i) => (
               <ProjectCard
                 key={project.href}
                 href={project.href}
@@ -485,14 +506,22 @@ export default function PortfolioShell() {
                 titleDataValue={project.title}
                 tech={project.tech}
                 techDataValue={project.tech}
+                className="rp-animate"
+                style={{ animationDelay: `${i * 40}ms` }}
               />
             ))}
           </div>
+
+          {/* ── Experience ── */}
           <div id="Section3" className="Section rp-section">
             <h2>Experience</h2>
             <div className="rp-timeline">
-              {EXPERIENCE_ITEMS.map((item) => (
-                <div key={item.headline} className="rp-exp-block">
+              {EXPERIENCE_ITEMS.map((item, i) => (
+                <div
+                  key={item.headline}
+                  className="rp-exp-block rp-animate"
+                  style={{ animationDelay: `${i * 35}ms` }}
+                >
                   <p className="rp-exp-headline">
                     {item.href ? (
                       <a
@@ -512,11 +541,40 @@ export default function PortfolioShell() {
               ))}
             </div>
           </div>
+
+          {/* ── Accolades ── */}
           <div id="Section4" className="Section rp-section">
+            <h2>Accolades</h2>
+            <div className="rp-accolade-list">
+              {ACCOLADE_ITEMS.map((item, i) => (
+                <article
+                  key={item.id}
+                  className="rp-accolade rp-animate"
+                  style={{ animationDelay: `${i * 30}ms` }}
+                >
+                  <p className="rp-accolade-title">
+                    {typeof item.title === "string" ? (
+                      <span className="rp-inline-em">{item.title}</span>
+                    ) : (
+                      item.title
+                    )}
+                  </p>
+                  <p className="rp-accolade-body">{item.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Education ── */}
+          <div id="Section5" className="Section rp-section">
             <h2>Education</h2>
             <div className="rp-edu-grid">
-              {EDUCATION_ITEMS.map((item) => (
-                <div key={item.school} className="rp-edu-card">
+              {EDUCATION_ITEMS.map((item, i) => (
+                <div
+                  key={item.school}
+                  className="rp-edu-card rp-animate"
+                  style={{ animationDelay: `${i * 50}ms` }}
+                >
                   <p className="rp-edu-school">
                     <span className="rp-inline-em">{item.school}</span>
                   </p>
@@ -532,23 +590,7 @@ export default function PortfolioShell() {
               ))}
             </div>
           </div>
-          <div id="Section5" className="Section rp-section">
-            <h2>Accolades</h2>
-            <div className="rp-accolade-list">
-              {ACCOLADE_ITEMS.map((item) => (
-                <article key={item.id} className="rp-accolade">
-                  <p className="rp-accolade-title">
-                    {typeof item.title === "string" ? (
-                      <span className="rp-inline-em">{item.title}</span>
-                    ) : (
-                      item.title
-                    )}
-                  </p>
-                  <p className="rp-accolade-body">{item.body}</p>
-                </article>
-              ))}
-            </div>
-          </div>
+
           <p className="rp-footer-credit">
             Built by <span className="rp-inline-em">Milad Ajaz Bhat</span> with <span className="rp-inline-em">Next.js</span>, <span className="rp-inline-em">React</span>, and{" "}
             <span className="rp-inline-em">TypeScript</span>. The 3D desk and retro CLI run on raw <span className="rp-inline-em">WebGL2</span> with{" "}
@@ -556,6 +598,7 @@ export default function PortfolioShell() {
             framework on the scene. Edited in <span className="rp-inline-em">Visual Studio Code</span>.
           </p>
         </div>
+
         <div id="LeftPanel">
           <LeftPanelHero />
           <nav className="NavContainer" aria-label="Sections">
@@ -574,6 +617,7 @@ export default function PortfolioShell() {
           </nav>
         </div>
       </div>
+
       <button
         type="button"
         id="MainButton"
@@ -619,6 +663,7 @@ export default function PortfolioShell() {
           </svg>
         </span>
       </button>
+
       <audio id="ComputerBoot" src="/Sounds/ComputerBoot.mp3" />
       <audio id="ComputerAmbient" src="/Sounds/ComputerAmbient.mp3" />
       <audio id="ComputerBeep" src="/Sounds/ComputerBeep.mp3" />
