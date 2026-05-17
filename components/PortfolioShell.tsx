@@ -10,7 +10,6 @@ import {
   useRef,
   useState,
 } from "react";
-import HandParticleLayer from "./HandParticleLayer";
 import LeftPanelHero from "./LeftPanelHero";
 import TechStackSection from "./tech-stack/TechStackSection";
 import { SiteThemeProvider } from "./site-theme/SiteThemeProvider";
@@ -157,12 +156,28 @@ const PROJECT_ITEMS: ProjectItem[] = [
 
 const EXPERIENCE_ITEMS: ExperienceItem[] = [
   {
+    headline: "Campus Ambassador | Google | May 2026 - Present",
+    text: "Serving as a Campus Ambassador at Google, bridging the gap between Google technologies and the student community through events, workshops, and mentorship.",
+  },
+  {
+    headline: "Mentor | GirlScript Summer of Code | May 2026 - Present",
+    text: "Mentoring open-source contributors at GSSoC, guiding them through project contributions, code reviews, and best practices in collaborative development.",
+  },
+  {
+    headline: "Student Intern | NIT Srinagar | Dec 2025 - Feb 2026",
+    text: "Full-time hybrid internship at the Department of Training and Placement, NIT Srinagar. Gained hands-on experience in real-world software development and institutional systems.",
+  },
+  {
+    headline: "Campus Lead | Open Source Connect | Dec 2025 - Apr 2026",
+    text: "Led open-source initiatives on campus as Campus Lead for Open Source Connect, organizing events and fostering a culture of open-source contribution.",
+  },
+  {
     headline: "Skillified Mentor | June 2025",
     href: "/Images/certificate.pdf",
     text: "Built a machine learning model for cancer diagnosis and analyzed the Framingham dataset to study glucose levels and heart disease risk.",
   },
   {
-    headline: "Yuva Global Enterprises | Dec 2024 - Present",
+    headline: "Yuva Global Enterprises | Dec 2024 - Jul 2025",
     text: "Led the development and maintenance of the Yuva Global Enterprises website (HTML, CSS, JavaScript). Additionally, managed key digital operations.",
   },
   {
@@ -196,6 +211,15 @@ const EDUCATION_ITEMS: EducationItem[] = [
 ] as const;
 
 const ACCOLADE_ITEMS: AccoladeItem[] = [
+  {
+    id: "synertech-2026-winner",
+    title: (
+      <>
+        1<sup>st</sup> Position in SynerTech 2026 Hackathon | KCET | 2026
+      </>
+    ),
+    body: "Won the hackathon at Kashmir College of Engineering and Technology. Developed a CRM-based Academic Management Portal with an AI-powered chatbot, integrated with a fully functional Android application.",
+  },
   {
     id: "open-build-challenge-2025",
     title: (
@@ -269,6 +293,78 @@ const ACCOLADE_ITEMS: AccoladeItem[] = [
     id: "gaming-coordinator-cuk-2025",
     title: "Coordinator of Gaming Competition | Central University of Kashmir | 2025",
     body: "Recognized for leadership and coordination during Cyber Concave 2025, including the BGMI event.",
+  },
+  {
+    id: "build-ai-agent-ibm",
+    title: "Build an AI Agent | IBM | 2026",
+    body: "Completed IBM's Build an AI Agent certification, gaining expertise in AI agent development and prompt engineering.",
+  },
+  {
+    id: "swoc-mentorship-cert",
+    title: "SWOC — Mentorship Certificate | Social Winter of Code | 2026",
+    body: "Received mentorship certification from Social Winter of Code for guiding open-source contributors.",
+  },
+  {
+    id: "cursor-kashmir-hackathon-cert",
+    title: "Cursor Kashmir Hackathon — Participation | Cursor | 2026",
+    body: "Participated in the Cursor Kashmir Hackathon, exploring AI-assisted development workflows.",
+  },
+  {
+    id: "ecwoc-participant",
+    title: (
+      <a
+        href="https://www.linkedin.com/in/m4milaad/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="Experience"
+      >
+        Participant — ECWOC | Elite Coders | 2026
+      </a>
+    ),
+    body: "Participated in ECWOC organized by Elite Coders, competing in competitive programming challenges.",
+  },
+  {
+    id: "viksit-bharat-2047-cert",
+    title: "Certificate of Participation — Viksit Bharat @2047 | 2026",
+    body: "Participated in the Viksit Bharat — Startups & Innovation Mission initiative.",
+  },
+  {
+    id: "google-ml-apis-badge",
+    title: (
+      <a
+        href="https://www.linkedin.com/in/m4milaad/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="Experience"
+      >
+        Prepare Data for ML APIs — Google Cloud Skill Badge | Google | 2025
+      </a>
+    ),
+    body: "Earned Google Cloud skill badge covering Cloud Natural Language API, Dataflow, and ML data preparation pipelines.",
+  },
+  {
+    id: "ibm-ai-fundamentals-cert",
+    title: (
+      <a
+        href="https://www.linkedin.com/in/m4milaad/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="Experience"
+      >
+        Artificial Intelligence Fundamentals | IBM | 2025
+      </a>
+    ),
+    body: "Completed IBM's AI Fundamentals certification covering AI applications, capabilities, and core concepts.",
+  },
+  {
+    id: "cyber-concave-achievement-cert",
+    title: "Certificate of Achievement — Cyber Concave 2025 | CUK | 2025",
+    body: "Recognized for exemplary leadership and dedication as Coordinator of Cyber Concave 2025.",
+  },
+  {
+    id: "ml-internship-cert",
+    title: "Machine Learning Internship Certificate | Skillified Mentor | 2025",
+    body: "Completed a one-month Machine Learning internship, working on ML workflows, model development, and deployment-ready solutions.",
   },
 ] as const;
 
@@ -369,7 +465,6 @@ export default function PortfolioShell() {
       <div id="MainDiv">
         <div id="MouseGlow" />
         <div id="MouseGlowBlur" />
-        <HandParticleLayer />
         <div id="RightPanel" ref={rightPanelRef}>
           <div id="Section1" className="Section">
             <TechStackSection />
