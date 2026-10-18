@@ -315,6 +315,12 @@ function KeyPressed(key) {
       if (ScrollOffset < LinesCount - 30) {
         ScrollOffset = Math.max(0, LinesCount - 30);
       }
+    } else if (key === "PageUp") // Scroll terminal output up
+    {
+      ScrollOffset = Math.max(0, ScrollOffset - 5);
+    } else if (key === "PageDown") // Scroll terminal output down
+    {
+      ScrollOffset = Math.min(Math.max(0, LinesCount - 1), ScrollOffset + 5);
     } else if (key === "Tab") // Auto complete
     {
       AutoComplete(); // Complete input text
@@ -405,43 +411,43 @@ const FileSystem = {
           "projects.txt": {
             type: "file",
             content:
-              "This section contains links to various projects I \nhave worked on.Use 'start <project_name.lnk>' to \nopen a project link in your browser.",
+              "FEATURED PROJECTS (2025 - 2026)\n==================================================\n\n[1] CUK Acadex (2025)\n    Full-stack academic platform with AI-powered\n    RAG, automated exam scheduling, real-time\n    collaboration, and native Android app.\n    Tech: React, TypeScript, Vite, Tailwind CSS,\n          Supabase, PostgreSQL, pgvector, RAG,\n          Python, Kotlin, Android.\n    Repo: github.com/m4milaad/schedule-savvy-schedules\n\n[2] KATHE English-to-Kashmiri Translation (2026)\n    Low-resource neural machine-translation\n    pipeline using NLLB-200, IndicTrans2, LoRA\n    fine-tuning, ensemble, and BLEU/chrF++ eval.\n    Tech: Python, PyTorch, Hugging Face, NLLB-200,\n          IndicTrans2, LoRA, PEFT, BLEU, chrF++.\n    Repo: github.com/m4milaad/bpccEngtoKash\n\n[3] SentinelFlow (2026)\n    Redis-backed distributed rate-limiting\n    service with multiple traffic algorithms,\n    REST APIs, observability, and Docker/K8s.\n    Tech: Java, Spring Boot, Redis, REST API,\n          Prometheus, Docker, Kubernetes, React, TS.\n    Repo: github.com/m4milaad/SentinelFlow\n\n[4] BIS AI (2026)\n    Offline-first multilingual product-safety app\n    with AI chat, image analysis, hybrid semantic\n    search, PWA, and low-bandwidth resilience.\n    Tech: React, TypeScript, Vite, Tailwind CSS,\n          PWA, Supabase, Postgres, pgvector, Gemini.\n    Repo: github.com/m4milaad/bis-ai\n\n[5] 2AI Conference (2026)\n    Production conference platform with attendee\n    registration, ICICI Eazypay payment processing,\n    and Cloudflare R2 media storage.\n    Tech: React, JavaScript, Vite, Tailwind CSS,\n          Supabase, Postgres, Edge Functions, R2.\n    Repo: github.com/m4milaad/2ai-Conference\n\n[6] repo-ready (2026)\n    Offline Python CLI evaluating repo readiness,\n    generating deterministic CI-compatible reports,\n    and scaffolding missing project files.\n    Tech: Python, Python CLI, Pytest, Docker,\n          GitHub Actions, JSON, Standard Library.\n    Repo: github.com/m4milaad/repo-ready\n\n--------------------------------------------------\nUse 'start <name.lnk>' or 'cat <name.lnk>'",
           },
-          "01_date_sheet_mgmt.lnk": {
+          "01_cuk_acadex.lnk": {
             type: "link",
-            content: "https://ds-cuk.vercel.app/",
+            content: "https://github.com/m4milaad/schedule-savvy-schedules",
             description:
-              "Web App: Date Sheet Management (TypeScript, React, TailwindCSS, PostgreSQL, Vercel)",
+              "CUK Acadex (2025)\nA full-stack academic management platform with AI-powered\nRAG search, automated exam scheduling, real-time\ncollaboration, role-based access, and a native Android app.\nTech: React, TypeScript, Vite, Tailwind, Supabase,\n      PostgreSQL, pgvector, RAG, Python, Kotlin, Android.",
           },
-          "02_cancer_diagnosis.lnk": {
+          "02_kathe_translation.lnk": {
             type: "link",
-            content:
-              "https://github.com/m4milaad/Pyhton-Projects/tree/main/Coffee%20Machine",
+            content: "https://github.com/m4milaad/bpccEngtoKash",
             description:
-              "Cancer Diagnosis Model (Python, Scikit-learn, Pandas, NumPy) - Note: Link is to Coffee Machine repo as per index.html",
+              "KATHE English-to-Kashmiri Translation (2026)\nA low-resource neural machine-translation pipeline using\nNLLB-200, IndicTrans2, LoRA fine-tuning, back-translation,\nensemble inference, and BLEU/chrF++ evaluation.\nTech: Python, PyTorch, Hugging Face Transformers, NLLB-200,\n      IndicTrans2, LoRA, PEFT, BLEU, chrF++, Kaggle.",
           },
-          "03_yge_website.lnk": {
+          "03_sentinelflow.lnk": {
             type: "link",
-            content: "https://yge.ct.ws/",
+            content: "https://github.com/m4milaad/SentinelFlow",
             description:
-              "Website: Yuva Global Enterprises (HTML, CSS, JS, DNS)",
+              "SentinelFlow (2026)\nA Redis-backed distributed rate-limiting service with multiple\ntraffic-control algorithms, REST APIs, observability,\nload testing, and Docker/Kubernetes deployment.\nTech: Java, Spring Boot, Redis, REST API, Prometheus,\n      Docker, Kubernetes, React, TypeScript, JUnit.",
           },
-          "04_states_game.lnk": {
+          "04_bis_ai.lnk": {
             type: "link",
-            content:
-              "https://github.com/m4milaad/Pyhton-Projects/tree/main/States%20Guessing%20Game",
-            description: "States Guessing Game (Python, Pandas, Turtle Game)",
+            content: "https://github.com/m4milaad/bis-ai",
+            description:
+              "BIS AI (2026)\nAn offline-first multilingual product-safety platform with\nAI chat, product-image analysis, hybrid semantic search,\nPWA support, and low-bandwidth features.\nTech: React, TypeScript, Vite, Tailwind CSS, PWA,\n      Supabase, PostgreSQL, pgvector, Gemini API, RAG, Deno.",
           },
-          "05_banking_system.lnk": {
+          "05_2ai_conference.lnk": {
             type: "link",
-            content: "https://github.com/m4milaad/Banking-System-",
-            description: "Banking System (Java, OOP, CLI Application)",
+            content: "https://github.com/m4milaad/2ai-Conference",
+            description:
+              "2AI Conference (2026)\nA production conference platform with event registration,\npayment processing, cloud media storage, Supabase backend\nservices, and a live public website.\nTech: React, JavaScript, Vite, Tailwind CSS, Supabase,\n      PostgreSQL, Edge Functions, ICICI Eazypay, Cloudflare R2.",
           },
-          "06_peek_hour.lnk": {
+          "06_repo_ready.lnk": {
             type: "link",
-            content:
-              "https://github.com/m4milaad/Pyhton-Projects/tree/main/Peek%20Hour",
-            description: "Peek Hour Game (Python, Turtle Game)",
+            content: "https://github.com/m4milaad/repo-ready",
+            description:
+              "repo-ready (2026)\nAn offline Python CLI that evaluates repository readiness,\ngenerates deterministic CI-compatible reports, and safely\nscaffolds missing project files.\nTech: Python, Python CLI, Pytest, Docker,\n      GitHub Actions, JSON, Standard Library.",
           },
         },
       },
@@ -451,7 +457,7 @@ const FileSystem = {
           "games.txt": {
             type: "file",
             content:
-              "Welcome to the Games Directory!\nType the game name as a command to play.\n\nAvailable games:\n  snake      Classic Snake\n  tetris     Falling blocks\n  minesweeper  Find the mines\n  pong       Ball & paddle\n  breakout   Brick breaker\n  2048       Slide & merge tiles\n  maze       Navigate the dungeon\n  typetest   Typing speed test\n\nControls: Arrow keys to move, Escape to exit.",
+              "Welcome to the Games Directory!\nType the game name as a command to play.\n\nAvailable games:\n  snake        Classic Snake\n  tetris       Falling blocks\n  minesweeper  Find the mines\n  pong         Ball & paddle\n  breakout     Brick breaker\n  2048         Slide & merge tiles\n  maze         Navigate the dungeon\n  typetest     Typing speed test\n\nControls: Arrow keys to move, Escape to exit.",
           },
           "snake.exe": { type: "executable", content: "snake" },
           "tetris.exe": { type: "executable", content: "tetris" },
@@ -466,97 +472,113 @@ const FileSystem = {
       "profile.txt": {
         type: "file",
         content:
-          "Technologist skilled in Python (Django, Flask, \nPandas, NumPy, Matplotlib, Scikit-learn), C, \nJava (Collections Framework), HTML, CSS, \nJavaScript (React, Vue.js, TypeScript, Bootstrap, \nTailwind CSS, Express.js, Node.js), and C++. \nExperienced with MongoDB, MySQL, PostgreSQL, \nAWS, Heroku, Netlify, Vercel, and Git. \nProficient with CLion, IntelliJ, Pycharm, and \nArduino integration.",
+          "MILAD AJAZ BHAT (@m4milaad)\n==================================================\nSoftware Engineer & Open Source Contributor\nSrinagar, Jammu & Kashmir, India\n\nSpecializing in full-stack engineering, distributed\nsystems, AI/ML pipelines (RAG, fine-tuning),\nand developer tooling.\n\n- Campus Ambassador @ Google\n- Mentor @ GirlScript Summer of Code (GSSoC)\n- Ex-Intern @ NIT Srinagar\n- B.Tech CSE @ Central University of Kashmir ('27)\n\nWebsite: https://m4milaad.github.io\nGitHub:  https://github.com/m4milaad",
+      },
+      "tech_stack.txt": {
+        type: "file",
+        content:
+          "TECHNICAL SKILLS & TECH STACK\n==================================================\n\n* Languages:\n  Python, JavaScript, TypeScript, Java, C/C++,\n  Kotlin, SQL, HTML5, CSS3\n\n* Frontend & Web:\n  React, Vite, Next.js, Tailwind CSS, PWA,\n  Responsive Layouts, WebGL, Canvas API\n\n* Backend & Distributed Systems:\n  Node.js, Spring Boot, REST APIs, Redis,\n  Edge Functions, Deno\n\n* Databases & Cloud Storage:\n  PostgreSQL, pgvector, Supabase, MongoDB,\n  Cloudflare R2\n\n* AI & Machine Learning:\n  RAG Architectures, PyTorch, Hugging Face,\n  Transformers, IndicTrans2, NLLB-200, LoRA,\n  PEFT, Gemini API, Scikit-learn, Pandas, NumPy\n\n* DevOps, Cloud & Tools:\n  Docker, Kubernetes, Git, GitHub Actions,\n  Prometheus, Vercel, VS Code, Linux",
       },
       "experience.txt": {
         type: "file",
         content:
-          "Campus Ambassador | Google | May 2026 - Present\n- Bridging Google technologies and the student\n  community through events, workshops, mentorship.\n\nMentor | GirlScript Summer of Code | May 2026 - Present\n- Mentoring open-source contributors at GSSoC,\n  guiding project contributions and code reviews.\n\nStudent Intern | NIT Srinagar | Dec 2025 - Feb 2026\n- Full-time hybrid internship at the Department of\n  Training and Placement, NIT Srinagar.\n\n5-Day AI/ML Workshop | NIT Srinagar | 2025\n- Hands-on training in machine learning concepts\n  and practical implementation.\n\nCampus Lead | Open Source Connect | Dec 2025 - Apr 2026\n- Led open-source initiatives on campus, organizing\n  events and fostering open-source contribution.\n\nSkillified Mentor | June 2025\n- Built a machine learning model for cancer \n  diagnosis and analyzed the Framingham dataset.\n- (Certificate: ./Images/certificate.pdf)\n\nYuva Global Enterprises | Dec 2024 - Jul 2025\n- Led the development and maintenance of the \n  Yuva Global Enterprises website (HTML, CSS, JS).\n- Managed key digital operations.\n\nByteNovators | Feb 2024 - Dec 2024\n- Validated software quality and user experience \n  through comprehensive testing methodologies.\n- Managed Facebook leads and ads for clients.\n\nCurrent Projects | 2023 - Present\n- Engineered an interactive online resume website.\n- Key Python projects: Peek Hour, States Guessing Game.\n- Developed a Java-based banking system (OOP).",
+          "WORK & COMMUNITY EXPERIENCE\n==================================================\n\n[1] Google | Campus Ambassador\n    May 2026 - Present\n    - Serving as Campus Ambassador at Google, bridging\n      Google technologies and the student community\n      via events, workshops, and mentorship.\n\n[2] GirlScript Summer of Code (GSSoC) | Mentor\n    May 2026 - Present\n    - Mentoring open-source contributors at GSSoC,\n      guiding project contributions, code reviews,\n      and collaborative development practices.\n\n[3] NIT Srinagar | Student Intern\n    Dec 2025 - Feb 2026\n    - Hybrid internship at Dept. of Training & Placement,\n      NIT Srinagar. Gained hands-on experience in\n      real-world software and institutional systems.\n\n[4] NIT Srinagar | 5-Day AI/ML Workshop\n    2025\n    - Hands-on training in machine learning concepts\n      and practical implementation at NIT Srinagar.\n\n[5] Open Source Connect | Campus Lead\n    Dec 2025 - Apr 2026\n    - Led open-source campus initiatives, organizing\n      hack events and fostering contribution culture.\n\n[6] Skillified | Mentor\n    June 2025\n    - Built an ML model for cancer diagnosis and\n      analyzed Framingham dataset (glucose/heart risk).\n    - Certificate: /Images/certificate.pdf\n\n[7] Yuva Global Enterprises | Web Lead\n    Dec 2024 - Jul 2025\n    - Led development and maintenance of company\n      website (HTML, CSS, JS) and digital operations.\n\n[8] ByteNovators | Software QA & Operations\n    Feb 2024 - Dec 2024\n    - Validated software quality via QA testing.\n      Managed client lead generation and campaigns.\n\n[9] Self-Initiated Projects\n    2023 - Present\n    - Engineered online 3D interactive portfolio site.\n    - Python projects: Peek Hour, States Guessing Game.\n    - Java: OOP-based Banking System CLI.",
       },
       "education.txt": {
         type: "file",
         content:
-          "Central University of Kashmir, Gaderbal\n- Bachelor of Technology (B.Tech), CSE\n- Expected Graduation: July 2027\n- Relevant Coursework: C, Java.\n- Activities: Coding Competition, Event Management.\n\nSri Pratap Higher Secondary School, Srinagar\n- 10+2 | Graduated: 2022\n- Relevant Coursework: Non-Medical.\n- Activities: Badminton, Football, Table Tennis.",
+          "EDUCATION\n==================================================\n\nCentral University of Kashmir, Ganderbal\n- Bachelor of Technology (B.Tech), CSE\n- Expected Graduation: July 2027\n- Relevant Coursework: C, Java, Data Structures, OOP\n- Activities: Coding Competitions, Event Management\n\nSri Pratap Higher Secondary School, Srinagar\n- 10+2 (Higher Secondary) | Graduated: 2022\n- Stream: Non-Medical\n- Activities: Badminton, Football, Table Tennis",
       },
       "accolades.txt": {
         type: "file",
         content:
-          "Build an AI Agent | IBM | 2026\n- Completed IBM certification in AI agent development.\n\n1st Position, SynerTech 2026 Hackathon | KCET | 2026\n- Developed a CRM-based Academic Management Portal\n  with an AI-powered chatbot and Android app.\n\nSWOC Mentorship Certificate | Social Winter of Code | 2026\n- Received mentorship certification for guiding\n  open-source contributors.\n\nCursor Kashmir Hackathon | Cursor | 2026\n- Participated in AI-assisted development hackathon.\n\nParticipant ECWOC | Elite Coders | 2026\n- Competed in competitive programming challenges.\n\nViksit Bharat @2047 | Startups & Innovation Mission | 2026\n- Participated in the national innovation initiative.\n\nGoogle Cloud ML APIs Skill Badge | Google | 2025\n- Cloud Natural Language API, Dataflow, ML pipelines.\n\nAI Fundamentals | IBM | 2025\n- AI applications, capabilities, and core concepts.\n\nOCI 2025 Certified AI Foundations Associate | Oracle | 2025\n- Passed with 95%. Certified in AI concepts, OCI AI\n  services, model lifecycle, and cloud-based AI workflows.\n\nCoding Challenge (Participation) | Tech Summit IUST | 2025\n- Participated during Foundation Week at IUST.\n\n1st Position, Open Build Challenge | NIT Srinagar | 2025\n- Organised by FOSS NIT Srinagar in collabration with \n  FOSS United.\n\n3rd Position in Coding Competition | CUK | 2025\n- Hosted by Code Squad during Cyber Concave 2025.\n\nCoordinator of Gaming Competition | CUK | 2025\n- Recognized for leadership during Cyber Concave 2025,\n  including the BGMI event.\n\nCyber Concave 2025 Achievement | CUK | 2025\n- Recognized for leadership as Coordinator.",
+          "HONORS, AWARDS & CERTIFICATIONS\n==================================================\n\n* 1st Position | SynerTech 2026 Hackathon (KCET, 2026)\n  - Won hackathon at Kashmir College of Eng & Tech.\n    Built CRM-based Academic Management Portal with\n    AI-powered chatbot and companion Android app.\n\n* 1st Position | Open Build Challenge (NIT Srinagar, 2025)\n  - Organised by FOSS NIT Srinagar in collaboration\n    with FOSS United.\n\n* 3rd Position | Coding Competition (CUK, 2025)\n  - Hosted by Code Squad during Cyber Concave 2025.\n\n* Build an AI Agent Certification (IBM, 2026)\n  - Completed IBM certification in AI agent development\n    and prompt engineering workflows.\n\n* OCI 2025 Certified AI Foundations Associate (Oracle, 2025)\n  - Passed certification (1Z0-1122-25) with 95%.\n\n* Prepare Data for ML APIs (Google Cloud Skill Badge, 2025)\n  - Natural Language API, Dataflow, ML pipelines.\n\n* Artificial Intelligence Fundamentals (IBM, 2025)\n  - AI applications, capabilities, and core concepts.\n\n* SWOC Mentorship Certificate (Social Winter of Code, 2026)\n  - Mentoring global open-source contributors.\n\n* Cursor Kashmir Hackathon (Cursor, 2026)\n  - AI-assisted development workflows.\n\n* Participant - ECWOC (Elite Coders, 2026)\n  - Competitive programming contest.\n\n* Viksit Bharat @2047 (Startups & Innovation Mission, 2026)\n  - National startup and innovation mission initiative.\n\n* Coding Challenge Participant (Tech Summit IUST, 2025)\n  - Algorithmic competition during Foundation Week.\n\n* Coordinator of Gaming Competition (CUK, 2025)\n  - Leadership during Cyber Concave 2025 (BGMI event).\n\n* Certificate of Achievement (Cyber Concave CUK, 2025)\n  - Exemplary leadership & dedication as Coordinator.",
+      },
+      "contact.txt": {
+        type: "file",
+        content:
+          "CONTACT & SOCIAL PROFILES\n==================================================\nEmail:    mb4milad.bhattt@gmail.com\nGitHub:   https://github.com/m4milaad\nLinkedIn: https://www.linkedin.com/in/m4milaad/\nX:        https://x.com/m4milaad\nResume:   /Images/Milad%20Ajaz%20Bhat%20Resume.pdf\nStatus:   Available for work / opportunities",
+      },
+      "resume.lnk": {
+        type: "link",
+        content: "/Images/Milad%20Ajaz%20Bhat%20Resume.pdf",
+        description: "Milad Ajaz Bhat - Resume / CV (PDF)",
+      },
+      "github.lnk": {
+        type: "link",
+        content: "https://github.com/m4milaad",
+        description: "Milad's GitHub Profile",
+      },
+      "linkedin.lnk": {
+        type: "link",
+        content: "https://www.linkedin.com/in/m4milaad/",
+        description: "Milad's LinkedIn Profile",
       },
       "plasma.exe": { type: "executable", content: "plasma" },
-      games: {
-        type: "directory",
-        contents: {
-          "games.txt": {
-            type: "file",
-            content:
-              "Welcome to the Games Directory!\nType the game name as a command to play.\n\nAvailable games:\n  snake      Classic Snake\n  tetris     Falling blocks\n  minesweeper  Find the mines\n  pong       Ball & paddle\n  breakout   Brick breaker\n  2048       Slide & merge tiles\n  maze       Navigate the dungeon\n  typetest   Typing speed test\n\nControls: Arrow keys to move, Escape to exit.",
-          },
-          "snake.exe": { type: "executable", content: "snake" },
-          "tetris.exe": { type: "executable", content: "tetris" },
-          "minesweeper.exe": { type: "executable", content: "minesweeper" },
-          "pong.exe": { type: "executable", content: "pong" },
-          "breakout.exe": { type: "executable", content: "breakout" },
-          "2048.exe": { type: "executable", content: "2048" },
-          "maze.exe": { type: "executable", content: "maze" },
-          "typetest.exe": { type: "executable", content: "typetest" },
-        },
-      },
     },
   },
 };
 
-function ListFiles() {
-  // Move to current folder
+function GetCurrentDirNode() {
   let DirectoryContents = FileSystem.root;
   for (let Dir of Directory.slice(15).split("/").filter(Boolean)) {
-    DirectoryContents = DirectoryContents.contents[Dir];
+    if (DirectoryContents && DirectoryContents.contents && DirectoryContents.contents[Dir]) {
+      DirectoryContents = DirectoryContents.contents[Dir];
+    }
+  }
+  return DirectoryContents;
+}
+
+function ListFiles() {
+  const DirectoryContents = GetCurrentDirNode();
+  if (!DirectoryContents || !DirectoryContents.contents) {
+    OutputsText += `\nError reading directory\n\n`;
+    return;
   }
 
   // Print directory being listed
-  OutputsText += `\nC:/../${Directory.split("/").slice(-1)}`;
+  const folderName = Directory.split("/").slice(-1)[0] || "guest";
+  OutputsText += `\nC:/../${folderName}`;
 
   // Print each file
   const Files = Object.keys(DirectoryContents.contents);
   for (let [Index, File] of Files.entries()) {
-    OutputsText += `\n${Index == Files.length - 1 ? "┗" : "┣"}${File.includes(".") ? "━▷" : "━━━━"} ${File}`;
+    const item = DirectoryContents.contents[File];
+    const isDir = item && item.type === "directory";
+    const prefix = Index == Files.length - 1 ? "┗" : "┣";
+    const marker = isDir ? "━━━━" : "━▷";
+    OutputsText += `\n${prefix}${marker} ${File}${isDir ? "/" : ""}`;
   }
 
   OutputsText += "\n\n";
 }
 
 function ChangeDirectory(InputDirectory) {
+  const cleanInput = (InputDirectory || "").trim().replace(/\/+$/, "");
   let CurrentDirectory = Directory.slice(15).split("/").filter(Boolean);
 
-  // Go back a folder
-  if (InputDirectory === "..") {
-    CurrentDirectory.pop();
-  }
-
   // Return to root folder
-  else if (InputDirectory === "/") {
+  if (!cleanInput || cleanInput === "/" || cleanInput === "~") {
     CurrentDirectory = [];
   }
-
+  // Go back a folder
+  else if (cleanInput === "..") {
+    CurrentDirectory.pop();
+  }
   // Move to new folder
   else {
-    // Move to current folder
     let DirectoryContents = FileSystem.root;
     for (let Dir of CurrentDirectory) {
       DirectoryContents = DirectoryContents.contents[Dir];
     }
 
-    // Add new folder to path
     if (
-      DirectoryContents.contents[InputDirectory] &&
-      DirectoryContents.contents[InputDirectory].type === "directory"
+      DirectoryContents.contents[cleanInput] &&
+      DirectoryContents.contents[cleanInput].type === "directory"
     ) {
-      CurrentDirectory.push(InputDirectory);
-    }
-
-    // Desired path dousnt exist
-    else {
-      OutputsText += `\ncd: '${InputDirectory}' No such directory\n\n`;
+      CurrentDirectory.push(cleanInput);
+    } else {
+      OutputsText += `\ncd: '${cleanInput}' No such directory\n\n`;
       return;
     }
   }
@@ -564,14 +586,55 @@ function ChangeDirectory(InputDirectory) {
   Directory = `C:/Users/guest${CurrentDirectory.length ? "/" : ""}${CurrentDirectory.join("/")}`;
 }
 
-function StartFile(InputFile) {
-  // Move to current folder
-  let DirectoryContents = FileSystem.root;
-  for (let Dir of Directory.slice(15).split("/").filter(Boolean)) {
-    DirectoryContents = DirectoryContents.contents[Dir];
+function ResolveFile(inputPath) {
+  if (!inputPath) return null;
+  const clean = inputPath.replace(/^C:\/Users\/guest\/?/i, "").trim();
+
+  // 1. Direct match in current directory
+  const currentDir = GetCurrentDirNode();
+  if (currentDir && currentDir.contents && currentDir.contents[clean]) {
+    return currentDir.contents[clean];
   }
 
-  const fileData = DirectoryContents.contents[InputFile];
+  // 2. Direct match in root
+  if (FileSystem.root.contents[clean]) {
+    return FileSystem.root.contents[clean];
+  }
+
+  // 3. Subdirectory paths like projects/01_cuk_acadex.lnk
+  if (clean.includes("/")) {
+    const parts = clean.split("/").filter(Boolean);
+    let target = clean.startsWith("/") ? FileSystem.root : currentDir;
+    for (let i = 0; i < parts.length - 1; i++) {
+      const part = parts[i];
+      if (part === "..") {
+        target = FileSystem.root;
+      } else if (target && target.contents && target.contents[part]) {
+        target = target.contents[part];
+      } else {
+        target = null;
+        break;
+      }
+    }
+    const fileName = parts[parts.length - 1];
+    if (target && target.contents && target.contents[fileName]) {
+      return target.contents[fileName];
+    }
+  }
+
+  // 4. Convenience search across subdirectories (projects, games)
+  if (FileSystem.root.contents.projects && FileSystem.root.contents.projects.contents[clean]) {
+    return FileSystem.root.contents.projects.contents[clean];
+  }
+  if (FileSystem.root.contents.games && FileSystem.root.contents.games.contents[clean]) {
+    return FileSystem.root.contents.games.contents[clean];
+  }
+
+  return null;
+}
+
+function StartFile(InputFile) {
+  const fileData = ResolveFile(InputFile);
 
   if (fileData) {
     if (fileData.type === "file") {
@@ -637,26 +700,45 @@ function StartFile(InputFile) {
         OutputsText += `\n'${InputFile}' Started successfully\n\n`;
         DisplayPlasma = true;
       }
+    } else if (fileData.type === "directory") {
+      OutputsText += `\nstart: '${InputFile}' is a directory. Use 'cd ${InputFile}' or 'ls'.\n\n`;
     }
-  }
-  // Selected file dousnt exist
-  else {
+  } else {
     OutputsText += `\nstart: '${InputFile}' No such file\n\n`;
+  }
+}
+
+function CatFile(InputFile) {
+  const fileData = ResolveFile(InputFile);
+
+  if (fileData) {
+    if (fileData.type === "file") {
+      OutputsText += `\n${fileData.content}\n\n`;
+    } else if (fileData.type === "link") {
+      OutputsText += `\nLink: ${fileData.content}\n`;
+      if (fileData.description) {
+        OutputsText += `${fileData.description}\n`;
+      }
+      OutputsText += `(Use 'start ${InputFile}' to open in browser)\n\n`;
+    } else if (fileData.type === "executable") {
+      OutputsText += `\n[Executable binary: '${InputFile}']\nType '${fileData.content}' or 'start ${InputFile}' to launch.\n\n`;
+    } else if (fileData.type === "directory") {
+      OutputsText += `\ncat: '${InputFile}': Is a directory. Use 'cd ${InputFile}' or 'ls'.\n\n`;
+    }
+  } else {
+    OutputsText += `\ncat: '${InputFile}': No such file\n\n`;
   }
 }
 
 // Modified ExecuteCommand function
 function ExecuteCommand() {
-  const [Command, ...Arguments] = InputText.split(" ");
+  const trimmed = InputText.trim();
+  const [Command, ...Arguments] = trimmed.split(/\s+/);
+  const cmd = (Command || "").toLowerCase();
 
-  if (Command) {
-    // Assuming ComputerBeep is defined elsewhere, if not, this will cause an error.
-    // ComputerBeep.play();
-    // ComputerBeep.currentTime = 0;
-  }
-
-  switch (Command) {
+  switch (cmd) {
     case "ls":
+    case "dir":
       if (Arguments.length) {
         OutputsText += "\nError: 'ls' doesn't accept any arguments\n\n";
       } else {
@@ -667,23 +749,105 @@ function ExecuteCommand() {
     case "cd":
       if (Arguments.length > 1) {
         OutputsText +=
-          "\nError: 'cd' doesn't accept more that one argument\n\n";
+          "\nError: 'cd' doesn't accept more than one argument\n\n";
       } else if (!Arguments.length) {
-        OutputsText += "\nError: 'cd' requires a directory argument\n\n";
+        ChangeDirectory("/");
       } else {
         ChangeDirectory(Arguments[0]);
       }
       break;
 
     case "start":
+    case "open":
       if (Arguments.length > 1) {
         OutputsText +=
-          "\nError: 'start' doesn't accept more that one argument\n\n";
+          `\nError: '${cmd}' doesn't accept more than one argument\n\n`;
       } else if (!Arguments.length) {
-        OutputsText += "\nError: 'start' requires a file argument\n\n";
+        OutputsText += `\nError: '${cmd}' requires a file argument\n\n`;
       } else {
         StartFile(Arguments[0]);
       }
+      break;
+
+    case "cat":
+    case "view":
+    case "type":
+    case "read":
+      if (Arguments.length > 1) {
+        OutputsText +=
+          `\nError: '${cmd}' doesn't accept more than one argument\n\n`;
+      } else if (!Arguments.length) {
+        OutputsText += `\nError: '${cmd}' requires a file argument\n\n`;
+      } else {
+        CatFile(Arguments[0]);
+      }
+      break;
+
+    case "projects":
+    case "project":
+      OutputsText += `\n${FileSystem.root.contents.projects.contents["projects.txt"].content}\n\n`;
+      break;
+
+    case "experience":
+    case "exp":
+      OutputsText += `\n${FileSystem.root.contents["experience.txt"].content}\n\n`;
+      break;
+
+    case "accolades":
+    case "awards":
+    case "certs":
+    case "certifications":
+      OutputsText += `\n${FileSystem.root.contents["accolades.txt"].content}\n\n`;
+      break;
+
+    case "education":
+    case "edu":
+      OutputsText += `\n${FileSystem.root.contents["education.txt"].content}\n\n`;
+      break;
+
+    case "skills":
+    case "tech":
+    case "stack":
+    case "techstack":
+      OutputsText += `\n${FileSystem.root.contents["tech_stack.txt"].content}\n\n`;
+      break;
+
+    case "profile":
+    case "whoami":
+    case "bio":
+    case "about":
+      OutputsText += `\n${FileSystem.root.contents["profile.txt"].content}\n\n`;
+      break;
+
+    case "contact":
+    case "social":
+    case "socials":
+      OutputsText += `\n${FileSystem.root.contents["contact.txt"].content}\n\n`;
+      break;
+
+    case "resume":
+    case "cv":
+      OutputsText += "\nOpening Resume: /Images/Milad%20Ajaz%20Bhat%20Resume.pdf\n\n";
+      window.open("/Images/Milad%20Ajaz%20Bhat%20Resume.pdf");
+      break;
+
+    case "github":
+      OutputsText += "\nOpening GitHub: https://github.com/m4milaad\n\n";
+      window.open("https://github.com/m4milaad");
+      break;
+
+    case "linkedin":
+      OutputsText += "\nOpening LinkedIn: https://www.linkedin.com/in/m4milaad/\n\n";
+      window.open("https://www.linkedin.com/in/m4milaad/");
+      break;
+
+    case "date":
+    case "time":
+      OutputsText += `\n${new Date().toString()}\n\n`;
+      break;
+
+    case "echo":
+      OutputsText += `\n${Arguments.join(" ")}\n\n`;
       break;
 
     case "snake":
@@ -792,6 +956,7 @@ function ExecuteCommand() {
       break;
 
     case "clear":
+    case "cls":
       if (Arguments.length) {
         OutputsText += "\nError: 'clear' doesn't accept any arguments\n\n";
       } else {
@@ -804,7 +969,33 @@ function ExecuteCommand() {
         OutputsText += "\nError: 'help' doesn't accept any arguments\n\n";
       } else {
         OutputsText +=
-          "\nPress 'tab' for auto complete and 'esc' to exit\na program (.exe file)\n\nLS           Lists current directory contents\nCD           Change directory, '..' back, '/' root\nSTART        Opens specified file or link\nSNAKE        Classic Snake game\nTETRIS       Falling blocks game\nMINESWEEPER  Find the mines\nPONG         Ball & paddle game\n2048         Slide & merge tiles\nMAZE         Navigate the dungeon\nTYPETEST     Typing speed test\nCLEAR        Clears all previous terminal outputs\n\n";
+          "\nPress 'tab' for auto complete, 'pgup/pgdn' to scroll,\nand 'esc' to exit a program (.exe game)\n\n" +
+          "NAVIGATION & FILES:\n" +
+          "  ls           List directory contents\n" +
+          "  cd <dir>     Change directory ('..' back, '/' root)\n" +
+          "  cat <file>   View contents of a text file\n" +
+          "  start <file> Open file, link, or executable\n" +
+          "  clear        Clear previous terminal outputs\n\n" +
+          "PORTFOLIO SHORTCUTS:\n" +
+          "  projects     View all featured engineering projects\n" +
+          "  experience   View work history and leadership roles\n" +
+          "  accolades    View awards, hackathons, certifications\n" +
+          "  education    View degrees and academic details\n" +
+          "  skills       View technical skills and stack\n" +
+          "  profile      View Milad's background profile\n" +
+          "  contact      View email and social profile links\n" +
+          "  resume       Open Milad's Resume / CV (PDF)\n" +
+          "  github       Open Milad's GitHub profile\n" +
+          "  linkedin     Open Milad's LinkedIn profile\n\n" +
+          "RETRO GAMES (.exe):\n" +
+          "  snake        Classic Snake\n" +
+          "  tetris       Falling blocks\n" +
+          "  minesweeper  Find the mines\n" +
+          "  pong         Ball & paddle\n" +
+          "  breakout     Brick breaker\n" +
+          "  2048         Slide & merge tiles\n" +
+          "  maze         Dungeon maze explorer\n" +
+          "  typetest     Typing speed test\n\n";
       }
       break;
 
@@ -812,17 +1003,36 @@ function ExecuteCommand() {
       break;
 
     default:
-      OutputsText += `\nCommand not found '${Command}'\n\n`;
+      OutputsText += `\nCommand not found '${Command}'. Type 'help' for commands.\n\n`;
   }
 }
 
 // Autocomplete function
 function AutoComplete() {
-  const [Command, Argument1] = InputText.split(" "); // Use Argument1 to avoid redeclaring Arguments
+  const [Command, Argument1] = InputText.split(" ");
   const CommandsList = [
     "ls",
     "cd",
     "start",
+    "open",
+    "cat",
+    "view",
+    "type",
+    "projects",
+    "experience",
+    "accolades",
+    "education",
+    "skills",
+    "tech",
+    "profile",
+    "contact",
+    "resume",
+    "cv",
+    "github",
+    "linkedin",
+    "whoami",
+    "date",
+    "echo",
     "snake",
     "tetris",
     "minesweeper",
@@ -838,7 +1048,7 @@ function AutoComplete() {
   // Auto completing a command
   if (InputText.split(" ").length === 1) {
     const CompletedCommand = CommandsList.filter((Element) =>
-      Element.startsWith(Command),
+      Element.startsWith(Command.toLowerCase()),
     );
     if (CompletedCommand.length === 1) {
       InputText = CompletedCommand[0] + " ";
@@ -848,18 +1058,15 @@ function AutoComplete() {
     }
   }
 
-  // Auto comepleting a file name for 'cd' or 'start'
+  // Auto completing a file name for commands taking file/dir argument
   else if (
-    ["cd", "start"].includes(Command) &&
+    ["cd", "start", "open", "cat", "view", "type"].includes(Command.toLowerCase()) &&
     InputText.split(" ").length === 2
   ) {
-    let DirectoryContents = FileSystem.root;
-    for (let Dir of Directory.slice(15).split("/").filter(Boolean)) {
-      DirectoryContents = DirectoryContents.contents[Dir];
-    }
-
+    let DirectoryContents = GetCurrentDirNode();
+    const arg = Argument1 || "";
     const PossibleCompletions = Object.keys(DirectoryContents.contents).filter(
-      (Item) => Item.startsWith(Argument1),
+      (Item) => Item.startsWith(arg),
     );
 
     if (PossibleCompletions.length === 1) {
@@ -869,7 +1076,27 @@ function AutoComplete() {
       OutputsText += PossibleCompletions.join("  ") + "\n";
     }
   }
-  Blinker.Index = InputText.length; // Ensure blinker is at the end after autocomplete
+  Blinker.Index = InputText.length;
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener(
+    "wheel",
+    function (event) {
+      if (typeof State !== "undefined" && State === "Retro") {
+        const LinesCount = OutputsText.split("\n").length;
+        if (event.deltaY > 0) {
+          ScrollOffset = Math.min(
+            Math.max(0, LinesCount - 15),
+            ScrollOffset + 3,
+          );
+        } else if (event.deltaY < 0) {
+          ScrollOffset = Math.max(0, ScrollOffset - 3);
+        }
+      }
+    },
+    { passive: true },
+  );
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //

@@ -51,8 +51,7 @@ function scrollToSection(
       behavior: "smooth",
     });
   } else {
-    const y =
-      target.getBoundingClientRect().top + window.scrollY - offset;
+    const y = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
   }
 }
@@ -98,9 +97,11 @@ let legacyScriptsLoading: Promise<void> | null = null;
 const CACHE_BUST = `?v=${Date.now()}`;
 
 type ProjectItem = {
-  href: string;
-  title: string;
-  tech: string;
+  name: string;
+  description: string;
+  technology: readonly string[];
+  year: number;
+  githubLink: string;
 };
 
 type ExperienceItem = {
@@ -118,39 +119,125 @@ type EducationItem = {
 type AccoladeItem = {
   id: string;
   title: ReactNode;
+  org?: string;
+  year?: string;
+  badge?: "gold" | "bronze" | "cert";
+  href?: string;
   body: ReactNode;
 };
 
-const PROJECT_ITEMS: ProjectItem[] = [
+const PROJECT_ITEMS: readonly ProjectItem[] = [
   {
-    href: "https://ds-cuk.vercel.app/",
-    title: "Web App: Date Sheet Management ",
-    tech: "TS React Tailwind Postgres Vercel",
+    name: "CUK Acadex",
+    description:
+      "A full-stack academic management platform with AI-powered RAG search, automated exam scheduling, real-time collaboration, role-based access, and a native Android app.",
+    technology: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "pgvector",
+      "RAG",
+      "Python",
+      "Kotlin",
+      "Android",
+    ],
+    year: 2025,
+    githubLink: "https://github.com/m4milaad/schedule-savvy-schedules",
   },
   {
-    href: "https://github.com/m4milaad/Pyhton-Projects/tree/main/Coffee%20Machine",
-    title: "Cancer Diagnosis Model ",
-    tech: "Python Scikit-learn Pandas NumPy",
+    name: "KATHE English-to-Kashmiri Translation",
+    description:
+      "A low-resource neural machine-translation pipeline using NLLB-200, IndicTrans2, LoRA fine-tuning, back-translation, ensemble inference, and BLEU/chrF++ evaluation.",
+    technology: [
+      "Python",
+      "PyTorch",
+      "Hugging Face Transformers",
+      "NLLB-200",
+      "IndicTrans2",
+      "LoRA",
+      "PEFT",
+      "BLEU",
+      "chrF++",
+      "Kaggle",
+    ],
+    year: 2026,
+    githubLink: "https://github.com/m4milaad/bpccEngtoKash",
   },
   {
-    href: "https://yge.ct.ws/",
-    title: "Website: Yuva Global Enterprises ",
-    tech: "HTML CSS JS DNS",
+    name: "SentinelFlow",
+    description:
+      "A Redis-backed distributed rate-limiting service with multiple traffic-control algorithms, REST APIs, observability, load testing, and Docker/Kubernetes deployment.",
+    technology: [
+      "Java",
+      "Spring Boot",
+      "Redis",
+      "REST API",
+      "Prometheus",
+      "Docker",
+      "Kubernetes",
+      "React",
+      "TypeScript",
+      "JUnit",
+    ],
+    year: 2026,
+    githubLink: "https://github.com/m4milaad/SentinelFlow",
   },
   {
-    href: "https://github.com/m4milaad/Pyhton-Projects/tree/main/States%20Guessing%20Game",
-    title: "States Guessing Game ",
-    tech: "Python Pandas Turtle Game",
+    name: "BIS AI",
+    description:
+      "An offline-first multilingual product-safety platform with AI chat, product-image analysis, hybrid semantic search, PWA support, and low-bandwidth features.",
+    technology: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "PWA",
+      "Supabase",
+      "PostgreSQL",
+      "pgvector",
+      "Gemini API",
+      "RAG",
+      "Deno",
+    ],
+    year: 2026,
+    githubLink: "https://github.com/m4milaad/bis-ai",
   },
   {
-    href: "https://github.com/m4milaad/Banking-System-",
-    title: "Banking System ",
-    tech: "Java OOP CLI Application",
+    name: "2AI Conference",
+    description:
+      "A production conference platform with event registration, payment processing, cloud media storage, Supabase backend services, and a live public website.",
+    technology: [
+      "React",
+      "JavaScript",
+      "Vite",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "Edge Functions",
+      "ICICI Eazypay",
+      "Cloudflare R2",
+    ],
+    year: 2026,
+    githubLink: "https://github.com/m4milaad/2ai-Conference",
   },
   {
-    href: "https://github.com/m4milaad/Pyhton-Projects/tree/main/Peek%20Hour",
-    title: "Peek Hour Game ",
-    tech: "Python Turtle Game",
+    name: "repo-ready",
+    description:
+      "An offline Python CLI that evaluates repository readiness, generates deterministic CI-compatible reports, and safely scaffolds missing project files.",
+    technology: [
+      "Python",
+      "Python CLI",
+      "Pytest",
+      "Docker",
+      "GitHub Actions",
+      "JSON",
+      "Standard Library",
+    ],
+    year: 2026,
+    githubLink: "https://github.com/m4milaad/repo-ready",
   },
 ] as const;
 
@@ -216,102 +303,27 @@ const EDUCATION_ITEMS: EducationItem[] = [
 
 const ACCOLADE_ITEMS: AccoladeItem[] = [
   {
-    id: "build-ai-agent-ibm",
-    title: "Build an AI Agent | IBM | 2026",
-    body: "Completed IBM's Build an AI Agent certification, gaining expertise in AI agent development and prompt engineering.",
-  },
-  {
     id: "synertech-2026-winner",
     title: (
-      <span className="rp-inline-em">
-        1<sup>st</sup> Position in SynerTech 2026 Hackathon | KCET | 2026
-      </span>
+      <>
+        1<sup>st</sup> Position in SynerTech 2026 Hackathon
+      </>
     ),
+    org: "KCET",
+    year: "2026",
+    badge: "gold",
     body: "Won the hackathon at Kashmir College of Engineering and Technology. Developed a CRM-based Academic Management Portal with an AI-powered chatbot, integrated with a fully functional Android application.",
-  },
-  {
-    id: "swoc-mentorship-cert",
-    title: "SWOC — Mentorship Certificate | Social Winter of Code | 2026",
-    body: "Received mentorship certification from Social Winter of Code for guiding open-source contributors.",
-  },
-  {
-    id: "cursor-kashmir-hackathon-cert",
-    title: "Cursor Kashmir Hackathon — Participation | Cursor | 2026",
-    body: "Participated in the Cursor Kashmir Hackathon, exploring AI-assisted development workflows.",
-  },
-  {
-    id: "ecwoc-participant",
-    title: (
-      <a
-        href="https://www.linkedin.com/in/m4milaad/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="Experience"
-      >
-        Participant — ECWOC | Elite Coders | 2026
-      </a>
-    ),
-    body: "Participated in ECWOC organized by Elite Coders, competing in competitive programming challenges.",
-  },
-  {
-    id: "viksit-bharat-2047-cert",
-    title: "Certificate of Participation — Viksit Bharat @2047 | 2026",
-    body: "Participated in the Viksit Bharat — Startups & Innovation Mission initiative.",
-  },
-  {
-    id: "google-ml-apis-badge",
-    title: (
-      <a
-        href="https://www.linkedin.com/in/m4milaad/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="Experience"
-      >
-        Prepare Data for ML APIs — Google Cloud Skill Badge | Google | 2025
-      </a>
-    ),
-    body: "Earned Google Cloud skill badge covering Cloud Natural Language API, Dataflow, and ML data preparation pipelines.",
-  },
-  {
-    id: "ibm-ai-fundamentals-cert",
-    title: (
-      <a
-        href="https://www.linkedin.com/in/m4milaad/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="Experience"
-      >
-        Artificial Intelligence Fundamentals | IBM | 2025
-      </a>
-    ),
-    body: "Completed IBM's AI Fundamentals certification covering AI applications, capabilities, and core concepts.",
-  },
-  {
-    id: "oci-foundations-2025",
-    title: (
-      <a
-        href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=20239024792714BF5CAC484CB35B78330060C9DC6F08F530A0FEE782FDECE86E"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="Experience"
-      >
-        OCI 2025 Certified AI Foundations Associate | Oracle | 2025
-      </a>
-    ),
-    body: "Successfully passed the OCI AI Foundations Associate (1Z0 1122 25) certification with 95 percent.",
-  },
-  {
-    id: "iust-tech-summit-2025",
-    title: "Coding Challenge (Participation) | Tech Summit IUST | 2025",
-    body: "Participated in the Coding Challenge during Tech Summit 2025, held as part of Foundation Week.",
   },
   {
     id: "open-build-challenge-2025",
     title: (
-      <span className="rp-inline-em">
-        1<sup>st</sup> Position in Open Build Challenge | NIT Srinagar | 2025
-      </span>
+      <>
+        1<sup>st</sup> Position in Open Build Challenge
+      </>
     ),
+    org: "NIT Srinagar",
+    year: "2025",
+    badge: "gold",
     body: (
       <>
         Organised by FOSS NIT Srinagar in collabration with{" "}
@@ -330,11 +342,13 @@ const ACCOLADE_ITEMS: AccoladeItem[] = [
   {
     id: "coding-competition-cuk-2025",
     title: (
-      <span className="rp-inline-em">
-        3<sup>rd</sup> Position in Coding Competition | Central University of
-        Kashmir | 2025
-      </span>
+      <>
+        3<sup>rd</sup> Position in Coding Competition
+      </>
     ),
+    org: "Central University of Kashmir",
+    year: "2025",
+    badge: "bronze",
     body: (
       <>
         Hosted by{" "}
@@ -351,16 +365,127 @@ const ACCOLADE_ITEMS: AccoladeItem[] = [
     ),
   },
   {
+    id: "build-ai-agent-ibm",
+    title: "Build an AI Agent",
+    org: "IBM",
+    year: "2026",
+    badge: "cert",
+    body: "Completed IBM's Build an AI Agent certification, gaining expertise in AI agent development and prompt engineering.",
+  },
+  {
+    id: "oci-foundations-2025",
+    title: "OCI 2025 Certified AI Foundations Associate",
+    org: "Oracle",
+    year: "2025",
+    badge: "cert",
+    href: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=20239024792714BF5CAC484CB35B78330060C9DC6F08F530A0FEE782FDECE86E",
+    body: "Successfully passed the OCI AI Foundations Associate (1Z0 1122 25) certification with 95 percent.",
+  },
+  {
+    id: "google-ml-apis-badge",
+    title: "Prepare Data for ML APIs — Google Cloud Skill Badge",
+    org: "Google",
+    year: "2025",
+    badge: "cert",
+    href: "https://www.linkedin.com/in/m4milaad/",
+    body: "Earned Google Cloud skill badge covering Cloud Natural Language API, Dataflow, and ML data preparation pipelines.",
+  },
+  {
+    id: "ibm-ai-fundamentals-cert",
+    title: "Artificial Intelligence Fundamentals",
+    org: "IBM",
+    year: "2025",
+    badge: "cert",
+    href: "https://www.linkedin.com/in/m4milaad/",
+    body: "Completed IBM's AI Fundamentals certification covering AI applications, capabilities, and core concepts.",
+  },
+  {
+    id: "swoc-mentorship-cert",
+    title: "SWOC — Mentorship Certificate",
+    org: "Social Winter of Code",
+    year: "2026",
+    body: "Received mentorship certification from Social Winter of Code for guiding open-source contributors.",
+  },
+  {
+    id: "cursor-kashmir-hackathon-cert",
+    title: "Cursor Kashmir Hackathon — Participation",
+    org: "Cursor",
+    year: "2026",
+    body: "Participated in the Cursor Kashmir Hackathon, exploring AI-assisted development workflows.",
+  },
+  {
+    id: "ecwoc-participant",
+    title: "Participant — ECWOC",
+    org: "Elite Coders",
+    year: "2026",
+    href: "https://www.linkedin.com/in/m4milaad/",
+    body: "Participated in ECWOC organized by Elite Coders, competing in competitive programming challenges.",
+  },
+  {
+    id: "viksit-bharat-2047-cert",
+    title: "Certificate of Participation — Viksit Bharat @2047",
+    year: "2026",
+    body: "Participated in the Viksit Bharat — Startups & Innovation Mission initiative.",
+  },
+  {
+    id: "iust-tech-summit-2025",
+    title: "Coding Challenge (Participation)",
+    org: "Tech Summit IUST",
+    year: "2025",
+    body: "Participated in the Coding Challenge during Tech Summit 2025, held as part of Foundation Week.",
+  },
+  {
     id: "gaming-coordinator-cuk-2025",
-    title: "Coordinator of Gaming Competition | Central University of Kashmir | 2025",
+    title: "Coordinator of Gaming Competition",
+    org: "Central University of Kashmir",
+    year: "2025",
     body: "Recognized for leadership and coordination during Cyber Concave 2025, including the BGMI event.",
   },
   {
     id: "cyber-concave-achievement-cert",
-    title: "Certificate of Achievement — Cyber Concave 2025 | CUK | 2025",
+    title: "Certificate of Achievement — Cyber Concave 2025",
+    org: "CUK",
+    year: "2025",
     body: "Recognized for exemplary leadership and dedication as Coordinator of Cyber Concave 2025.",
   },
 ] as const;
+
+function parsePipeHeadline(raw: string): {
+  role: string;
+  org?: string;
+  period?: string;
+} {
+  const parts = raw.split("|").map((s) => s.trim());
+  if (parts.length >= 3) {
+    return {
+      role: parts[0]!,
+      org: parts[1],
+      period: parts.slice(2).join(" · "),
+    };
+  }
+  if (parts.length === 2) {
+    return { role: parts[0]!, period: parts[1] };
+  }
+  return { role: raw };
+}
+
+function parseDetailLine(detail: string): {
+  label?: string;
+  items: string[];
+} {
+  const idx = detail.indexOf(":");
+  if (idx === -1) return { items: [detail] };
+  const label = detail.slice(0, idx).trim();
+  const rest = detail
+    .slice(idx + 1)
+    .replace(/\.$/, "")
+    .trim();
+  const items = rest
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return { label, items };
+}
 
 function loadScript(src: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -378,16 +503,18 @@ function ProjectCard({
   href,
   title,
   titleDataValue,
-  tech,
-  techDataValue,
+  description,
+  technology,
+  year = 2025,
   className,
   style,
 }: {
   href: string;
   title: string;
   titleDataValue: string;
-  tech: string;
-  techDataValue: string;
+  description: string;
+  technology?: readonly string[];
+  year?: number | string;
   className?: string;
   style?: React.CSSProperties;
 }) {
@@ -411,11 +538,19 @@ function ProjectCard({
           {title}
         </p>
         <div className="Separator rp-project-sep" />
-        <p data-value="2025">2025</p>
+        <p data-value={String(year)}>{year}</p>
       </div>
-      <p className="rp-project-tech" data-value={techDataValue}>
-        {tech}
-      </p>
+      <div className="rp-project-desc">{description}</div>
+      {technology && technology.length > 0 && (
+        <div className="rp-project-tech-pills">
+          {technology.map((tech) => (
+            <span key={tech} className="rp-tech-pill">
+              <span className="rp-tech-pill-dot" aria-hidden />
+              {tech}
+            </span>
+          ))}
+        </div>
+      )}
     </a>
   );
 }
@@ -458,18 +593,19 @@ export default function PortfolioShell() {
     };
   }, [updateActiveFromScroll]);
 
-  /* ── Scroll-reveal: IntersectionObserver adds .rp-visible ── */
+  /* ── Scroll-reveal: IntersectionObserver adds .rp-visible with per-batch stagger ── */
   useEffect(() => {
     const panel = rightPanelRef.current;
     if (!panel) return;
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add("rp-visible");
-            io.unobserve(e.target);
-          }
-        }
+        const visibleBatch = entries.filter((e) => e.isIntersecting);
+        visibleBatch.forEach((e, batchIndex) => {
+          const el = e.target as HTMLElement;
+          el.style.setProperty("--rp-stagger", `${batchIndex * 50}ms`);
+          el.classList.add("rp-visible");
+          io.unobserve(el);
+        });
       },
       { root: panel, threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
     );
@@ -493,21 +629,21 @@ export default function PortfolioShell() {
           <div id="Section2" className="Section rp-section">
             <h2>Projects</h2>
             <p className="rp-section-intro">
-              Below are some of the projects I have developed. This is a selection
-              of projects I&apos;ve worked on. I plan to revisit and polish these
-              projects in the future, improving their code with my current level of
-              expertise.
+              Below are some of the projects I have developed. This is a
+              selection of projects I&apos;ve worked on. I plan to revisit and
+              polish these projects in the future, improving their code with my
+              current level of expertise.
             </p>
-            {PROJECT_ITEMS.map((project, i) => (
+            {PROJECT_ITEMS.map((project) => (
               <ProjectCard
-                key={project.href}
-                href={project.href}
-                title={project.title}
-                titleDataValue={project.title}
-                tech={project.tech}
-                techDataValue={project.tech}
+                key={project.githubLink}
+                href={project.githubLink}
+                title={`${project.name} `}
+                titleDataValue={`${project.name} `}
+                description={project.description}
+                technology={project.technology}
+                year={project.year}
                 className="rp-animate"
-                style={{ animationDelay: `${i * 40}ms` }}
               />
             ))}
           </div>
@@ -516,29 +652,73 @@ export default function PortfolioShell() {
           <div id="Section3" className="Section rp-section">
             <h2>Experience</h2>
             <div className="rp-timeline">
-              {EXPERIENCE_ITEMS.map((item, i) => (
-                <div
-                  key={item.headline}
-                  className="rp-exp-block rp-animate"
-                  style={{ animationDelay: `${i * 35}ms` }}
-                >
-                  <p className="rp-exp-headline">
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="Experience"
-                      >
-                        <span className="rp-inline-em">{item.headline}</span>
-                      </a>
-                    ) : (
-                      <span className="rp-inline-em">{item.headline}</span>
-                    )}
-                  </p>
-                  <p className="rp-exp-text">{item.text}</p>
-                </div>
-              ))}
+              {EXPERIENCE_ITEMS.map((item, idx) => {
+                const { role, org, period } = parsePipeHeadline(item.headline);
+                const isCurrent =
+                  period?.toLowerCase().includes("present") ?? false;
+                const isLast = idx === EXPERIENCE_ITEMS.length - 1;
+
+                return (
+                  <div
+                    key={item.headline}
+                    className={`rp-exp-block rp-animate${
+                      isCurrent ? " rp-exp-current" : ""
+                    }${isLast ? " rp-exp-last" : ""}`}
+                  >
+                    {/* Dedicated left timeline column: concentric node + segmented stem */}
+                    <div className="rp-exp-rail" aria-hidden>
+                      <div className="rp-exp-node">
+                        <span className="rp-exp-node-core" />
+                        {isCurrent && <span className="rp-exp-node-Ping" />}
+                      </div>
+                      {!isLast && <div className="rp-exp-stem" />}
+                    </div>
+
+                    {/* Right experience card with horizontal connector tick */}
+                    <div className="rp-exp-card">
+                      <span className="rp-exp-connector" aria-hidden />
+                      <div className="rp-exp-header">
+                        <div className="rp-exp-title-group">
+                          <p className="rp-exp-headline">
+                            {item.href ? (
+                              <a
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="Experience rp-ext-link"
+                              >
+                                <span className="rp-inline-em">{role}</span>
+                                <span className="rp-ext-arrow" aria-hidden>
+                                  ↗
+                                </span>
+                              </a>
+                            ) : (
+                              <span className="rp-inline-em">{role}</span>
+                            )}
+                          </p>
+                          {org && <span className="rp-org-pill">{org}</span>}
+                        </div>
+                        {period && (
+                          <span
+                            className={`rp-date-pill${
+                              isCurrent ? " rp-date-pill-live" : ""
+                            }`}
+                          >
+                            {isCurrent && (
+                              <span className="rp-live-dot" aria-hidden />
+                            )}
+                            {period}
+                          </span>
+                        )}
+                      </div>
+                      <p className="rp-exp-text">{item.text}</p>
+                      <span className="rp-card-index" aria-hidden>
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -546,22 +726,68 @@ export default function PortfolioShell() {
           <div id="Section4" className="Section rp-section">
             <h2>Accolades</h2>
             <div className="rp-accolade-list">
-              {ACCOLADE_ITEMS.map((item, i) => (
-                <article
-                  key={item.id}
-                  className="rp-accolade rp-animate"
-                  style={{ animationDelay: `${i * 30}ms` }}
-                >
-                  <p className="rp-accolade-title">
-                    {typeof item.title === "string" ? (
-                      <span className="rp-inline-em">{item.title}</span>
-                    ) : (
-                      item.title
-                    )}
-                  </p>
-                  <p className="rp-accolade-body">{item.body}</p>
-                </article>
-              ))}
+              {ACCOLADE_ITEMS.map((item) => {
+                const isFeatured =
+                  item.badge === "gold" || item.badge === "bronze";
+
+                return (
+                  <article
+                    key={item.id}
+                    className={`rp-accolade rp-animate${
+                      item.badge ? ` rp-accolade-${item.badge}` : ""
+                    }${isFeatured ? " rp-accolade-featured" : ""}`}
+                  >
+                    <div className="rp-accolade-top">
+                      <div className="rp-accolade-heading-wrap">
+                        {item.badge === "gold" && (
+                          <span className="rp-award-badge rp-award-gold">
+                            ★ Winner
+                          </span>
+                        )}
+                        {item.badge === "bronze" && (
+                          <span className="rp-award-badge rp-award-bronze">
+                            ★ Podium
+                          </span>
+                        )}
+                        {item.badge === "cert" && (
+                          <span className="rp-award-badge rp-award-cert">
+                            ✓ Certified
+                          </span>
+                        )}
+                        <p className="rp-accolade-title">
+                          {item.href ? (
+                            <a
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="Experience rp-ext-link"
+                            >
+                              <span className="rp-inline-em">{item.title}</span>
+                              <span className="rp-ext-arrow" aria-hidden>
+                                ↗
+                              </span>
+                            </a>
+                          ) : (
+                            <span className="rp-inline-em">{item.title}</span>
+                          )}
+                        </p>
+                      </div>
+
+                      {(item.org || item.year) && (
+                        <div className="rp-accolade-meta">
+                          {item.org && (
+                            <span className="rp-org-pill">{item.org}</span>
+                          )}
+                          {item.year && (
+                            <span className="rp-date-pill">{item.year}</span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    <p className="rp-accolade-body">{item.body}</p>
+                  </article>
+                );
+              })}
             </div>
           </div>
 
@@ -569,33 +795,68 @@ export default function PortfolioShell() {
           <div id="Section5" className="Section rp-section">
             <h2>Education</h2>
             <div className="rp-edu-grid">
-              {EDUCATION_ITEMS.map((item, i) => (
-                <div
-                  key={item.school}
-                  className="rp-edu-card rp-animate"
-                  style={{ animationDelay: `${i * 50}ms` }}
-                >
-                  <p className="rp-edu-school">
-                    <span className="rp-inline-em">{item.school}</span>
-                  </p>
-                  <p className="rp-edu-degree">
-                    <span className="rp-inline-em">{item.degree}</span>
-                  </p>
-                  {item.details.map((detail) => (
-                    <p key={detail} className="rp-edu-detail">
-                      {detail}
-                    </p>
-                  ))}
-                </div>
-              ))}
+              {EDUCATION_ITEMS.map((item) => {
+                const { role: degreeTitle, period: gradPeriod } =
+                  parsePipeHeadline(item.degree);
+
+                return (
+                  <div key={item.school} className="rp-edu-card rp-animate">
+                    <div className="rp-edu-header">
+                      <div>
+                        <p className="rp-edu-school">
+                          <span className="rp-inline-em">{item.school}</span>
+                        </p>
+                        <p className="rp-edu-degree">
+                          <span className="rp-inline-em">{degreeTitle}</span>
+                        </p>
+                      </div>
+                      {gradPeriod && (
+                        <span className="rp-date-pill">{gradPeriod}</span>
+                      )}
+                    </div>
+
+                    <div className="rp-edu-details-wrap">
+                      {item.details.map((detail) => {
+                        const { label, items } = parseDetailLine(detail);
+                        return (
+                          <div key={detail} className="rp-edu-detail-row">
+                            {label && (
+                              <span className="rp-edu-detail-label">
+                                {label}
+                              </span>
+                            )}
+                            <div className="rp-edu-detail-pills">
+                              {items.map((chip) => (
+                                <span key={chip} className="rp-tech-pill">
+                                  <span
+                                    className="rp-tech-pill-dot"
+                                    aria-hidden
+                                  />
+                                  {chip}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           <p className="rp-footer-credit">
-            Built by <span className="rp-inline-em">Milad Ajaz Bhat</span> with <span className="rp-inline-em">Next.js</span>, <span className="rp-inline-em">React</span>, and{" "}
-            <span className="rp-inline-em">TypeScript</span>. The 3D desk and retro CLI run on raw <span className="rp-inline-em">WebGL2</span> with{" "}
-            <span className="rp-inline-em">HTML</span>, <span className="rp-inline-em">CSS</span>, and <span className="rp-inline-em">JavaScript</span> — no game engine or UI
-            framework on the scene. Edited in <span className="rp-inline-em">Visual Studio Code</span>.
+            Built by <span className="rp-inline-em">Milad Ajaz Bhat</span> with{" "}
+            <span className="rp-inline-em">Next.js</span>,{" "}
+            <span className="rp-inline-em">React</span>, and{" "}
+            <span className="rp-inline-em">TypeScript</span>. The 3D desk and
+            retro CLI run on raw <span className="rp-inline-em">WebGL2</span>{" "}
+            with <span className="rp-inline-em">HTML</span>,{" "}
+            <span className="rp-inline-em">CSS</span>, and{" "}
+            <span className="rp-inline-em">JavaScript</span> — no game engine or
+            UI framework on the scene. Edited in{" "}
+            <span className="rp-inline-em">Visual Studio Code</span>.
           </p>
         </div>
 
