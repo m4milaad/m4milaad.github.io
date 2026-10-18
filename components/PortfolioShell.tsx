@@ -243,41 +243,33 @@ const PROJECT_ITEMS: readonly ProjectItem[] = [
 
 const EXPERIENCE_ITEMS: ExperienceItem[] = [
   {
+    headline: "Student Intern | NIT Srinagar | Dec 2025 - Feb 2026",
+    text: "Full-time hybrid internship focused on practical software development and institutional systems at the Department of Training and Placement.",
+  },
+  {
+    headline: "Web Developer | Yuva Global Enterprises | Dec 2024 - Jul 2025",
+    text: "Developed and maintained the company website (HTML, CSS, JavaScript) on-site. Supported key digital operations and client engagement.",
+  },
+  {
+    headline: "Mentor | Skillified | Jun 2025 - Jul 2025",
+    href: "/Images/certificate.pdf",
+    text: "Built a machine learning model for cancer diagnosis achieving 95% accuracy, and analyzed the Framingham dataset to predict heart disease risk.",
+  },
+  {
     headline: "Campus Ambassador | Google | May 2026 - Present",
-    text: "Serving as a Campus Ambassador at Google, bridging the gap between Google technologies and the student community through events, workshops, and mentorship.",
+    text: "Serving as Campus Ambassador at Google, bridging the gap between Google technologies and the student community through events, workshops, and mentorship.",
   },
   {
     headline: "Mentor | GirlScript Summer of Code | May 2026 - Present",
-    text: "Mentoring open-source contributors at GSSoC, guiding them through project contributions, code reviews, and best practices in collaborative development.",
-  },
-  {
-    headline: "Student Intern | NIT Srinagar | Dec 2025 - Feb 2026",
-    text: "Full-time hybrid internship at the Department of Training and Placement, NIT Srinagar. Gained hands-on experience in real-world software development and institutional systems.",
-  },
-  {
-    headline: "5-Day AI/ML Workshop | NIT Srinagar | 2025",
-    text: "Hands-on training in machine learning concepts and practical implementation at NIT Srinagar.",
+    text: "Mentoring open-source contributors at GSSoC, guiding project contributions, code reviews, and collaborative development practices.",
   },
   {
     headline: "Campus Lead | Open Source Connect | Dec 2025 - Apr 2026",
-    text: "Led open-source initiatives on campus as Campus Lead for Open Source Connect, organizing events and fostering a culture of open-source contribution.",
+    text: "Led campus open-source initiatives for Open Source Connect, organizing events and fostering a collaborative developer contribution culture.",
   },
   {
-    headline: "Skillified Mentor | June 2025",
-    href: "/Images/certificate.pdf",
-    text: "Built a machine learning model for cancer diagnosis and analyzed the Framingham dataset to study glucose levels and heart disease risk.",
-  },
-  {
-    headline: "Yuva Global Enterprises | Dec 2024 - Jul 2025",
-    text: "Led the development and maintenance of the Yuva Global Enterprises website (HTML, CSS, JavaScript). Additionally, managed key digital operations.",
-  },
-  {
-    headline: "ByteNovators | Feb 2024 - Dec 2024",
-    text: "Validated software quality and user experience through comprehensive testing methodologies. Concurrently, managed Facebook leads and ads for clients.",
-  },
-  {
-    headline: "Current Projects | 2023 - Present",
-    text: "Engineered an interactive online resume website (HTML, CSS, JS). Key Python projects include development of Peek Hour and States Guessing Game. Developed a Java-based banking system with object-oriented principles.",
+    headline: "QA & Marketing Intern | ByteNovators | Feb 2024 - Dec 2024",
+    text: "Validated software quality and user experience through comprehensive testing methodologies. Managed client lead generation and advertising campaigns.",
   },
 ] as const;
 
