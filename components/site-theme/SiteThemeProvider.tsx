@@ -12,7 +12,7 @@ import {
 type Ctx = { dark: boolean; toggleTheme: () => void };
 
 const ThemeContext = createContext<Ctx>({
-  dark: true,
+  dark: false,
   toggleTheme: () => {},
 });
 
@@ -36,16 +36,16 @@ function subscribe(onChange: () => void) {
 }
 
 function getServerSnapshot() {
-  return true;
+  return false;
 }
 
 function getClientSnapshot() {
-  if (typeof window === "undefined") return true;
+  if (typeof window === "undefined") return false;
   try {
     const saved = localStorage.getItem("milad-embed-theme");
-    return saved !== "light";
+    return saved === "dark";
   } catch {
-    return true;
+    return false;
   }
 }
 
@@ -60,12 +60,24 @@ export function SiteThemeProvider({ children }: { children: ReactNode }) {
   const toggleTheme = useCallback(() => {
     try {
       const saved = localStorage.getItem("milad-embed-theme");
-      const currentlyDark = saved !== "light";
+      const currentlyDark = saved === "dark";
       localStorage.setItem(
         "milad-embed-theme",
         currentlyDark ? "light" : "dark",
       );
-      emitThemeChange();
+      const apply = () => {
+        // Flip the class here, not in the effect, so the view transition captures the new theme
+        document.documentElement.classList.toggle("embed-site-light", currentlyDark);
+        emitThemeChange();
+      };
+      if (
+        document.startViewTransition &&
+        !matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        document.startViewTransition(apply);
+      } else {
+        apply();
+      }
     } catch {
       /* ignore */
     }

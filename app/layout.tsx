@@ -71,7 +71,7 @@ export default function RootLayout({
         {/* App Router: link tag fonts are fine for a single layout (legacy parity with index.html) */}
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=Orbitron:wght@700;900&family=VT323&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
         <script
@@ -80,7 +80,7 @@ export default function RootLayout({
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("milad-embed-theme");if(t==="light")document.documentElement.classList.add("embed-site-light");}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem("milad-embed-theme");if(t!=="dark")document.documentElement.classList.add("embed-site-light");}catch(e){}})();`,
           }}
         />
       </head>
