@@ -31,17 +31,35 @@ a { text-decoration-thickness: 1px; text-underline-offset: 4px; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 ::selection { background: var(--accent); color: var(--bg); }
 #MainDiv { width: min(100% - 64px, 940px); margin-inline: auto; }
-#Canvas3D, #MainButton { display: none; }
+#Canvas3D, #LaptopControls { display: none; }
 html[data-terminal-mode="retro"] { overflow: hidden; }
 html[data-terminal-mode="retro"] #MainDiv { visibility: hidden; }
-html[data-terminal-mode="retro"] #Canvas3D { display: block; position: fixed; inset: 0; width: 100%; height: 100%; z-index: 2; touch-action: none; outline: none; }
-html[data-terminal-mode="retro"] #MainButton {
-  display: block; position: fixed; left: 24px; bottom: 24px; z-index: 3;
-  padding: 8px 16px; border: 1px solid #63675e; border-radius: 6px;
-  background: #171816; color: #f1eee6; font-size: 14px;
-  transition: border-color 160ms var(--ease);
+html[data-terminal-mode="retro"] #Canvas3D { display: block; position: fixed; inset: 0; width: 100%; height: 100%; z-index: 2; touch-action: none; outline: none; cursor: grab; }
+html[data-terminal-mode="retro"] #Canvas3D:active { cursor: grabbing; }
+html[data-terminal-mode="retro"] #LaptopControls {
+  position: fixed; z-index: 3; left: 0; right: 0; bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px;
+  padding-inline: 12px; color: #383b40; pointer-events: none;
 }
-html[data-terminal-mode="retro"] #MainButton:hover { border-color: #f1eee6; }
+#LaptopControls button {
+  pointer-events: auto; color-scheme: light; background: #fffffff5; color: #282b30;
+  border: 1px solid #c4c7ca; border-radius: 6px; padding: 8px 13px;
+  font: 500 13px/1.35 var(--sans); min-height: 36px;
+}
+#LaptopControls button:hover { border-color: #62666e; }
+#LaptopControls button:focus-visible { outline: 2px solid #394c6a; outline-offset: 2px; }
+#OrbitHint { font: 13px/1.3 var(--sans); margin-inline-end: 10px; }
+#TerminalFallback:not([hidden]) {
+  position: fixed; inset: 0; z-index: 2; margin: 0; padding: 5vh 5vw 72px;
+  overflow: auto; background: #0a1017; color: #d2e8f5; font: clamp(10px, 2vw, 18px)/1.28 var(--mono);
+}
+@media (max-width: 600px) {
+  #OrbitHint { width: 100%; text-align: center; margin: 0 0 4px; }
+}
+@media (max-height: 450px) {
+  html[data-terminal-mode="retro"] #LaptopControls { bottom: 6px; }
+  #OrbitHint { display: none; }
+}
 footer { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--quiet); font-size: 14px; }
 footer a { text-decoration-color: var(--line); transition: color 160ms var(--ease), text-decoration-color 160ms var(--ease); }
 footer a span { display: inline-block; transition: translate 240ms var(--ease); }
@@ -56,7 +74,7 @@ footer a:hover span { translate: 0 -2px; }
   html { scroll-behavior: smooth; }
   /* Entering the terminal: the 3D scene settles in, then the way back appears */
   html[data-terminal-mode="retro"] #Canvas3D { animation: scene-in 900ms var(--ease) backwards; }
-  html[data-terminal-mode="retro"] #MainButton { animation: rise 500ms var(--ease) 450ms backwards; }
+  html[data-terminal-mode="retro"] #LaptopControls { animation: rise 500ms var(--ease) 200ms backwards; }
   /* Theme switch: the new theme spreads out from the toggle (SiteThemeProvider starts it) */
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
   ::view-transition-new(root) { animation: theme-reveal 700ms var(--ease); }

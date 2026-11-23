@@ -20,6 +20,8 @@ const SECTION_LABELS = {
 };
 
 const LEGACY_SCRIPTS = [
+  "/Scripts/LegionChassis.js",
+  "/Scripts/LegionKeyboard.js",
   "/Scripts/ModelFiles.js",
   "/Scripts/RenderingFunctions.js",
   "/Scripts/TerminalFunction.js",
@@ -506,7 +508,8 @@ export default function PortfolioShell() {
 
   return (
     <SiteThemeProvider>
-      <canvas id="Canvas3D" aria-label="Interactive 3D Legion laptop. Drag to rotate and type to use the terminal." />
+      <canvas id="Canvas3D" tabIndex={0} aria-label="Lenovo Legion 3D viewer. Drag or use the arrow keys to rotate. Scroll, pinch, or use plus and minus to zoom. Type to use the terminal." />
+      <pre id="TerminalFallback" tabIndex={0} aria-label="Portfolio terminal" hidden />
       <div id="MainDiv">
         <LeftPanelHero />
         <main id="RightPanel">
@@ -628,7 +631,12 @@ export default function PortfolioShell() {
         </main>
         <footer><span>Milad Ajaz Bhat</span><a href="#MainDiv">Back to top <span aria-hidden="true">↑</span></a></footer>
       </div>
-      <button id="MainButton" type="button">Close terminal</button>
+      <div id="LaptopControls" role="group" aria-label="Laptop controls">
+        <span id="OrbitHint">Drag to rotate</span>
+        <button id="LidToggle" type="button">Close lid</button>
+        <button id="ScreenToggle" type="button">Use terminal</button>
+        <button id="MainButton" type="button">Back to portfolio</button>
+      </div>
 
       <audio id="ComputerBoot" src="/Sounds/ComputerBoot.mp3" />
       <audio id="ComputerAmbient" src="/Sounds/ComputerAmbient.mp3" />

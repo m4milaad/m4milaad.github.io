@@ -1079,24 +1079,9 @@ function AutoComplete() {
   Blinker.Index = InputText.length;
 }
 
-if (typeof window !== "undefined") {
-  window.addEventListener(
-    "wheel",
-    function (event) {
-      if (typeof State !== "undefined" && State === "Retro") {
-        const LinesCount = OutputsText.split("\n").length;
-        if (event.deltaY > 0) {
-          ScrollOffset = Math.min(
-            Math.max(0, LinesCount - 15),
-            ScrollOffset + 3,
-          );
-        } else if (event.deltaY < 0) {
-          ScrollOffset = Math.max(0, ScrollOffset - 3);
-        }
-      }
-    },
-    { passive: true },
-  );
+function scrollTerminal(deltaY) {
+  const end = Math.max(0, OutputsText.split("\n").length - 15);
+  ScrollOffset = Math.max(0, Math.min(end, ScrollOffset + 3 * Math.sign(deltaY)));
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
