@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   title: "Milad Ajaz Bhat | Portfolio",
   description:
     "Personal portfolio of Milad Ajaz Bhat showcasing projects in AI, machine learning, web development, and software engineering.",
-  metadataBase: new URL("https://m4milaad.github.io"),
+  metadataBase: new URL("https://m4milaad.tech"),
+  authors: [{ name: "Milad Ajaz Bhat", url: "https://m4milaad.tech/" }],
+  creator: "Milad Ajaz Bhat",
+  // Let search and answer engines quote freely and show large previews
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 } },
   alternates: { canonical: "/" },
   verification: {
     google: "1qe3cEZmpUpCyhVnz2i2MsffDnyvi18DSo9KUl86Hjk",
@@ -15,9 +19,9 @@ export const metadata: Metadata = {
     title: "Milad Ajaz Bhat | Portfolio",
     description:
       "Portfolio showcasing projects in AI, ML, web development, and software engineering.",
-    url: "https://m4milaad.github.io/",
+    url: "/",
     siteName: "Milad Ajaz Bhat",
-    images: [{ url: "https://m4milaad.github.io/Images/logo.png" }],
+    images: [{ url: "/Images/logo.png" }],
     type: "website",
   },
   twitter: {
@@ -25,7 +29,7 @@ export const metadata: Metadata = {
     title: "Milad Ajaz Bhat | Portfolio",
     description:
       "Portfolio showcasing projects in AI, ML, web development, and software engineering.",
-    images: ["https://m4milaad.github.io/Images/logo.png"],
+    images: ["/Images/logo.png"],
   },
   icons: {
     icon: [
@@ -40,18 +44,6 @@ export const metadata: Metadata = {
     ],
     apple: "/Images/logo-light.png",
   },
-};
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Milad Ajaz Bhat",
-  url: "https://m4milaad.github.io/",
-  image: "https://m4milaad.github.io/Images/logo.png",
-  sameAs: [
-    "https://github.com/m4milaad",
-    "https://www.linkedin.com/in/m4milaad/",
-  ],
 };
 
 export default function RootLayout({
@@ -73,10 +65,6 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap"
           rel="stylesheet"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <script
           dangerouslySetInnerHTML={{

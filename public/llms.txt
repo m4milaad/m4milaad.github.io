@@ -1,0 +1,46 @@
+# Milad Ajaz Bhat
+
+> Milad Ajaz Bhat (m4milaad) is a software developer and machine learning engineer from Kashmir, India. He builds software, web apps and machine learning models, and studies computer science (B.Tech, CSE, expected July 2027) at the Central University of Kashmir. He is open to work.
+
+- Website: https://m4milaad.tech/
+- Email: mb4milad.bhattt@gmail.com
+- GitHub: https://github.com/m4milaad
+- LinkedIn: https://www.linkedin.com/in/m4milaad/
+- X: https://x.com/m4milaad
+- Résumé (PDF): https://m4milaad.tech/Images/Milad%20Ajaz%20Bhat%20Resume.pdf
+
+## Selected work
+
+- [CUK Acadex](https://github.com/m4milaad/schedule-savvy-schedules) (2025): campus software for searching course material, scheduling exams and collaborating across web and Android. React, TypeScript, Supabase, PostgreSQL, pgvector, RAG, Kotlin.
+- [KATHE English-to-Kashmiri Translation](https://github.com/m4milaad/bpccEngtoKash) (2026): English-to-Kashmiri machine translation fine-tuned from multilingual models (NLLB-200, IndicTrans2) with LoRA on limited data. Python, PyTorch, Hugging Face Transformers.
+- [SentinelFlow](https://github.com/m4milaad/SentinelFlow) (2026): a Redis-backed service that manages API traffic and tracks rate-limit performance under load. Java, Spring Boot, Redis, Prometheus, Docker, Kubernetes.
+- [BIS AI](https://github.com/m4milaad/bis-ai) (2026): a multilingual product safety app with image analysis and offline access. React, PWA, Supabase, Gemini API, RAG.
+- [2AI Conference](https://github.com/m4milaad/2ai-Conference) (2026): registration, payments and media storage for the 2AI conference. React, Supabase, Edge Functions, Cloudflare R2.
+- [repo-ready](https://github.com/m4milaad/repo-ready) (2026): a Python command-line tool that checks repositories and generates reports for continuous integration.
+
+## Experience
+
+- Campus Ambassador, Google (May 2026 to present)
+- Mentor, GirlScript Summer of Code (May 2026 to present)
+- Campus Lead, Open Source Connect (Dec 2025 to Apr 2026)
+- Student Intern, NIT Srinagar, Department of Training and Placement (Dec 2025 to Feb 2026)
+- Mentor, Skillified (Jun 2025 to Jul 2025): built a cancer-diagnosis ML model with 95% accuracy
+- Web Developer, Yuva Global Enterprises (Dec 2024 to Jul 2025)
+- QA & Marketing Intern, ByteNovators (Feb 2024 to Dec 2024)
+
+## Awards
+
+- 1st place, SynerTech 2026 Hackathon, Kashmir College of Engineering and Technology
+- 1st place, Open Build Challenge 2025, FOSS NIT Srinagar with FOSS United
+- 3rd place, Coding Competition 2025, Central University of Kashmir
+
+## Certifications
+
+- Oracle OCI 2025 Certified AI Foundations Associate (95%)
+- IBM Build an AI Agent (2026)
+- IBM Artificial Intelligence Fundamentals (2025)
+- Google Cloud Skill Badge: Prepare Data for ML APIs (2025)
+
+## Skills
+
+TypeScript, Python, Java, JavaScript, React, Next.js, Node.js, Spring Boot, Tailwind CSS, PyTorch, Hugging Face, PostgreSQL, Supabase, MongoDB, Redis, Docker, Kubernetes, Git, retrieval-augmented generation (RAG), fine-tuning with LoRA.

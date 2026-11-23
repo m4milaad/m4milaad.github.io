@@ -8,7 +8,7 @@ import {
   useEffect,
 } from "react";
 import LeftPanelHero from "./LeftPanelHero";
-import TechStackSection from "./tech-stack/TechStackSection";
+import TechStackSection, { TECH_ITEMS } from "./tech-stack/TechStackSection";
 import { SiteThemeProvider } from "./site-theme/SiteThemeProvider";
 
 const SECTION_LABELS = {
@@ -369,6 +369,99 @@ const ACCOLADE_ITEMS: AccoladeItem[] = [
   },
 ] as const;
 
+/** Structured data for search and answer engines, built from the same lists the page renders. */
+const SITE = "https://m4milaad.tech/";
+const PERSON_ID = `${SITE}#person`;
+const STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}#website`,
+      url: SITE,
+      name: "Milad Ajaz Bhat",
+      inLanguage: "en",
+      publisher: { "@id": PERSON_ID },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE}#profile`,
+      url: SITE,
+      name: "Milad Ajaz Bhat | Portfolio",
+      isPartOf: { "@id": `${SITE}#website` },
+      mainEntity: { "@id": PERSON_ID },
+      hasPart: { "@id": `${SITE}#work` },
+    },
+    {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: "Milad Ajaz Bhat",
+      alternateName: "m4milaad",
+      url: SITE,
+      image: `${SITE}Images/dev-head.png`,
+      email: "mailto:mb4milad.bhattt@gmail.com",
+      jobTitle: "Software Developer and Machine Learning Engineer",
+      description:
+        "Builds software, web apps, and machine learning models. Studies computer science at the Central University of Kashmir.",
+      homeLocation: { "@type": "Place", name: "Kashmir, India" },
+      seeks: { "@type": "Demand", description: "Open to software and machine learning work" },
+      sameAs: [
+        "https://github.com/m4milaad",
+        "https://www.linkedin.com/in/m4milaad/",
+        "https://x.com/m4milaad",
+      ],
+      alumniOf: EDUCATION_ITEMS.map((e) => ({
+        "@type": "EducationalOrganization",
+        name: e.school,
+      })),
+      knowsAbout: [
+        ...TECH_ITEMS.map((t) => t.name),
+        "Machine learning",
+        "Natural language processing",
+        "Retrieval-augmented generation",
+      ],
+      award: ACCOLADE_ITEMS.filter((a) => a.place).map(
+        (a) => `${a.place} place, ${a.title}${a.org ? `, ${a.org}` : ""}`,
+      ),
+      hasCredential: ACCOLADE_ITEMS.filter((a) => a.badge === "cert").map(
+        (a) => ({
+          "@type": "EducationalOccupationalCredential",
+          name: a.title,
+          ...(a.org && { recognizedBy: { "@type": "Organization", name: a.org } }),
+          ...(a.href && { url: a.href }),
+        }),
+      ),
+      hasOccupation: EXPERIENCE_ITEMS.map((item) => {
+        const { role, org, period } = parsePipeHeadline(item.headline);
+        return {
+          "@type": "Occupation",
+          name: org ? `${role}, ${org}` : role,
+          ...(period && { description: period.replace(" - ", " to ") }),
+        };
+      }),
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${SITE}#work`,
+      name: "Selected work",
+      itemListElement: PROJECT_ITEMS.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "SoftwareSourceCode",
+          name: p.name,
+          description: p.description,
+          codeRepository: p.githubLink,
+          url: p.githubLink,
+          dateCreated: String(p.year),
+          keywords: p.technology.join(", "),
+          author: { "@id": PERSON_ID },
+        },
+      })),
+    },
+  ],
+};
+
 function SectionHead({ id }: { id: keyof typeof SECTION_LABELS }) {
   return <h2 className="section-heading">{SECTION_LABELS[id]}</h2>;
 }
@@ -508,6 +601,10 @@ export default function PortfolioShell() {
 
   return (
     <SiteThemeProvider>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
+      />
       <canvas id="Canvas3D" tabIndex={0} aria-label="Lenovo Legion 3D viewer. Drag or use the arrow keys to rotate. Scroll, pinch, or use plus and minus to zoom. Type to use the terminal." />
       <pre id="TerminalFallback" tabIndex={0} aria-label="Portfolio terminal" hidden />
       <div id="MainDiv">
