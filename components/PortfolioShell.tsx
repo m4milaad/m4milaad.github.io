@@ -2,6 +2,7 @@
 
 /** Full-page shell: #MainDiv, #RightPanel (sections + legacy Main.js hooks), #LeftPanel, script loader. */
 import "../styles/right-panel-sections.css";
+import "../styles/windows-desktop.css";
 import {
   Fragment,
   type ReactNode,
@@ -25,6 +26,7 @@ const LEGACY_SCRIPTS = [
   "/Scripts/ModelFiles.js",
   "/Scripts/RenderingFunctions.js",
   "/Scripts/TerminalFunction.js",
+  "/Scripts/WindowsDesktop.js",
   "/Scripts/Main.js",
 ] as const;
 
@@ -606,6 +608,7 @@ export default function PortfolioShell() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
       />
       <canvas id="Canvas3D" tabIndex={0} aria-label="Lenovo Legion 3D viewer. Drag or use the arrow keys to rotate. Scroll, pinch, or use plus and minus to zoom. Type to use the terminal." />
+      <div id="WindowsDesktop" role="region" aria-label="Windows desktop" tabIndex={-1} hidden />
       <pre id="TerminalFallback" tabIndex={0} aria-label="Portfolio terminal" hidden />
       <div id="MainDiv">
         <LeftPanelHero />
@@ -731,7 +734,8 @@ export default function PortfolioShell() {
       <div id="LaptopControls" role="group" aria-label="Laptop controls">
         <span id="OrbitHint">Drag to rotate</span>
         <button id="LidToggle" type="button">Close lid</button>
-        <button id="ScreenToggle" type="button">Use terminal</button>
+        <button id="DesktopExpand" type="button">Use desktop</button>
+        <button id="ScreenToggle" type="button">Open PowerShell</button>
         <button id="MainButton" type="button">Back to portfolio</button>
       </div>
 

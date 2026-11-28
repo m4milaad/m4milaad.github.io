@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs><linearGradient id="steel" x2=".7" y2="1"><stop stop-color="#cdd7dd"/><stop offset=".47" stop-color="#91a3b0"/><stop offset="1" stop-color="#566b7d"/></linearGradient></defs>
+  <path fill="url(#steel)" stroke="#728491" stroke-width=".8" d="M17.88 9.22 L19.78 8.26 L20.35 3.32 L27.65 3.32 L28.22 8.26 L30.12 9.22 L32.15 9.88 L36.05 6.80 L41.20 11.95 L38.12 15.85 L38.78 17.88 L39.74 19.78 L44.68 20.35 L44.68 27.65 L39.74 28.22 L38.78 30.12 L38.12 32.15 L41.20 36.05 L36.05 41.20 L32.15 38.12 L30.12 38.78 L28.22 39.74 L27.65 44.68 L20.35 44.68 L19.78 39.74 L17.88 38.78 L15.85 38.12 L11.95 41.20 L6.80 36.05 L9.88 32.15 L9.22 30.12 L8.26 28.22 L3.32 27.65 L3.32 20.35 L8.26 19.78 L9.22 17.88 L9.88 15.85 L6.80 11.95 L11.95 6.80 L15.85 9.88Z"/>
+  <circle cx="24" cy="24" r="10.1" fill="#546c80"/><circle cx="24" cy="24" r="8.4" fill="#42c3fc"/><circle cx="24" cy="24" r="5.7" fill="#1475be"/>
+</svg>

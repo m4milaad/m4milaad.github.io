@@ -24,10 +24,20 @@ let Time = 0;
     let terminal = false, lidOpen = 1, lidTarget = 1;
     let yaw = 0, elevation = 0, zoom = 1;
     let frame = 0, lastTime = 0;
+    const root = document.getElementById("WindowsDesktop");
+    const expand = document.getElementById("DesktopExpand");
+    const desktop = createWindowsDesktop(root,key=>{ KeyPressed(key); schedule(); },()=>{
+        setLid(1); yaw=.90; elevation=0; zoom=1; schedule();
+    });
+    function expanded(value) {
+        root.classList.toggle("pc-expanded",value);
+        expand.textContent=value ? "View laptop" : "Use desktop";
+        if (value) { setLid(1); yaw=.90; elevation=0; zoom=1; root.hidden=false; root.focus(); }
+        schedule();
+    }
+    expand.onclick=()=>expanded(!root.classList.contains("pc-expanded"));
     let terminalStarted = false;
     ambient.loop = true;
-    boot.volume = 0.5;
-    ambient.volume = 0.25;
 
     function setAudio(active) {
         if (active) {
@@ -47,16 +57,18 @@ let Time = 0;
         frame = 0;
         const elapsed = Math.max(0, (now-lastTime)/1000);
         lastTime = now;
-        if (terminal) Time += elapsed;
+        if (terminal || desktop.shellVisible) Time += elapsed;
         const distance = lidTarget-lidOpen;
         const step = elapsed/0.55;
         lidOpen = reducedMotion.matches || Math.abs(distance) <= step ? lidTarget : lidOpen + Math.sign(distance)*step;
         const smoothLid = lidOpen*lidOpen*(3-2*lidOpen);
-        const text = terminal ? GetText() : null;
+        const text = terminal || desktop.shellVisible ? GetText() : null;
+        if (desktop.shellVisible) desktop.updateShell(text);
         if (draw) draw(text, elevation, yaw, displayImage, smoothLid, zoom);
         else if (fallback.textContent !== text) fallback.textContent = text;
-        if (terminal || lidOpen !== lidTarget) schedule();
+        if (terminal || desktop.shellVisible || lidOpen !== lidTarget) schedule();
     }
+    window.setInterval(schedule, 60000);
     canvas.addEventListener("webglcontextrestored", schedule);
     new ResizeObserver(schedule).observe(canvas);
     window.addEventListener("resize", schedule);
@@ -71,8 +83,10 @@ let Time = 0;
         schedule();
     }
     function setTerminal(value) {
-        terminal = value;
-        screenButton.textContent = value ? "Show wallpaper" : "Use terminal";
+        terminal = value && !draw;
+        if(value && draw) desktop.show("terminal");
+
+        screenButton.textContent = "Open PowerShell";
         hint.hidden = value;
         if (value) {
             setLid(1);
@@ -80,7 +94,7 @@ let Time = 0;
         }
         lastTime = performance.now();
         setAudio(value);
-        focusDisplay();
+        if (!value || !draw) focusDisplay();
         schedule();
     }
 
@@ -106,9 +120,11 @@ let Time = 0;
         screenButton.hidden = lidButton.hidden = !draw;
         yaw = 0; elevation = 0; zoom = lidOpen = 1;
         setLid(1);
-        setTerminal(!draw || (wallpaper.complete && !wallpaper.naturalWidth));
+        expand.hidden=!draw;
+        setTerminal(!draw);
     };
     close.onclick = () => {
+        expanded(false);
         State = "Modern";
         cancelAnimationFrame(frame);
         frame = 0;
@@ -119,8 +135,9 @@ let Time = 0;
         portfolio.inert = false;
         open.focus({preventScroll:true});
     };
-    screenButton.onclick = () => setTerminal(!terminal);
+    screenButton.onclick = () => setTerminal(true);
     lidButton.onclick = () => {
+        expanded(false);
         const next = 1-lidTarget;
         if (terminal) setTerminal(false);
         setLid(next);
@@ -175,7 +192,6 @@ let Time = 0;
             else if (event.key.length === 1 || event.key === "Enter") {
                 setTerminal(true);
                 // Direct typing at the product view starts a ready command prompt.
-                if (Time <= 5) { Time = 5.01; BootSequence(); }
                 if (event.key !== "Enter") KeyPressed(event.key);
             } else return;
         } else {

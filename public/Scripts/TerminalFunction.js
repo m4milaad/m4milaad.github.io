@@ -1,5 +1,5 @@
 // All previous outputs from commands and such
-let OutputsText = "";
+let OutputsText = "Windows PowerShell\nType Get-Help to explore the portfolio.\n\n";
 // Lets user scroll through the past outputs
 let ScrollOffset = 0;
 
@@ -48,12 +48,7 @@ function GetText() {
     return TypeTestRender();
   }
 
-  if (Time < 5 || OutputsText.split("\n").length < 19) // If in boot sequence
-  {
-    BootSequence();
-    FinalText = OutputsText;
-  } else if (!DisplayPlasma) // If not in boot sequence
-  {
+  if (!DisplayPlasma) {
     // Trim the previous output to be displayed
     let Lines = OutputsText.split("\n");
     FinalText += Lines.slice(
@@ -65,10 +60,10 @@ function GetText() {
     if (ScrollOffset + 30 >= Lines.length) {
       if ((Date.now() * 0.001 - Blinker.Time) % 1 < 0.5) // Show blinker
       {
-        FinalText += `${Directory}> ${InputText.slice(0, Blinker.Index)}█${InputText.slice(Blinker.Index + 1, InputText.length)}`;
+        FinalText += `${powerShellPrompt()} ${InputText.slice(0, Blinker.Index)}█${InputText.slice(Blinker.Index + 1, InputText.length)}`;
       } else // Dont show blinker
       {
-        FinalText += `${Directory}> ${InputText}`;
+        FinalText += `${powerShellPrompt()} ${InputText}`;
       }
     }
   } else {
@@ -251,7 +246,7 @@ function KeyPressed(key) {
     if (key === "Escape") {
       DisplayPlasma = false;
     }
-  } else if (Time > 5) {
+  } else {
     let LinesCount = OutputsText.split("\n").length;
 
     if (
@@ -330,7 +325,7 @@ function KeyPressed(key) {
       } // Reset the scroll if off screen
     } else if (key === "Enter") // Submit text
     {
-      OutputsText += `${Directory}> ${InputText}\n`;
+      OutputsText += `${powerShellPrompt()} ${InputText}\n`;
 
       // Save non-empty commands to history (avoid duplicates at top)
       if (InputText.trim() && (CommandHistory.length === 0 || CommandHistory[CommandHistory.length - 1] !== InputText)) {
@@ -351,52 +346,8 @@ function KeyPressed(key) {
   }
 }
 
-function BootSequence() {
-  OutputsText = "";
-  let LoadingChars = ["—", "\\", "|", "/"];
-  // The font used below is ANSI shodow if you forget @Meeelaaad
-  if (Time > 0.1) {
-    OutputsText += "███╗   ███╗██╗██╗      █████╗ ██████╗     █████╗ ██╗ \n";
-  }
-  if (Time > 0.2) {
-    OutputsText += "████╗ ████║██║██║     ██╔══██╗██╔══██╗   ██╔══██╗██║ \n";
-  }
-  if (Time > 0.3) {
-    OutputsText += "██╔████╔██║██║██║     ███████║██║  ██║   ███████║██║ \n";
-  }
-  if (Time > 0.4) {
-    OutputsText += "██║╚██╔╝██║██║██║     ██╔══██║██║  ██║   ██╔══██║██║ \n";
-  }
-  if (Time > 0.5) {
-    OutputsText += "██║ ╚═╝ ██║██║███████╗██║  ██║██████╔╝██╗██║  ██║██║ \n";
-  }
-  if (Time > 0.6) {
-    OutputsText +=
-      "╚═╝     ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═╝╚═╝ \n\n\n";
-  }
-  if (Time > 1.1) {
-    OutputsText += "Welcome to Milad.AI 1.2.7 x86_64\n";
-  }
-  if (Time > 1.2) {
-    OutputsText += "Type 'help' to list available commands\n\n\n";
-  }
-  if (Time > 1.7) {
-    OutputsText += `Loading ${LoadingChars[Math.ceil((Math.min(3.7, Time) % 0.4) / 0.1) - 1]} ${Math.ceil(Math.min(100, (Time - 1.7) / 0.02))}%\n`;
-  }
-  if (Time > 3.7) {
-    OutputsText += ".\n";
-  }
-  if (Time > 3.8) {
-    OutputsText += ".\n";
-  }
-  if (Time > 3.9) {
-    OutputsText += ".\n";
-  }
-  if (Time > 4.0) {
-    OutputsText += "Complete!\n\n";
-  }
-
-  ScrollOffset = Math.min(OutputsText.split("\n").length - 1, ScrollOffset);
+function powerShellPrompt() {
+  return "PS " + Directory.replaceAll("/", "\\") + ">";
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -737,6 +688,11 @@ function ExecuteCommand() {
   const cmd = (Command || "").toLowerCase();
 
   switch (cmd) {
+    case "get-location":
+    case "pwd":
+      OutputsText += "\n" + Directory.replaceAll("/", "\\") + "\n\n";
+      break;
+    case "get-childitem":
     case "ls":
     case "dir":
       if (Arguments.length) {
@@ -746,6 +702,7 @@ function ExecuteCommand() {
       }
       break;
 
+    case "set-location":
     case "cd":
       if (Arguments.length > 1) {
         OutputsText +=
@@ -753,7 +710,7 @@ function ExecuteCommand() {
       } else if (!Arguments.length) {
         ChangeDirectory("/");
       } else {
-        ChangeDirectory(Arguments[0]);
+        ChangeDirectory(Arguments[0].replaceAll("\\", "/"));
       }
       break;
 
@@ -769,6 +726,7 @@ function ExecuteCommand() {
       }
       break;
 
+    case "get-content":
     case "cat":
     case "view":
     case "type":
@@ -841,11 +799,13 @@ function ExecuteCommand() {
       window.open("https://www.linkedin.com/in/m4milaad/");
       break;
 
+    case "get-date":
     case "date":
     case "time":
       OutputsText += `\n${new Date().toString()}\n\n`;
       break;
 
+    case "write-output":
     case "echo":
       OutputsText += `\n${Arguments.join(" ")}\n\n`;
       break;
@@ -955,15 +915,18 @@ function ExecuteCommand() {
       }
       break;
 
+    case "clear-host":
     case "clear":
     case "cls":
       if (Arguments.length) {
         OutputsText += "\nError: 'clear' doesn't accept any arguments\n\n";
       } else {
-        BootSequence();
+        OutputsText = "";
+        ScrollOffset = 0;
       }
       break;
 
+    case "get-help":
     case "help":
       if (Arguments.length) {
         OutputsText += "\nError: 'help' doesn't accept any arguments\n\n";
@@ -1053,7 +1016,7 @@ function AutoComplete() {
     if (CompletedCommand.length === 1) {
       InputText = CompletedCommand[0] + " ";
     } else if (CompletedCommand.length > 1) {
-      OutputsText += `\n${Directory}> ${InputText}\n`;
+      OutputsText += `\n${powerShellPrompt()} ${InputText}\n`;
       OutputsText += CompletedCommand.join("  ") + "\n";
     }
   }
@@ -1072,7 +1035,7 @@ function AutoComplete() {
     if (PossibleCompletions.length === 1) {
       InputText = `${Command} ${PossibleCompletions[0]}`;
     } else if (PossibleCompletions.length > 1) {
-      OutputsText += `\n${Directory}> ${InputText}\n`;
+      OutputsText += `\n${powerShellPrompt()} ${InputText}\n`;
       OutputsText += PossibleCompletions.join("  ") + "\n";
     }
   }

@@ -1,0 +1,95 @@
+#WindowsDesktop{--paper:#f7f8fb;--surface:#edf1f8;--ink:#192431;--line:#cbd3dd;--accent:#086ab4;display:none;position:fixed;left:0;top:0;z-index:3;width:1448px;height:818px;transform-origin:0 0;overflow:hidden;isolation:isolate;user-select:none;color:var(--ink);background:#27455d url('/Images/legion-wallpaper.webp') center/cover;font:20px/1.35 "Segoe UI",Arial,sans-serif;color-scheme:light}
+html[data-terminal-mode=retro] #WindowsDesktop:not([hidden]){display:block}
+#WindowsDesktop[data-theme=dark]{--paper:#20242a;--surface:#2c323a;--ink:#eef4fb;--line:#505863;--accent:#75c2ff;color-scheme:dark}
+#WindowsDesktop *{box-sizing:border-box}
+#WindowsDesktop [hidden]{display:none!important}
+#WindowsDesktop button,#WindowsDesktop input,#WindowsDesktop textarea{font:inherit;color:inherit}
+#WindowsDesktop button{background:transparent;border:0;border-radius:7px;padding:7px 12px;cursor:pointer;text-align:left}
+#WindowsDesktop button:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+#WindowsDesktop :focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.pc-icon{display:block;flex:none;width:36px;height:36px;object-fit:contain}
+.pc-title .pc-icon{width:24px;height:24px}
+.pc-dock .pc-icon{width:32px;height:32px}
+.pc-shortcuts .pc-icon{width:44px;height:44px}
+.pc-glyph{display:inline-block;vertical-align:middle;width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.pc-title .pc-glyph{width:17px;height:17px}
+.pc-places .pc-glyph{margin-right:8px}
+.pc-result .pc-glyph,.pc-files .pc-glyph,.pc-places .pc-glyph{color:var(--accent)}
+.pc-shortcuts{display:grid;gap:8px;position:absolute;left:12px;top:18px}
+#WindowsDesktop .pc-shortcuts button{display:grid;justify-items:center;gap:5px;width:112px;color:white;text-shadow:0 1px 4px #000,0 1px 2px #000;font-size:18px}
+.pc-windows{position:absolute;z-index:1;inset:0 0 56px;pointer-events:none}
+.pc-window{position:absolute;width:min(1140px,83%);height:87%;display:flex;flex-direction:column;pointer-events:auto;background:var(--paper);border:1px solid var(--line);border-radius:11px;box-shadow:0 14px 44px #0005;overflow:hidden;outline:0}
+.pc-window.pc-max{inset:0!important;width:100%;height:100%;border-radius:0}
+.pc-title,.pc-address{display:flex;align-items:center;gap:12px;background:var(--surface);padding:0 12px;height:51px;flex:none;border-bottom:1px solid var(--line)}
+.pc-title{touch-action:none}.pc-title strong{font-weight:500}.pc-spacer{flex:1}
+#WindowsDesktop .pc-title button{width:50px;text-align:center}
+#WindowsDesktop .pc-title button:last-child:hover{background:#c42b1c;color:white}
+.pc-body{padding:24px;flex:1;min-height:0;overflow:auto}
+.pc-body h1,.pc-body h2,.pc-fly h2,.pc-fly h3{margin:9px 0 16px;font-weight:600}
+.pc-window[data-app=terminal]{background:#111317;color:#eee;border-color:#434750}
+.pc-window[data-app=terminal] .pc-title{background:#292c32;border-color:#333}
+.pc-output,.pc-file{font:20px/1.19 Consolas,monospace;white-space:pre-wrap;user-select:text;margin:0}
+.pc-window[data-app=notes] .pc-body{display:flex;padding:0}
+.pc-editor{width:100%;height:100%;border:0;background:var(--paper);padding:22px;resize:none;user-select:text}
+.pc-address{border-radius:8px;margin-bottom:14px}.pc-files{display:grid}
+#WindowsDesktop .pc-files button{display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line)}
+.pc-files small{margin-left:auto;opacity:.6}.pc-file-icon{color:var(--accent)}
+.pc-bar{position:absolute;z-index:2;inset:auto 0 0;height:56px;display:flex;align-items:center;justify-content:center;gap:5px;background:color-mix(in srgb,var(--surface) 95%,transparent);border-top:1px solid var(--line)}
+.pc-bar button{position:relative;height:46px;display:grid;place-items:center}
+.pc-bar button[data-running=true]:after{content:"";position:absolute;bottom:0;width:7px;height:3px;border-radius:4px;background:#85919c}
+.pc-bar button[data-active=true]:after{width:20px;background:var(--accent)}
+.pc-start{width:28px;height:28px;background:conic-gradient(#21a7ef,#0078d4);mask:linear-gradient(to right,#000 45%,transparent 45% 55%,#000 55%),linear-gradient(#000 45%,transparent 45% 55%,#000 55%);mask-composite:intersect}
+#WindowsDesktop .pc-searchpill{width:190px;height:38px;display:block;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding-left:18px}
+#WindowsDesktop .pc-clock{position:relative;font-size:14px;white-space:pre;text-align:right;line-height:1.2}
+.pc-fly{position:absolute;z-index:3;bottom:67px;left:50%;transform:translateX(-50%);width:min(640px,94%);max-height:82%;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:13px;box-shadow:0 12px 44px #0004;padding:26px}
+.pc-searchbox{background:var(--paper);border:1px solid var(--line);border-bottom:3px solid var(--accent);border-radius:7px;padding:12px 16px;width:100%}
+.pc-results{overflow:auto;padding:16px 0}.pc-results>button{display:block;width:100%}.pc-pins{display:flex;flex-wrap:wrap;gap:6px}.pc-pins button{display:grid;justify-items:center;gap:8px}.pc-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;text-align:center}.pc-calendar .today{background:var(--accent);color:var(--paper);border-radius:20px}
+html[data-terminal-mode=retro] #LaptopControls{z-index:4}
+#WindowsDesktop.pc-expanded{width:100vw;height:calc(100dvh - 65px);transform:none!important}
+@media(max-width:750px){#WindowsDesktop.pc-expanded .pc-window{left:1%!important;top:1%!important;width:98%;height:97%}#WindowsDesktop.pc-expanded .pc-searchpill{width:75px}#WindowsDesktop.pc-expanded .pc-bar{gap:0}#WindowsDesktop.pc-expanded .pc-bar button{padding-inline:7px}#WindowsDesktop.pc-expanded .pc-output{font-size:14px}}
+
+.pc-fly label{display:grid;grid-template-columns:115px 1fr;align-items:center;padding:16px 0}
+.pc-fly input[type=range]{accent-color:var(--accent)}
+
+.pc-section-head,.pc-filters,.pc-crumbs{display:flex;align-items:center;gap:6px}
+.pc-section-head{justify-content:space-between;margin:0 0 12px}
+.pc-section-head h3{margin:0}
+#WindowsDesktop .pc-section-head button,#WindowsDesktop .pc-filters button{font-size:15px;border:1px solid var(--line);background:var(--paper)}
+.pc-filters{margin-top:14px}
+#WindowsDesktop .pc-filters [aria-pressed=true]{color:white;background:#086ab4;border-color:#086ab4}
+.pc-applist{display:grid;gap:4px}
+.pc-applist button,#WindowsDesktop .pc-result{display:flex;align-items:center;gap:14px}
+.pc-result small{margin-left:auto;opacity:.65}
+.pc-fly[data-panel=start],.pc-fly[data-panel=search]{background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(24px);padding:28px 32px}
+.pc-pins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:24px}
+#WindowsDesktop .pc-pins button{font-size:16px;padding:14px 3px}
+.pc-window[data-app=explorer] .pc-body{padding:0;display:flex;flex-direction:column}
+.pc-explorer-layout{display:flex;min-height:0;flex:1}
+.pc-places{width:175px;flex:none;padding:14px 8px;background:var(--surface);border-right:1px solid var(--line)}
+#WindowsDesktop .pc-places button{display:block;width:100%;font-size:16px;margin-bottom:4px}
+#WindowsDesktop .pc-places [aria-current]{background:color-mix(in srgb,var(--accent) 13%,transparent);box-shadow:inset 3px 0 var(--accent)}
+.pc-location{flex:1;min-width:0;overflow:auto;padding:16px 22px}
+.pc-count{display:block;padding:10px 0;opacity:.65}
+.pc-address{margin:0;gap:2px;border-radius:0}
+.pc-crumbs,.pc-folder-search{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:5px;font-size:16px}
+.pc-crumbs{flex:1;overflow:auto;white-space:nowrap}
+#WindowsDesktop .pc-folder-search{width:25%;font-size:16px;color:var(--ink);padding:7px}
+#WindowsDesktop button:disabled{opacity:.35;cursor:default}
+.pc-fly[data-panel=quick],.pc-fly[data-panel=calendar]{left:auto;right:10px;transform:none;width:min(390px,94%)}
+@media(max-width:650px){.pc-expanded .pc-places{width:93px}.pc-expanded .pc-location{padding:8px}.pc-expanded .pc-address{flex-wrap:wrap;height:auto;padding:4px}.pc-expanded .pc-files small{display:none}}
+
+.pc-bar{container-type:inline-size;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:0;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(24px);box-shadow:0 -1px 8px #0001}
+.pc-dock,.pc-status{display:flex;align-items:center;gap:3px}
+.pc-dock{grid-column:2}
+.pc-status{justify-self:end;padding-right:8px}
+#WindowsDesktop .pc-bar button{transition:background .12s ease;width:46px;padding:5px;justify-items:center}
+#WindowsDesktop .pc-bar .pc-searchpill{display:flex;align-items:center;gap:9px;width:155px;padding:0 14px;font-size:16px}
+.pc-bar svg{display:block;width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#WindowsDesktop .pc-bar .pc-clock{width:auto;padding-inline:8px}
+.pc-bar button[data-active=true]{background:color-mix(in srgb,var(--paper) 76%,transparent);box-shadow:0 1px 3px #0001}
+@container (max-width:710px){
+    .pc-dock{grid-column:1}.pc-status{grid-column:2}
+    #WindowsDesktop .pc-bar .pc-searchpill{width:42px;justify-content:center;padding:5px}
+    .pc-searchpill span{display:none}
+}
+@media(max-width:710px){#WindowsDesktop.pc-expanded .pc-bar{grid-template-columns:1fr auto;padding-inline:4px}#WindowsDesktop.pc-expanded .pc-bar button{width:clamp(29px,7vw,44px)}}

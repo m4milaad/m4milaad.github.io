@@ -356,7 +356,7 @@ function createLegionRenderer(canvas) {
         makeTexture(0,mesh.atlas);
         gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);
         makeTexture(1,display);
-        makeTexture(2,null);
+
         gl.activeTexture(gl.TEXTURE3);
         const depth = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D,depth);
@@ -404,7 +404,31 @@ function createLegionRenderer(canvas) {
         gl.uniform4fv(pass.uniforms.lens,camera.lens);
     }
 
-    return function draw(text, elevation=0, yaw=0, wallpaper=null, lidOpen=1, zoom=1) {
+    const desktop = document.getElementById("WindowsDesktop");
+    const panel = [];
+    for (let i=lidStart; i<count && panel.length<3; i++) {
+        if (mesh.vertices[i*stride+11]===2) panel.push(Array.from(mesh.vertices.slice(i*stride,i*stride+3)));
+    }
+    // Keep native desktop controls on the LCD using the same perspective as WebGL.
+    function placeDesktop(camera, angle, open, width, height) {
+        if (!desktop || !panel.length) return;
+        const {eye,basis,lens} = camera;
+        const projected = panel.map(point => {
+            const v = hinge(point,angle).map((n,i)=>n-eye[i]);
+            const depth = -dot(v,basis.slice(6));
+            return [width*.5*((1+lens[2])*depth+lens[0]*dot(v,basis.slice(0,3))),
+                height*.5*((1-lens[3])*depth-lens[1]*dot(v,basis.slice(3,6))),0,depth];
+        });
+        const [tl,bl,br]=projected;
+        const axis=(a,b,size)=>a.map((n,i)=>(n-b[i])/size);
+        const x=axis(br,bl,1448), y=axis(bl,tl,818);
+        const signed=(br[0]/br[3]-bl[0]/bl[3])*(bl[1]/bl[3]-tl[1]/tl[3])
+            -(br[1]/br[3]-bl[1]/bl[3])*(bl[0]/bl[3]-tl[0]/tl[3]);
+        desktop.hidden=open<.62 || signed<=0;
+        desktop.style.transform="matrix3d("+[...x,...y,0,0,1,0,...tl].join(",")+")";
+    }
+
+    function draw(text, elevation=0, yaw=0, wallpaper=null, lidOpen=1, zoom=1) {
         if (gl.isContextLost()) return;
         const cssW = canvas.clientWidth, cssH = canvas.clientHeight;
         if (!cssW || !cssH) return;
@@ -413,21 +437,12 @@ function createLegionRenderer(canvas) {
         const open = Math.max(0,Math.min(1,lidOpen));
         // Image dimensions can be known while the browser is still decoding its pixels.
         const image = wallpaper?.complete && wallpaper.naturalWidth ? wallpaper : null;
-        if (previous.w===w && previous.h===h && previous.open===open && previous.zoom===zoom && previous.yaw===yaw &&
-            previous.elevation===elevation && previous.text===text && previous.image===image) return;
+        if (previous.w===w && previous.h===h && previous.open===open && previous.zoom===zoom &&
+            previous.yaw===yaw && previous.elevation===elevation && previous.image===image) return;
         const {model,studio,shadow,vao,shadowTarget} = gpu;
         if (canvas.width!==w || canvas.height!==h) { canvas.width=w; canvas.height=h; }
-        if (image && image!==previous.image) {
-            gl.activeTexture(gl.TEXTURE2);
-            gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,image);
-            gl.generateMipmap(gl.TEXTURE_2D);
-        }
-        if (text != null && text !== previous.text) {
-            terminal.fillStyle = "#0a1017";
-            terminal.fillRect(0,0,display.width,display.height);
-            terminal.font = "24px Consolas, monospace";
-            terminal.fillStyle = "#d2e8f5";
-            text.split("\n").forEach((line,i) => terminal.fillText(line,28,32+i*26));
+        if (image && previous.image!==image) {
+            terminal.drawImage(image,0,0,display.width,display.height);
             gl.activeTexture(gl.TEXTURE1);
             gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,gl.RGBA,gl.UNSIGNED_BYTE,display);
             gl.generateMipmap(gl.TEXTURE_2D);
@@ -453,6 +468,7 @@ function createLegionRenderer(canvas) {
         gl.disable(gl.DEPTH_TEST);
         gl.disable(gl.BLEND);
         gl.bindVertexArray(null);
+        placeDesktop(camera,angle,open,cssW,cssH);
         setCamera(studio,camera);
         const tip = lid.corners.length ? hinge([0,lid.max[1],lid.max[2]],-open*lidAngle) : pivot;
         gl.uniform3fv(studio.uniforms.lidTip,tip);
@@ -463,11 +479,12 @@ function createLegionRenderer(canvas) {
         gl.bindVertexArray(vao);
         setCamera(model,camera);
         gl.uniform2f(model.uniforms.hingeCS,c,s);
-        gl.uniform1i(model.uniforms.lcd,text == null ? 2 : 1);
+        gl.uniform1i(model.uniforms.lcd,1);
         gl.uniform1i(model.uniforms.glowingScreen,text == null && image ? 1 : 0);
         gl.uniform1f(model.uniforms.panelPower,Math.max(0,Math.min(1,(open-0.045)/0.065)));
         gl.uniform2f(model.uniforms.panelAxis,Math.sin(open*lidAngle),Math.cos(open*lidAngle));
         gl.drawArrays(gl.TRIANGLES,0,count);
         previous = {w,h,open,yaw,elevation,text,image,zoom};
-    };
+    }
+    return draw;
 }
